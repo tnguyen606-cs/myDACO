@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- forgot_password_screen strings -->
+
+	<string name="app_name">Page 1</string>
+	<string name="ek_img_content">ExportKit Image</string>
+	<string name="firstnametext_string">First Name:</string>
+	<string name="lastnametext_string">Last Name:</string>
+	<string name="usernametext_string">Username:</string>
+	<string name="passwordtext_string">Passwords:</string>
+	<string name="idtext_string">Employee ID:</string>
+	<string name="go_back_string">Go Back </string>
+	<string name="register_string">Register</string>
+	<string name="employee_id__string">Employee ID:</string>
+	<string name="contact_info_string">Please contact the Department of Registration to verify your ID. </string>
+	<string name="go_back_ek1_string">Go Back </string>
+	<string name="register_ek1_string">Register</string>
+	<string name="login_string">Login</string>
+	<string name="forgot_password_string">Forgot Password</string>
+	<string name="username_string">Username</string>
+	<string name="password_string">Password</string>
+	<string name="daco_app_string">DACO APP</string>
+	<string name="newUsers_string">New users?</string>
+	<string name="click_here_string">Click here</string>
+</resources>
