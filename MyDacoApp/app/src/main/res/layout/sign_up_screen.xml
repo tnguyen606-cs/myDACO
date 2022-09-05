@@ -4,44 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ForgotPasswordActivity">
+    tools:context=".SignUpActivity">
 
     <RelativeLayout android:id="@+id/daco_app_img"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
         <ImageView
             android:id="@+id/aircaft_icon"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="50dp"
             android:contentDescription="aircaft_icon"
             android:src="@drawable/aircaft_icon" />
         <TextView
             android:id="@+id/login"
-            android:layout_width="315dp"
+            android:layout_width="310dp"
             android:layout_height="50dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="170dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="50dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="@string/daco_app_string"
             android:textColor="@color/_bg_App_color"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/textfield_group"
-        android:layout_width="302dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="220dp">
 
         <TextView
             android:id="@+id/firstName"
@@ -101,12 +100,53 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
+            android:id="@+id/username"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/usernametext_string"
+            android:textColor="@color/text_color"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/usernamebox"
+            android:layout_width="287dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="280dp"
+            android:background="@drawable/usernamebox_shape"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="330dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/passwordtext_string"
+            android:textColor="@color/text_color"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/passwordbox"
+            android:layout_width="287dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="360dp"
+            android:background="@drawable/usernamebox_shape"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
             android:id="@+id/contact_info"
             android:layout_width="266dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="410dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="@string/contact_info_string"
@@ -118,55 +158,23 @@
     </RelativeLayout>
 
     <RelativeLayout android:id="@+id/login_button"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="690dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         >
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/continueBtn"
+            android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:text="@string/register_string"
             android:background="@drawable/loginbox_shape"
             android:fontFamily="sans-serif"
-            android:text="@string/continue_string"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/new_users_field"
-        android:layout_width="220dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="680dp"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:id="@+id/new_users"
-            android:layout_width="125dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="@string/newUsers_string"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="17sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        <Button
-            android:id="@+id/newUsersBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:background="@android:color/transparent"
-            android:text="@string/click_here_string"
-            android:textAllCaps="false"
-            android:textColor="@color/_bg_App_color"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </RelativeLayout>
 </RelativeLayout>
