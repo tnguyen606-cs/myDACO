@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
