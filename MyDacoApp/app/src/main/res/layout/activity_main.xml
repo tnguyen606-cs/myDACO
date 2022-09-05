@@ -53,8 +53,8 @@
             android:textAllCaps="false"
             android:textColor="@color/design_default_color_primary"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:clickable="true"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/username"
@@ -122,18 +122,18 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         >
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_string"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/loginbox_shape"
             android:fontFamily="sans-serif"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:textSize="23sp"
+            android:text="@string/login_string"
             android:textColor="@color/white"
-            />
+            android:textSize="23sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
