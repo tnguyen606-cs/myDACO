@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4885" />
+        <entry key="app/src/main/res/drawable/_bg__forgot_password_screen_ek2_shape.xml" value="0.2775" />
+        <entry key="app/src/main/res/drawable/_bg__login_screen_ek2_shape.xml" value="0.209" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/loginbox_ek1_shape.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/loginbox_shape.xml" value="0.4885" />
