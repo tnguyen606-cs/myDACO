@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.Intent;
 import com.google.android.material.button.MaterialButton;
 
 
@@ -36,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
                     String toastMessage = "Username or Password are not populated";
                     Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        // forgot Password
+        forgotBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nextScreen = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(nextScreen);
             }
         });
 
