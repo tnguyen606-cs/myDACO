@@ -10,7 +10,6 @@ import android.widget.Toast;
 import android.content.Intent;
 import com.google.android.material.button.MaterialButton;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         forgotBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent nextScreen = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
-                startActivity(nextScreen);
+                Intent nextScreen = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                MainActivity.this.startActivity(nextScreen);
             }
         });
 
