@@ -3,7 +3,7 @@
 	<!-- forgot_password_screen strings -->
 
 	<string name="app_name">Page 1</string>
-	<string name="ek_img_content">ExportKit Image</string>
+	<string name="img_content">ExportKit Image</string>
 	<string name="firstnametext_string">First Name:</string>
 	<string name="lastnametext_string">Last Name:</string>
 	<string name="usernametext_string">Username:</string>
@@ -11,10 +11,7 @@
 	<string name="idtext_string">Employee ID:</string>
 	<string name="go_back_string">Go Back </string>
 	<string name="register_string">Register</string>
-	<string name="employee_id__string">Employee ID:</string>
-	<string name="contact_info_string">Please contact the Department of Registration to verify your ID. </string>
-	<string name="go_back_ek1_string">Go Back </string>
-	<string name="register_ek1_string">Register</string>
+	<string name="contact_info_string">Please contact the Department of Registration to verify your ID.</string>
 	<string name="login_string">Login</string>
 	<string name="forgot_password_string">Forgot Password</string>
 	<string name="username_string">Username</string>

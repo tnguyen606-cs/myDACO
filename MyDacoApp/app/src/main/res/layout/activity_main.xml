@@ -44,7 +44,7 @@
         android:layout_marginTop="380dp">
 
         <Button
-            android:id="@+id/bt_forget"
+            android:id="@+id/forgotBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="90dp"
@@ -65,17 +65,18 @@
             android:layout_marginTop="0dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/username_string"
-            android:textColor="@color/nametext_color"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/usernamebox_ek2"
+            android:id="@+id/usernamebox"
             android:layout_width="287dp"
             android:layout_height="52dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="26dp"
-            android:background="@drawable/usernamebox_ek2_shape" />
+            android:background="@drawable/usernamebox_shape"
+            android:hint="@string/username_string" />
 
         <TextView
             android:id="@+id/password"
@@ -85,26 +86,18 @@
             android:layout_marginTop="88dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/password_string"
-            android:textColor="@color/nametext_color"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/passwordbox_ek2"
+            android:id="@+id/passwordbox"
             android:layout_width="287dp"
             android:layout_height="52dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="114dp"
-            android:background="@drawable/passwordbox_ek2_shape" />
-
-        <ImageView
-            android:id="@+id/password_icon"
-            android:layout_width="18.76dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="88dp"
-            android:contentDescription="password_icon"
-            android:src="@drawable/password_icon" />
+            android:background="@drawable/usernamebox_shape"
+            android:hint="@string/password_string" />
 
         <ImageView
             android:id="@+id/username_icon"
@@ -114,16 +107,24 @@
             android:layout_marginTop="0dp"
             android:contentDescription="username_icon"
             android:src="@drawable/username_icon" />
+        <ImageView
+            android:id="@+id/password_icon"
+            android:layout_width="18.76dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="88dp"
+            android:contentDescription="password_icon"
+            android:src="@drawable/password_icon" />
     </RelativeLayout>
 
-    <RelativeLayout android:id="@+id/login_button_ek2"
+    <RelativeLayout android:id="@+id/login_button"
         android:layout_marginTop="622dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         >
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/loginbox"
+            android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_string"
@@ -139,7 +140,7 @@
     <RelativeLayout
         android:id="@+id/new_users_field"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="680dp"
         android:layout_centerHorizontal="true">
 
@@ -155,7 +156,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <Button
-            android:id="@+id/new_users_bt"
+            android:id="@+id/newUsersBtn"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="90dp"
@@ -168,6 +169,4 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </RelativeLayout>
-
-
 </RelativeLayout>

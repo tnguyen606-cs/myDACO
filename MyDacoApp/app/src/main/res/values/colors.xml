@@ -13,10 +13,10 @@
 	<color name="black">#FF000000</color>
 	<color name="white">#FFFFFFFF</color>
 	<color name="_bg_App_color">#354FDD</color>
-	<color name="nametext_color">#4E4C4C</color>
-	<color name="firstnamebox_color">#F8F8F8</color>
-	<color name="daco_app_ek1_color">#1A87D6</color>
-	<color name="loginbox_color">#2E97E3</color>
-	<color name="rectangle_10_color">#C4C4C4</color>
+	<color name="text_color">#4E4C4C</color>
+	<color name="box_color">#F8F8F8</color>
+	<color name="daco_app_color">#1A87D6</color>
+	<color name="login_box_color">#2E97E3</color>
+	<color name="rectangle_color">#C4C4C4</color>
 	<color name="design_default_color_primary">#251C1C</color>
 </resources>
