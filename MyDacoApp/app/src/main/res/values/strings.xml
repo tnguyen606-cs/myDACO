@@ -11,6 +11,7 @@
 	<string name="idtext_string">Employee ID:</string>
 	<string name="go_back_string">Go Back </string>
 	<string name="register_string">Register</string>
+	<string name="continue_string">Continue</string>
 	<string name="contact_info_string">Please contact the Department of Registration to verify your ID.</string>
 	<string name="login_string">Login</string>
 	<string name="forgot_password_string">Forgot Password</string>
