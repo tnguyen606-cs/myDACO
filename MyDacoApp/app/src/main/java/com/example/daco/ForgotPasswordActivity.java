@@ -5,7 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.daco.data.Users;
+import com.example.daco.utilities.FileHelper;
+
+import java.io.InputStream;
+import java.util.Set;
 
 
 public class ForgotPasswordActivity extends AppCompatActivity {
@@ -15,15 +22,37 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_pasword_screen);
 
+        EditText firstname = (EditText) findViewById(R.id.firstNamebox);
+        EditText lastname = (EditText) findViewById(R.id.lastNamebox);
+        EditText employeeId = (EditText) findViewById(R.id.employeeIdbox);
+
         Button cont = (Button) findViewById(R.id.continueBtn);
         Button newUsersBtn = (Button) findViewById(R.id.newUsersBtn);
+
+        InputStream inputStream = getResources().openRawResource(R.raw.user_data);
 
         // continue
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String toastMessage = "A new reset password link just sent to your email";
-                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                FileHelper file = new FileHelper();
+                String name = file.concatString(firstname.getText().toString(), lastname.getText().toString());
+                Set<Users> strUsersArray = file.getResource(inputStream);
+                String id = employeeId.getText().toString();
+                boolean validUser = false;
+                for (Users u : strUsersArray) {
+                    if (u.getDacoName().equals(name)
+                    && u.getDacoId().equals(id)) {
+                        validUser = true;
+                        String toastMessage = "A new reset password link just sent to your email";
+                        Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+                if (!validUser) {
+                    String toastMessage = "Are you a new user. Please register to log in!";
+                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+                }
             }
         });
 

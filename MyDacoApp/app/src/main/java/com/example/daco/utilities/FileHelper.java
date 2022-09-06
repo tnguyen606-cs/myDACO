@@ -1,7 +1,4 @@
 package com.example.daco.utilities;
-
-import android.util.Log;
-
 import com.example.daco.data.Users;
 
 import org.json.JSONArray;
@@ -31,14 +28,16 @@ public class FileHelper {
             JSONObject jsonRootObject = new JSONObject(strJson);
 
             //Get the instance of JSONArray that contains JSONObjects
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.getJSONArray("data");
 
             //Iterate the jsonArray and print the info of JSONObjects
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String name = jsonObject.get("username").toString();
-                String pss = jsonObject.get("password").toString();
-                Users user = new Users(name, pss);
+                String username = jsonObject.optString("username");
+                String pss = jsonObject.optString("password");
+                String name = jsonObject.optString("name");
+                String id = jsonObject.optString("id");
+                Users user = new Users(id, name, username, pss);
                 setUsers.add(user);
             }
         } catch (JSONException | IOException e) {
@@ -76,5 +75,13 @@ public class FileHelper {
             list.add(value);
         }
         return list;
+    }
+
+    public String concatString(String pre, String post) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(pre);
+        builder.append(" ");
+        builder.append(post);
+        return  builder.toString();
     }
 }
