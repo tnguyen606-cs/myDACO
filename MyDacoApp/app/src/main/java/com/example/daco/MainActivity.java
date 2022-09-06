@@ -2,7 +2,6 @@ package com.example.daco;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +12,7 @@ import com.example.daco.data.Users;
 import com.example.daco.utilities.FileHelper;
 import com.google.android.material.button.MaterialButton;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,30 +22,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText username = (EditText) findViewById(R.id.usernamebox);
-        EditText password = (EditText) findViewById(R.id.passwordbox);
+        EditText usernameInput = (EditText) findViewById(R.id.usernamebox);
+        EditText passwordInput = (EditText) findViewById(R.id.passwordbox);
+        String username = usernameInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
         MaterialButton loginBtn = (MaterialButton) findViewById(R.id.loginBtn);
         Button forgotBtn = (Button) findViewById(R.id.forgotBtn);
         Button newUsersBtn = (Button) findViewById(R.id.newUsersBtn);
 
-        InputStream inputStream= getResources().openRawResource(R.raw.user_data);
+        InputStream inputStream = getResources().openRawResource(R.raw.user_data);
 
         // admin
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 FileHelper file = new FileHelper();
                 Set<Users> strUsersArray = file.getResource(inputStream);
-
-                if (username.getText().length() > 0 && password.getText().length() > 0) {
-                    String toastMessage = "Username: " + username.getText().toString() + ", Password: " + password.getText().toString();
-                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-                } else {
-                    String toastMessage = "Username or Password are not populated";
-                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                boolean validUser = false;
+                for (Users u : strUsersArray) {
+                    if (u.equals(new Users(username, password))) {
+                        validUser = true;
+                        String toastMessage = "Username: " + username + ", Password: " + password;
+                        Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+                        break;
+                    }
                 }
+               if (!validUser) {
+                   String toastMessage = "Username or Password are not correct. Please enter the correct one";
+                   Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+               }
             }
         });
 

@@ -1,20 +1,16 @@
 package com.example.daco.data;
 
 public class Users {
-    private int id;
-    private String firstName;
-    private String lastName;
+    private String id;
     private String name;
     private String username;
     private String password;
 
-    public Users(int id, String name, String username, String password) {
+    public Users(String id, String name, String username, String password) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
-        this.firstName = name.substring(0, ' ');
-        this.lastName = name.substring(' ');
     }
 
     public Users(String username, String password) {
@@ -39,16 +35,22 @@ public class Users {
         return this.username;
     }
 
-    public int getDacoId() {
+    public String getDacoId() {
         return this.id;
     }
 
-    public String getDacoFirstName() {
-        return this.name.substring(0, ' ');
+    /*
+     * This method checks if whether it is a same assigned Personnel
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (o instanceof Users) {
+            Users otherUser= (Users) o;
+            return this.username.equals(otherUser.getDacoUsername())
+                    && this.password.equals(otherUser.getDacoPassword());
+        }
+        return false;
     }
-
-    public String getDacoLastName() {
-        return this.name.substring(' ');
-    }
-
 }
