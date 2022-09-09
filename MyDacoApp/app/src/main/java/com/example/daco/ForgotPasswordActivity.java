@@ -36,13 +36,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
-                String name = file.concatString(firstname.getText().toString(), lastname.getText().toString());
                 Set<Users> strUsersArray = file.getResource(inputStream);
+
+                String name = file.concatString(firstname.getText().toString(), lastname.getText().toString());
                 String id = employeeId.getText().toString();
+
                 boolean validUser = false;
                 for (Users u : strUsersArray) {
-                    if (u.getDacoName().equals(name)
-                    && u.getDacoId().equals(id)) {
+                    if (u.getDacoName().equals(name) && u.getDacoId().equals(id)) {
                         validUser = true;
                         String toastMessage = "A new reset password link just sent to your email";
                         Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();

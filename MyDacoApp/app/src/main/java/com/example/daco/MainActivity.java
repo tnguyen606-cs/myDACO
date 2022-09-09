@@ -2,6 +2,7 @@ package com.example.daco;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         EditText usernameInput = (EditText) findViewById(R.id.usernamebox);
         EditText passwordInput = (EditText) findViewById(R.id.passwordbox);
-        String username = usernameInput.getText().toString();
-        String password = passwordInput.getText().toString();
 
         MaterialButton loginBtn = (MaterialButton) findViewById(R.id.loginBtn);
         Button forgotBtn = (Button) findViewById(R.id.forgotBtn);
@@ -39,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
                 Set<Users> strUsersArray = file.getResource(inputStream);
+
+                String username = usernameInput.getText().toString();
+                String password = passwordInput.getText().toString();
+
                 boolean validUser = false;
+
                 for (Users u : strUsersArray) {
-                    if (u.equals(new Users(username, password))) {
+                    if (u.getDacoUsername().equals(username) && u.getDacoPassword().equals(password)) {
                         validUser = true;
                         String toastMessage = "Username: " + username + ", Password: " + password;
                         Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
