@@ -1,9 +1,7 @@
-<div align="center">
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield][issues-url]
 [![MIT License][license-shield]][license-url]
-</div>
 
 ## Introduction
 
@@ -29,5 +27,5 @@
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/tnguyen606-cs/myDACO/blob/main/LICENSE.txt
 [product-screenshot]: images/aircaft_icon.png
