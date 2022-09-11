@@ -1,10 +1,10 @@
+<div align="center">
 # MyDACO App
-
-
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
-[![Issues][cumulative-shield]][cumulative-url]
+[![Issues][issues-shield][issues-url]
 [![MIT License][license-shield]][license-url]
+</div>
 
 ## Introduction
 
@@ -27,8 +27,8 @@
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
-[cumulative-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[cumulative-url]: https://github.com/othneildrew/Best-README-Template/issues](https://github.com/tnguyen606-cs/myDACO/settings/access#workspaces/mydaco-team-2117-630bc8dccdc264737ee74c8f/reports/cumulative?r=&p[]=Closed&df=&dt=&dr=14d&labels[]=&notLabels[]=
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [product-screenshot]: images/aircaft_icon.png
