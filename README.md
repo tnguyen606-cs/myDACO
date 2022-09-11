@@ -1,5 +1,4 @@
 <div align="center">
-# MyDACO App
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield][issues-url]
