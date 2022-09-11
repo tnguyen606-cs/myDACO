@@ -1,4 +1,4 @@
-package com.example.myDACO;
+package com.myDACO;
 
 import android.content.Intent;
 import android.os.Bundle;

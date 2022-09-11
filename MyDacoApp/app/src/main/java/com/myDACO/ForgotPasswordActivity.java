@@ -1,4 +1,4 @@
-package com.example.myDACO;
+package com.myDACO;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
