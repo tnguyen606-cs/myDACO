@@ -1,14 +1,26 @@
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Issues][issues-shield][issues-url]
-[![MIT License][license-shield]][license-url]
+
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/tnguyen606-cs/myDACO">
+    <img src="images/aircaft_icon.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">project_title</h3>
+
+  <p align="center">
+    PROJECT'S INTRODUCTION [SUMMARY]
+    <br />
+    <!-- PROJECT SHIELDS -->
+    [![Contributors][contributors-shield]][contributors-url]
+    [![Issues][issues-shield][issues-url]
+    [![MIT License][license-shield]][license-url]
+  </p>
+</p>
 
 ## Introduction
 
-
-
-## Release Notes
-### Version 1.0.0
 
 #### New Features
 * Feature 1 for this release
