@@ -1,7 +1,7 @@
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
-[![Release][release-shield]][release-url]
-[![Issues][issues-shield][issues-url]
+[![Release][release-shield]][v 1.0.0]
+[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
     
 <!-- PROJECT LOGO -->
