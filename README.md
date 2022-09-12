@@ -1,14 +1,8 @@
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Release][release-shield]][v 1.0.0]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-    
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/tnguyen606-cs/myDACO">
-    <img src="images/aircaft_icon.png" alt="Logo" width="80" height="80">
+    <img src="images/aircaft_icon.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">MYDACO APP</h3>
