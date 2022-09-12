@@ -1,5 +1,6 @@
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
+[![Release][release-shield]][release-url]
 [![Issues][issues-shield][issues-url]
 [![MIT License][license-shield]][license-url]
     
@@ -49,10 +50,12 @@
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/gitlab/v/release/myDACO?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/tnguyen606-cs/myDACO.svg?style=for-the-badge
 [contributors-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[release-shield]: https://img.shields.io/gitlab/v/release/myDACO.svg?style=for-the-badge
+[release-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
+[issues-shield]: https://img.shields.io/github/issues/tnguyen606-cs/myDACO.svg?style=for-the-badge
 [issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/tnguyen606-cs/myDACO.svg?style=for-the-badge
 [license-url]: https://github.com/tnguyen606-cs/myDACO/blob/main/LICENSE.txt
 [product-screenshot]: images/aircaft_icon.png
