@@ -34,7 +34,7 @@
 
 During tactical airborne operations, the departure airfield coordination officer (**DACO**) is responsible for managing accountability of all personnel and equipment on the airfield. When aircraft become inoperable (for any variety of reasons), the **DACO** must determine how to most efficiently redistribute the *personnel* and *equipment* that were assigned to the `downed` aircraft to the remaining aircraft. This process becomes incredibly *time consuming* and *prone to human error* when executed under stressful conditions (night, minimal sleep, combat, etc).  
 
-**A mobile application** that could assist **DACOs** in determining the load plans for airborne operations and quickly recommend the optimal `bump plan` when aircraft go down based on a variety of factors (#/type of aircraft, # of equipment, # of personnel, location of aircraft on the airfield, etc). 
+This is **a mobile application** that assists **DACOs** in determining the load plans for airborne operations and quickly recommends the optimal `bump plan` when aircraft go down based on a variety of factors (#/type of aircraft, # of equipment, # of personnel, location of aircraft on the airfield, etc). 
 
 <!-- GETTING STARTED -->
 # Getting Started
@@ -66,7 +66,7 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 * New dashboard view for users with personel, cargo, and planes information
 
 ### Bug Fixes
-* Fixed login page redirecting to the sign-up screen and forgor password screen
+* Fixed login page redirecting to the sign-up screen and forgot password screen
 * Fixed the app as using Firebase
 
 ### Known Issues
