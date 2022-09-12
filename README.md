@@ -49,7 +49,7 @@ Android Studio is available for computers running Windows or Linux, and for Macs
 
 ## Get started
 
-Follow the this [intruction](https://developer.android.com/codelabs/build-your-first-android-app#2) to create a new Android project for your first app.  
+Follow this [INTRUCTION](https://developer.android.com/codelabs/build-your-first-android-app#2) to create a new Android project for your first app.  
 
 > Read more about [here](https://developer.android.com/codelabs/build-your-first-android-app#0).
 
