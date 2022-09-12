@@ -2,13 +2,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/tnguyen606-cs/myDACO">
-    <img src="images/aircaft_icon.png" alt="Logo" width="200" height="200">
+    <img src="images/aircaft_icon.png" alt="Logo" width="200" height="250">
   </a>
 
   <h3 align="center">MyDACO App</h3>
 
   <p align="center">
-    MyDACO App is an Android Mobile App built with Android Studio and Java
+    Use Android Studio and Java to write MyDACO Android app
   </p>
 </p>
 
@@ -18,7 +18,7 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#getting-started">Getting Started</a>></li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li>
       <a href="#releases">Release Notes</a>
       <ul>
@@ -35,6 +35,33 @@
 
 <!-- GETTING STARTED -->
 ## Getting Started
+### Prerequisites
+
+You can download Android Studio 3.6 from the [Android Studio](https://developer.android.com/studio/) page.   
+Android Studio is available for computers running Windows or Linux, and for Macs running macOS. The OpenJDK (Java Development Kit) is bundled with Android Studio.
+
+1. Navigate to the [Android Studio](https://developer.android.com/studio/) page and follow the instructions to download and install [Android Studio](https://developer.android.com/studio/install.html). 
+2. Accept the default configurations for all steps, and ensure that all components are selected for installation.
+3. After the install is complete, the setup wizard downloads and installs additional components, including the Android SDK. Be patient, because this process might take some time, depending on your internet speed.
+4. When the installation completes, Android Studio starts, and you are ready to create your first project.
+
+
+### Installation
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```JS
+   const API_KEY = 'ENTER YOUR API';
+   ```
+
 
 
 <!-- RELEASE NOTES -->
