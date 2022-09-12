@@ -49,7 +49,7 @@
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/crates/v/myDACO?style=for-the-badge
+[contributors-shield]: https://img.shields.io/gitlab/v/release/myDACO?style=for-the-badge
 [contributors-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
