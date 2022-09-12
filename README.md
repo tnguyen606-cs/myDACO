@@ -20,10 +20,10 @@
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li>
-      <a href="#releases">Release Notes</a>
+      <a href="#release-notes">Release Notes</a>
       <ul>
-        <li><a href="#newfeatures">New Features</a></li>
-        <li><a href="#bugfixes">Bug Fixes</a></li>
+        <li><a href="#new-features">New Features</a></li>
+        <li><a href="#bug-fixes">Bug Fixes</a></li>
       </ul>
     </li>
   </ol>
