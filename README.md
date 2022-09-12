@@ -37,7 +37,8 @@
 ## Getting Started
 ### Prerequisites
 
-You can download Android Studio 3.6 from the [Android Studio](https://developer.android.com/studio/) page.   
+> You can download Android Studio 3.6 from the [Android Studio](https://developer.android.com/studio/) page.   
+
 Android Studio is available for computers running Windows or Linux, and for Macs running macOS. The OpenJDK (Java Development Kit) is bundled with Android Studio.
 
 1. Navigate to the [Android Studio](https://developer.android.com/studio/) page and follow the instructions to download and install [Android Studio](https://developer.android.com/studio/install.html). 
