@@ -52,10 +52,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-               if (!validUser) {
-                   String toastMessage = "Username or Password are not correct. Please enter the correct one";
-                   Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
-               }
+                if(validUser) {
+                    Intent nextScreen = new Intent(MainActivity.this, MainMenu.class);
+                    MainActivity.this.startActivity(nextScreen);
+                } else {
+                    String toastMessage = "Username or Password are not correct. Please enter the correct one";
+                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
