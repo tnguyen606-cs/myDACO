@@ -5,7 +5,7 @@
     <img src="images/aircaft_icon.png" alt="Logo" width="150" height="200">
   </a>
 
-  <h2 align="center">MyDACO App</h2>
+  <h1 align="center">MyDACO App</h1>
 
   <p align="center">
     Use Android Studio and Java to write MyDACO Android app
@@ -66,4 +66,7 @@ Follow this [INTRUCTION](https://developer.android.com/codelabs/build-your-first
 ### Bug Fixes
 * Fixed login page redirecting to the sign-up screen and forgor password screen
 * Fixed the app as using Firebase
+
+### Known Issues
+N/A
 ---
