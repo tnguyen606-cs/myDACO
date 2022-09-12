@@ -32,11 +32,9 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-During tactical airborne operations, the departure airfield coordination officer (**DACO**) is responsible for managing accountability of all personnel and equipment on the airfield. When aircraft become inoperable (for any variety of reasons), the **DACO** must determine how to most efficiently redistribute the *personnel* and *equipment* that were assigned to the `downed` aircraft to the remaining aircraft. This process becomes incredibly time consuming and prone to human error when executed under stressful conditions (night, minimal sleep, combat, etc).  
+During tactical airborne operations, the departure airfield coordination officer (**DACO**) is responsible for managing accountability of all personnel and equipment on the airfield. When aircraft become inoperable (for any variety of reasons), the **DACO** must determine how to most efficiently redistribute the *personnel* and *equipment* that were assigned to the `downed` aircraft to the remaining aircraft. This process becomes incredibly *time consuming* and *prone to human error* when executed under stressful conditions (night, minimal sleep, combat, etc).  
 
 **A mobile application** that could assist **DACOs** in determining the load plans for airborne operations and quickly recommend the optimal `bump plan` when aircraft go down based on a variety of factors (#/type of aircraft, # of equipment, # of personnel, location of aircraft on the airfield, etc). 
-
-Summary of the project.
 
 <!-- GETTING STARTED -->
 # Getting Started
@@ -53,9 +51,9 @@ Android Studio is available for computers running Windows or Linux, and for Macs
 
 ## Get started
 
-Follow this [INTRUCTION](https://developer.android.com/codelabs/build-your-first-android-app#2) to create a new Android project for your first app.  
+> Follow this [INTRUCTION](https://developer.android.com/codelabs/build-your-first-android-app#2) to create a new Android project for your first app.  
 
-> Read more about [here](https://developer.android.com/codelabs/build-your-first-android-app#0).
+Read more about [here](https://developer.android.com/codelabs/build-your-first-android-app#0).
 
 <!-- RELEASE NOTES -->
 # Release Notes
