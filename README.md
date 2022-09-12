@@ -25,9 +25,9 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#newfeatures">New Features</a></li>
     <li><a href="#bugfixes">Bug Fixes</a></li>
-    <li><a href="#installation">Installation</a></li>
   </ol>
 </details>
 
@@ -49,7 +49,7 @@
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/apm/v/myDACO
 [contributors-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
