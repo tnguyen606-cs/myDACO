@@ -2,15 +2,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/tnguyen606-cs/myDACO">
-    <img src="images/aircaft_icon.png" alt="Logo" width="100" height="100">
+    <img src="images/aircaft_icon.png" alt="Logo" width="200" height="200">
   </a>
 
-  <h3 align="center">MYDACO APP</h3>
+  <h3 align="center">MyDACO App</h3>
 
   <p align="center">
-    PROJECT'S INTRODUCTION
-    <br />
-    <!-- PROJECT SHIELDS -->
+    MyDACO App is an Android Mobile App built with Android Studio and Java
   </p>
 </p>
 
@@ -20,9 +18,14 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#newfeatures">New Features</a></li>
-    <li><a href="#bugfixes">Bug Fixes</a></li>
+    <li><a href="#getting-started">Getting Started</a>></li>
+    <li>
+      <a href="#releases">Release Notes</a>
+      <ul>
+        <li><a href="#newfeatures">New Features</a></li>
+        <li><a href="#bugfixes">Bug Fixes</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -30,14 +33,19 @@
 ## About The Project
 
 
-## Instalation
+<!-- GETTING STARTED -->
+## Getting Started
 
 
-## New Features
+<!-- RELEASE NOTES -->
+## Release Notes
+### Version 1.0.0
+
+#### New Features
 * Feature 1 for this release
 * feature 2 for this release
 
-## Bug Fixes
+#### Bug Fixes
 * bug fixed 1
 * bug fixed 2
 ---
