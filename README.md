@@ -57,7 +57,7 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 
 <!-- RELEASE NOTES -->
 # Release Notes
-## Version 1.0.0
+## Version 0.1.0
 
 ### New Features
 * Ability for users to log into the app using a valid SSO
