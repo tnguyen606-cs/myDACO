@@ -51,9 +51,9 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/tnguyen606-cs/myDACO.svg?style=for-the-badge
-[contributors-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
+[contributors-url]: https://github.com/tnguyen606-cs/myDACO
 [release-shield]: https://img.shields.io/gitlab/v/release/myDACO.svg?style=for-the-badge
-[release-url]: https://github.com/tnguyen606-cs/myDACO/settings/access
+[release-url]: https://github.com/tnguyen606-cs/myDACO
 [issues-shield]: https://img.shields.io/github/issues/tnguyen606-cs/myDACO.svg?style=for-the-badge
 [issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
 [license-shield]: https://img.shields.io/github/license/tnguyen606-cs/myDACO.svg?style=for-the-badge
