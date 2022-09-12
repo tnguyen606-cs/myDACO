@@ -2,10 +2,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/tnguyen606-cs/myDACO">
-    <img src="images/aircaft_icon.png" alt="Logo" width="200" height="250">
+    <img src="images/aircaft_icon.png" alt="Logo" width="150" height="200">
   </a>
 
-  <h3 align="center">MyDACO App</h3>
+  <h2 align="center">MyDACO App</h2>
 
   <p align="center">
     Use Android Studio and Java to write MyDACO Android app
@@ -30,12 +30,13 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
+Summary of the project.
 
 <!-- GETTING STARTED -->
-## Getting Started
-### Prerequisites
+# Getting Started
+## Installation
 
 > You can download Android Studio 3.6 from the [Android Studio](https://developer.android.com/studio/) page.   
 
@@ -46,46 +47,23 @@ Android Studio is available for computers running Windows or Linux, and for Macs
 3. After the install is complete, the setup wizard downloads and installs additional components, including the Android SDK. Be patient, because this process might take some time, depending on your internet speed.
 4. When the installation completes, Android Studio starts, and you are ready to create your first project.
 
+## Get started
 
-### Installation
+Follow the this [intruction](https://developer.android.com/codelabs/build-your-first-android-app#2) to create a new Android project for your first app.  
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
+> Read more about [here](https://developer.android.com/codelabs/build-your-first-android-app#0).
 
 <!-- RELEASE NOTES -->
-## Release Notes
-### Version 1.0.0
+# Release Notes
+## Version 1.0.0
 
-#### New Features
-* Feature 1 for this release
-* feature 2 for this release
+### New Features
+* Ability for users to log into the app using a valid SSO
+* Ability for users to reset password via name and employee Id added
+* Ability for users to sign up new account
+* New dashboard view for users with personel, cargo, planes information
 
-#### Bug Fixes
-* bug fixed 1
-* bug fixed 2
+### Bug Fixes
+* Fixed login page redirecting to the sign-up screen and forgor password screen
+* Fixed the app as using Firebase
 ---
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/tnguyen606-cs/myDACO.svg?style=for-the-badge
-[contributors-url]: https://github.com/tnguyen606-cs/myDACO
-[release-shield]: https://img.shields.io/gitlab/v/release/myDACO.svg?style=for-the-badge
-[release-url]: https://github.com/tnguyen606-cs/myDACO
-[issues-shield]: https://img.shields.io/github/issues/tnguyen606-cs/myDACO.svg?style=for-the-badge
-[issues-url]: https://github.com/tnguyen606-cs/myDACO/issues
-[license-shield]: https://img.shields.io/github/license/tnguyen606-cs/myDACO.svg?style=for-the-badge
-[license-url]: https://github.com/tnguyen606-cs/myDACO/blob/main/LICENSE.txt
-[product-screenshot]: images/aircaft_icon.png
