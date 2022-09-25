@@ -6,6 +6,8 @@ public class Cargo {
     private Planes assignedPlane;
     private Planes bumpPlane;
 
+    public Cargo() {}
+
     public Cargo(String cargoName, int weight) {
         this.cargoName = cargoName;
         this.weight = weight;

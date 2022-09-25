@@ -7,6 +7,9 @@ public class Personnel {
     private Planes assignedPlane;
     private Planes bumpPlane;
 
+    public Personnel()
+    {}
+
     public Personnel(String firstName, String lastName, Planes assignedPlane, Planes bumpPlane) {
         this.firstName = firstName;
         this.lastName = lastName;
