@@ -1,6 +1,14 @@
 {
   "data": [
     {
+      "name": "Tam Nguyen",
+      "username": "tnguyen606",
+      "password": "tnguyen606",
+      "id": "888",
+      "capacity": 3,
+      "status": "OPEN"
+    },
+    {
       "name": "Astra Express",
       "username": "Blackhawk",
       "password": "astra-express",
