@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 for (Users u : strUsersArray) {
                     if (u.getDacoUsername().equals(username) && u.getDacoPassword().equals(password)) {
                         validUser = true;
-                        String toastMessage = "Username: " + username + ", Password: " + password;
                         // Go to Plane Screen if valid login
                         Intent nextScreen = new Intent(MainActivity.this, PlanesActivity.class);
                         MainActivity.this.startActivity(nextScreen);

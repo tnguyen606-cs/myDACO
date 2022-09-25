@@ -1,7 +1,11 @@
 package com.myDACO;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.myDACO.data.Planes;
@@ -17,23 +21,29 @@ public class PlanesActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_planes_screen);
+        setContentView(R.layout.activity_planes_manifest);
 
         InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
         FileHelper file = new FileHelper();
         List<Planes> planesList = file.toList(inputStream);
-        String[] planes = new String[planesList.size()];
-        for (int i = 0; i < planesList.size(); i++) {
-            planes[i] = planesList.get(i).getPlane();
-        }
 
         // Get the handle for ListView
-        ListView list = (ListView) findViewById(R.id.planes_list);
+        ListView listView = (ListView) findViewById(R.id.planes_list);
 
         // Specify an adapter and pass context along with all the arrays in constructor
-        PlaneArrayAdapter planeAdapter = new PlaneArrayAdapter(this, planes);
+        PlaneArrayAdapter planeAdapter = new PlaneArrayAdapter(this, planesList);
 
         // Set the adapter with the ListView
-        list.setAdapter(planeAdapter);
+        listView.setAdapter(planeAdapter);
+
+        // Go to view screen of a single plane
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
+                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlane());
+                PlanesActivity.this.startActivity(nextScreen);
+            }
+        });
     }
 }
