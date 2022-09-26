@@ -1,4 +1,5 @@
 package com.myDACO.data;
+import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,15 +34,39 @@ import java.util.*;
 public class FirestoreQuery {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    CollectionReference planeRef = db.collection("aircraft");
+    CollectionReference planeRef = db.collection("planes");
 
     public Planes addPlane(Planes plane) {
-        
+        // todo: check uniqueness before adding to prevent duplicate plane ids (Idk how to do this)
+        planeRef.add(plane)
         return plane;
     }
 
+    public void deletePlane(String id) {
+        // Delete plane based on the 'id' field of the plane
+
+        //First, query the database for the plane with the specified id
+        // There might be multiple planes with the same id since uniqueness isn't enforced (yet)
+        planeRef.where("id", '==', id)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        WriteBatch batch = db.batch();
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            batch.delete(snapshot.getReference());
+                        }
+                        Log.d('FirestoreQuery', 'Deleted all planes with the id ' + id);
+                    }
+                });
+
+    }
+
     public ArrayList<Planes> getAllPlanes() {
-        //Get all planes in the "aircraft" collection in the Firestore DB
+        //Get all planes in the "planes" collection in the Firestore DB
         ArrayList<Planes> planeList = new ArrayList<>();
         planeRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -51,8 +76,14 @@ public class FirestoreQuery {
                             Planes plane = documentSnapshot.toObject(Planes.class);
                             planeList.add(plane);
                         }
+                        Log.d('FirestoreQuery', 'Get all planes query complete');
                     }
                 });
         return planeList;
     }
+
+
+
+
+
 }
