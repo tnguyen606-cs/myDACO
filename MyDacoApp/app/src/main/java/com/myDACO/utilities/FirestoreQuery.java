@@ -1,4 +1,4 @@
-package com.myDACO.data;
+package com.myDACO.utilities;
 import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +28,7 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
 import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
+import com.myDACO.data.Planes;
 
 import java.util.*;
 
