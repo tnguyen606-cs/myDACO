@@ -37,17 +37,36 @@ public class FirestoreQuery {
     CollectionReference planeRef = db.collection("planes");
 
     public Planes addPlane(Planes plane) {
-        // todo: check uniqueness before adding to prevent duplicate plane ids (Idk how to do this)
-        planeRef.add(plane)
+        // Adds a plane to the "planes" collection in Firestore
+        // Uniqueness check of plane.ID to prevent duplicate ID in the database
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()) {
+                            Log.d('FirestoreQuery', 'Unable to add plane; ID is not unique');
+                            return null;
+                        }
+                    }
+                });
+
+        // Add the plane
+        planeRef.add(plane).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d("FirestoreQuery", "DocumentSnapshot written with internal ID: " + documentReference.getId());
+            }
+        });
         return plane;
     }
 
-    public void deletePlane(String id) {
+    public void deletePlane(String planeID) {
         // Delete plane based on the 'id' field of the plane
 
         //First, query the database for the plane with the specified id
         // There might be multiple planes with the same id since uniqueness isn't enforced (yet)
-        planeRef.where("id", '==', id)
+        planeRef.whereEqualTo("id", planeID)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -81,9 +100,4 @@ public class FirestoreQuery {
                 });
         return planeList;
     }
-
-
-
-
-
 }
