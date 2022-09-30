@@ -1,36 +1,29 @@
 package com.myDACO.data;
 
 public class Personnel {
-    private String firstName;
-    private String lastName;
+    private String name;
     private int priority;
     private Planes assignedPlane;
     private Planes bumpPlane;
 
     public Personnel() {}
 
-    public Personnel(String firstName, String lastName, Planes assignedPlane, Planes bumpPlane) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Personnel(String name, Planes assignedPlane, Planes bumpPlane) {
+        this.name = name;
         this.priority = 0;
         this.assignedPlane = assignedPlane;
         this.bumpPlane = bumpPlane;
     }
 
-    public Personnel(String firstName, String lastName, int priority, Planes assignedPlane, Planes bumpPlane) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Personnel(String name, int priority, Planes assignedPlane, Planes bumpPlane) {
+        this.name = name;
         this.priority = priority;
         this.assignedPlane = assignedPlane;
         this.bumpPlane = bumpPlane;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getPersonnelName() {
+        return name;
     }
 
     public int getPriority() {

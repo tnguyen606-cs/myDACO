@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
-                Set<Users> strUsersArray = file.getResource(inputStream);
+                Set<Users> strUsersArray = file.getUserResource(inputStream);
 
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();

@@ -1,6 +1,7 @@
 package com.myDACO.utilities;
 
 import android.media.Image;
+import android.util.Log;
 
 import com.myDACO.data.Planes;
 import com.myDACO.data.Users;
@@ -16,17 +17,25 @@ import java.util.List;
 import java.util.Set;
 
 public class FileHelper {
-    public Set<Users> getResource(InputStream inputStream) {
+    // JSON Node names
+    private final String TAG_NAME = "name";
+    private final String TAG_USERNAME = "username";
+    private final String TAG_PASSWORD = "password";
+    private final String TAG_ID = "id";
+    private final String TAG_CARGO = "cargos";
+    private final String TAG_PERSONNEL = "personnel";
+
+    public Set<Users> getUserResource(InputStream inputStream) {
         Set<Users> setUsers = new HashSet<>();
         try {
             JSONArray jsonArray = convertJSONtoArray(inputStream, "data");
             //Iterate the jsonArray and print the info of JSONObjects
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String username = jsonObject.optString("username");
-                String pss = jsonObject.optString("password");
-                String name = jsonObject.optString("name");
-                String id = jsonObject.optString("id");
+                String username = jsonObject.optString(TAG_USERNAME);
+                String pss = jsonObject.optString(TAG_PASSWORD);
+                String name = jsonObject.optString(TAG_NAME);
+                String id = jsonObject.optString(TAG_ID);
                 Users user = new Users(id, username, pss);
                 user.setName(name);
                 setUsers.add(user);
@@ -39,17 +48,25 @@ public class FileHelper {
 
     public List<Planes> toList(InputStream inputStream) {
         List<Planes> list = new ArrayList<Planes>();
+        List<String> cargo_list = new ArrayList<>();
+        List<String> personnel_list = new ArrayList<>();
         try {
             JSONArray jsonArray = convertJSONtoArray(inputStream, "planes");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String name = jsonObject.optString("name");
-                String[] cargo = jsonObject.op
-                Planes plane = new Planes(name, i);
+                String name = jsonObject.optString(TAG_NAME);
+                String id = jsonObject.optString(TAG_ID);
+                // If your json string is an array, use JSONArray
+                JSONArray cargos = jsonObject.getJSONArray(TAG_CARGO);
+                JSONArray personnel = jsonObject.getJSONArray(TAG_PERSONNEL);
+                // To get the items from the array
+                cargo_list = getItemsArray(cargos);
+                personnel_list = getItemsArray(personnel);
+                Planes plane = new Planes(name, id, cargo_list, personnel_list);
                 list.add(plane);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("JSON Parser", "Error parsing data as converting to List  " + e.toString());
         }
         return list;
     }
@@ -69,7 +86,7 @@ public class FileHelper {
                 }
             } while (i < list.size());
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("JSON Parser", "Error parsing data as removing an item " + e.toString());
         }
     }
 
@@ -86,8 +103,23 @@ public class FileHelper {
             JSONArray jsonArray = jsonRootObject.getJSONArray(data);
             return jsonArray;
         } catch (JSONException | IOException e) {
-            e.printStackTrace();
+            Log.e("JSON Parser", "Error parsing data from JSON file " + e.toString());
         }
         return null;
+    }
+
+    protected List<String> getItemsArray(JSONArray jArray) {
+        List<String> l = new ArrayList<>();
+        for (int i = 0; i < jArray.length(); i++)
+        {
+            try {
+                String oneItem = jArray.getString(i);
+                l.add(oneItem);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data an array of a json item " + e.toString());
+            }
+        }
+        Log.d("Print ", l.toString());
+        return l;
     }
 }
