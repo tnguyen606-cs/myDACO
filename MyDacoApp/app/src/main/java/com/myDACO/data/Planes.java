@@ -32,11 +32,23 @@ public class Planes {
     }
 
     public String getPlane() {
-        return planeName;
+        return this.planeName;
     }
 
-    public String getId() {
-        return id;
+    public void setPlane(String name) {
+        this.planeName = name;
+    }
+
+    public String getPlaneId() {
+        return this.id;
+    }
+
+    public void setPlaneId(String id) {
+        this.id = id;
+    }
+
+    public void setIsActive(boolean selected) {
+        this.isActive = selected;
     }
 
     public boolean isActive() {

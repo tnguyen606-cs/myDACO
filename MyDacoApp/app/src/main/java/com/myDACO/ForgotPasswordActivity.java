@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myDACO.data.Users;
-import com.example.myDACO.utilities.FileHelper;
+import com.myDACO.data.Users;
+import com.myDACO.utilities.FileHelper;
 
 import java.io.InputStream;
 import java.util.Set;
