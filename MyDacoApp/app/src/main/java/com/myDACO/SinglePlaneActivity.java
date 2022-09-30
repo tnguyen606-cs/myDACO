@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.myDACO.data.Planes;
+import com.myDACO.utilities.FileHelper;
+
+import java.io.InputStream;
+import java.util.List;
+
 public class SinglePlaneActivity extends AppCompatActivity {
 
     @Override
@@ -40,6 +46,9 @@ public class SinglePlaneActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.edit_icon) {
 
                 } else if (menuItem.getItemId() == R.id.delete) {
+                    InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
+                    FileHelper file = new FileHelper();
+
 
                 }
                 return false;

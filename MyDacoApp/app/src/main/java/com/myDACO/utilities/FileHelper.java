@@ -1,5 +1,7 @@
 package com.myDACO.utilities;
 
+import android.media.Image;
+
 import com.myDACO.data.Planes;
 import com.myDACO.data.Users;
 
@@ -15,20 +17,9 @@ import java.util.Set;
 
 public class FileHelper {
     public Set<Users> getResource(InputStream inputStream) {
-        String strJson = null;
         Set<Users> setUsers = new HashSet<>();
         try {
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            strJson = new String(buffer, "UTF-8");
-            // Create the root JSONObject from the JSON string.
-            JSONObject jsonRootObject = new JSONObject(strJson);
-
-            //Get the instance of JSONArray that contains JSONObjects
-            JSONArray jsonArray = jsonRootObject.getJSONArray("data");
-
+            JSONArray jsonArray = convertJSONtoArray(inputStream, "data");
             //Iterate the jsonArray and print the info of JSONObjects
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -36,47 +27,67 @@ public class FileHelper {
                 String pss = jsonObject.optString("password");
                 String name = jsonObject.optString("name");
                 String id = jsonObject.optString("id");
-                Users user = new Users(id, name, username, pss);
+                Users user = new Users(id, username, pss);
+                user.setName(name);
                 setUsers.add(user);
             }
-        } catch (JSONException | IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return setUsers;
     }
 
     public List<Planes> toList(InputStream inputStream) {
-        String strJson = null;
         List<Planes> list = new ArrayList<Planes>();
         try {
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            strJson = new String(buffer, "UTF-8");
-            // Create the root JSONObject from the JSON string.
-            JSONObject jsonRootObject = new JSONObject(strJson);
-            //Get the instance of JSONArray that contains JSONObjects
-            JSONArray jsonArray = jsonRootObject.getJSONArray("planes");
-
+            JSONArray jsonArray = convertJSONtoArray(inputStream, "planes");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String name = jsonObject.optString("name");
-                String id = jsonObject.optString("id");
-                Planes plane = new Planes(name, id);
+                String[] cargo = jsonObject.op
+                Planes plane = new Planes(name, i);
                 list.add(plane);
             }
-        } catch (JSONException | IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    public String concatString(String pre, String post) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(pre);
-        builder.append(" ");
-        builder.append(post);
-        return  builder.toString();
+    public void remove(List<Planes> list, int position) {
+        JSONArray newJ_Array = new JSONArray();
+        try {
+            int i = 0;
+            do {
+                if (i == position) {
+                    Planes rm = list.remove(i);
+                    System.out.println(rm.getPlane());
+                } else {
+                    JSONObject formDetailsJson = new JSONObject();
+
+                    newJ_Array.put(list.get(i));
+                }
+            } while (i < list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected JSONArray convertJSONtoArray(InputStream inputStream, String data) {
+        try {
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            String strJson = new String(buffer, "UTF-8");
+            // Create the root JSONObject from the JSON string.
+            JSONObject jsonRootObject = new JSONObject(strJson);
+            //Get the instance of JSONArray that contains JSONObjects
+            JSONArray jsonArray = jsonRootObject.getJSONArray(data);
+            return jsonArray;
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
