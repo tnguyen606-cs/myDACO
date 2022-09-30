@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Planes {
     private String planeName;
-    private int id;
+    private String id;
     private boolean isActive;
     private List<Personnel> assignedPersonnel;
     private int personnelCount;
@@ -12,7 +12,9 @@ public class Planes {
     private int cargoWeight;
     private int cargoCapacity;
 
-    public Planes(String plane, int  id, boolean isActive, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
+    public Planes() {}
+
+    public Planes(String plane, String id, boolean isActive, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
         this.planeName = plane;
         this.id = id;
         this.isActive = isActive;
@@ -24,7 +26,7 @@ public class Planes {
         this.cargoCapacity = cargoCapacity;
     }
 
-    public Planes(String plane, int id) {
+    public Planes(String plane, String id) {
         this.planeName = plane;
         this.id = id;
     }
@@ -33,7 +35,7 @@ public class Planes {
         return planeName;
     }
 
-    public int  getId() {
+    public int getId() {
         return id;
     }
 
