@@ -24,4 +24,6 @@
 	<string name="plane_delete_confirm">Are you sure you want to remove this Plane from the Manifest?</string>
 	<string name="delete">Delete</string>
 	<string name="cancel">Cancel</string>
+    <string name="cargo">Cargo</string>
+    <string name="passengers">Passengers</string>
 </resources>

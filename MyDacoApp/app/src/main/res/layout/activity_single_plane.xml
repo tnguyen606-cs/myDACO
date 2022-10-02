@@ -20,7 +20,7 @@
             android:text="@string/daco_app_string"
             android:textColor="@color/_bg_App_color"
             android:textSize="35sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -54,6 +54,59 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/plane_content_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/cargo"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="24sp"
+            android:background="@drawable/rectangle_shape"/>
+
+
+        <ListView
+            android:id="@+id/cargo_list"
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginTop="40dp"
+            android:divider="@color/text_color"
+            android:dividerHeight="1sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/passengers"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="24sp"
+            android:background="@drawable/rectangle_shape"/>
+
+        <ListView
+            android:id="@+id/passenger_list"
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginTop="40dp"
+            android:divider="@color/text_color"
+            android:dividerHeight="1sp" />
     </RelativeLayout>
 
 </RelativeLayout>
