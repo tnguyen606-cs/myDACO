@@ -1,12 +1,7 @@
 package com.myDACO.utilities;
 
-import android.app.Activity;
-import android.media.Image;
-import android.util.JsonWriter;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.myDACO.R;
 import com.myDACO.data.Planes;
 import com.myDACO.data.Users;
 
@@ -14,12 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

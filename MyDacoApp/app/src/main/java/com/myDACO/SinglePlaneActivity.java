@@ -1,8 +1,6 @@
 package com.myDACO;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.myDACO.data.Planes;
-import java.util.ArrayList;
 
 public class SinglePlaneActivity extends AppCompatActivity {
 
@@ -82,7 +77,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
         //The user will be able to cancel the dialog bu clicking anywhere outside the dialog.
         dialog.setCancelable(true);
         //Mention the name of the layout of your custom dialog.
-        dialog.setContentView(R.layout.activity_custom_diaglog);
+        dialog.setContentView(R.layout.activity_custom_dialog);
 
         //Initializing the views of the dialog.
         Button cancelBtn = dialog.findViewById(R.id.cancelBtn);
