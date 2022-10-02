@@ -20,4 +20,7 @@
 	<string name="newUsers_string">New users?</string>
 	<string name="click_here_string">Click here</string>
 	<string name="airfield_manifest_string">Airfield manifest</string>
+    <string name="edit_icon">edit_icon</string>
+    <string name="cargo">Cargo</string>
+    <string name="passengers">Passengers</string>
 </resources>
