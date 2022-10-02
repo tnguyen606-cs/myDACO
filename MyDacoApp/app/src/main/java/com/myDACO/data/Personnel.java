@@ -44,4 +44,24 @@ public class Personnel {
     public String getBumpPlaneID() {
         return bumpPlaneID;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setAssignedPlaneID(String assignedPlaneID) {
+        this.assignedPlaneID = assignedPlaneID;
+    }
+
+    public void setBumpPlaneID(String bumpPlaneID) {
+        this.bumpPlaneID = bumpPlaneID;
+    }
 }

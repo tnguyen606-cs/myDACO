@@ -41,4 +41,20 @@ public class Cargo {
     public String getBumpPlaneID() {
         return bumpPlaneID;
     }
+
+    public void setCargoName(String cargoName) {
+        this.cargoName = cargoName;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setAssignedPlaneID(String assignedPlaneID) {
+        this.assignedPlaneID = assignedPlaneID;
+    }
+
+    public void setBumpPlaneID(String bumpPlaneID) {
+        this.bumpPlaneID = bumpPlaneID;
+    }
 }
