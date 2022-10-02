@@ -14,9 +14,10 @@ public class Planes {
 
     public Planes() {}
 
-    public Planes(String plane, String id, List<String> assignedCargo, List<String> assignedPersonnel) {
+    public Planes(String plane, String id, boolean isActive, List<String> assignedCargo, List<String> assignedPersonnel) {
         this.planeName = plane;
         this.id = id;
+        this.isActive = isActive;
         this.assignedPersonnel = assignedPersonnel;
         this.assignedCargo = assignedCargo;
     }

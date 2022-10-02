@@ -133,7 +133,9 @@
             android:text="@string/login_string"
             android:textColor="@color/white"
             android:textSize="23sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"/>
     </RelativeLayout>
 
     <RelativeLayout

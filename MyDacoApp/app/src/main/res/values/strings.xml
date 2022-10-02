@@ -20,4 +20,8 @@
 	<string name="newUsers_string">New users?</string>
 	<string name="click_here_string">Click here</string>
 	<string name="airfield_manifest_string">Airfield manifest</string>
+	<string name="edit_icon">Edit</string>
+	<string name="plane_delete_confirm">Are you sure you want to remove this Plane from the Manifest?</string>
+	<string name="delete">Delete</string>
+	<string name="cancel">Cancel</string>
 </resources>
