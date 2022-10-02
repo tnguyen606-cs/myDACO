@@ -89,79 +89,21 @@ public class FirestoreQuery {
         //Get all planes in the "planes" collection in the Firestore DB
         ArrayList<Planes> planeList = new ArrayList<>();
         planeRef.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Planes plane = documentSnapshot.toObject(Planes.class);
-                            planeList.add(plane);
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Planes plane = document.toObject(Planes.class);
+                                planeList.add(plane);
+                                Log.d("Firestore query", "added " + plane.getPlaneName());
+                            }
+                        } else {
+                            Log.d("Firestore query", "Error getting documents: ", task.getException());
                         }
-                        Log.d("FirestoreQuery", "Get all planes query complete");
                     }
                 });
         return planeList;
     }
 
-    public ArrayList<Personnel> getPersonnelFromPlane(String planeID) {
-        // Gets all the personnel associated with a specified plane (input is a plane ID, output is an ArrayList of Personnel objects)
-        ArrayList<Personnel> personnelList = new ArrayList<>();
-
-        // Get Firestore document ID of plane using plane ID to query
-        // Nested query: First query the plane we want to get personnel for. Then query the assignedPersonnel list of that plane
-        planeRef.whereEqualTo("id", planeID).limit(1)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()) {
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String docID = documentSnapshot.getId();
-                                CollectionReference planePersonnelRef = planeRef.document(docID).collection("assignedPersonnel");
-                                planePersonnelRef.get()
-                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                                    personnelList.add(documentSnapshot.toObject(Personnel.class));
-                                                }
-                                            }
-                                        });
-                            }
-                        }
-                    }
-                });
-        return personnelList;
-    }
-
-    public ArrayList<Cargo> getCargoFromPlane(String planeID) {
-        // Gets all the cargo associated with a specified plane (input is a plane ID, output is an ArrayList of Cargo objects)
-        ArrayList<Cargo> cargoList = new ArrayList<>();
-
-        // Get Firestore document ID of plane using plane ID to query
-        // Nested query: First query the plane we want to get personnel for. Then query the assignedCargo list of that plane
-        planeRef.whereEqualTo("id", planeID).limit(1)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String docID = documentSnapshot.getId();
-                                CollectionReference planePersonnelRef = planeRef.document(docID).collection("assignedCargo");
-                                planePersonnelRef.get()
-                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                                    cargoList.add(documentSnapshot.toObject(Cargo.class));
-                                                }
-                                            }
-                                        });
-                            }
-                        }
-                    }
-                });
-
-        return cargoList;
-    }
 }

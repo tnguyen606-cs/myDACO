@@ -4,25 +4,25 @@ public class Personnel {
     private String firstName;
     private String lastName;
     private int priority;
-    private Planes assignedPlane;
-    private Planes bumpPlane;
+    private String assignedPlaneID;
+    private String bumpPlaneID;
 
     public Personnel() {}
 
-    public Personnel(String firstName, String lastName, Planes assignedPlane, Planes bumpPlane) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, String bumpPlaneID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = 0;
-        this.assignedPlane = assignedPlane;
-        this.bumpPlane = bumpPlane;
+        this.assignedPlaneID = assignedPlaneID;
+        this.bumpPlaneID = bumpPlaneID;
     }
 
-    public Personnel(String firstName, String lastName, int priority, Planes assignedPlane, Planes bumpPlane) {
+    public Personnel(String firstName, String lastName, int priority, String assignedPlaneID, String bumpPlaneID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
-        this.assignedPlane = assignedPlane;
-        this.bumpPlane = bumpPlane;
+        this.assignedPlaneID = assignedPlaneID;
+        this.bumpPlaneID = bumpPlaneID;
     }
 
     public String getFirstName() {
@@ -37,11 +37,11 @@ public class Personnel {
         return priority;
     }
 
-    public Planes getAssignedPlane() {
-        return assignedPlane;
+    public String getAssignedPlaneID() {
+        return assignedPlaneID;
     }
 
-    public Planes getBumpPlane() {
-        return bumpPlane;
+    public String getBumpPlaneID() {
+        return bumpPlaneID;
     }
 }
