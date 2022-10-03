@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.myDACO.data.Planes;
@@ -63,6 +64,16 @@ public class PlanesActivity extends AppCompatActivity {
                 nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlane());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
                 nextScreen.putExtra("PLANE_ACTIVE", String.valueOf(planesList.get(position).isActive()));
+                PlanesActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Go to mission activity
+        Button missionBtn = (Button) findViewById(R.id.missionBtn);
+        missionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nextScreen = new Intent(PlanesActivity.this, MissionActivity.class);
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });

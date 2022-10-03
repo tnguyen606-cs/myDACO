@@ -26,4 +26,5 @@
 	<string name="cancel">Cancel</string>
     <string name="cargo">Cargo</string>
     <string name="passengers">Passengers</string>
+	<string name="mission">Start Mission</string>
 </resources>
