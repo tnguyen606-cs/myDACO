@@ -73,3 +73,18 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 N/A
 
 ---
+# Release Notes
+## Version 0.2.0
+
+### New Features
+* Ability for users to see the current airfield manifest including all the aircrafs
+* Ability for users to select a particular plane in the current airfield page
+* Ability for users to see the plane's manifest including its cargos and personnels
+* Ability for users to remove an unused plane in the plane's manifest page
+
+### Bug Fixes
+* Fixed the Edit context-menu in plane manifest 
+* Fixed the app as using Firebase
+
+### Known Issues
+N/A
