@@ -1,6 +1,5 @@
 package com.myDACO.utilities;
 
-import android.media.Image;
 import android.util.Log;
 
 import com.myDACO.data.Planes;
@@ -9,6 +8,7 @@ import com.myDACO.data.Users;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class FileHelper {
     private final String TAG_USERNAME = "username";
     private final String TAG_PASSWORD = "password";
     private final String TAG_ID = "id";
+    private final String TAG_ACTIVE = "Active";
     private final String TAG_CARGO = "cargos";
     private final String TAG_PERSONNEL = "personnel";
 
@@ -36,8 +37,7 @@ public class FileHelper {
                 String pss = jsonObject.optString(TAG_PASSWORD);
                 String name = jsonObject.optString(TAG_NAME);
                 String id = jsonObject.optString(TAG_ID);
-                Users user = new Users(id, username, pss);
-                user.setName(name);
+                Users user = new Users(id, name, username, pss);
                 setUsers.add(user);
             }
         } catch (JSONException e) {
@@ -46,23 +46,20 @@ public class FileHelper {
         return setUsers;
     }
 
-    public List<Planes> toList(InputStream inputStream) {
+    public List<Planes> toList(JSONArray jsonArray) {
         List<Planes> list = new ArrayList<Planes>();
-        List<String> cargo_list = new ArrayList<>();
-        List<String> personnel_list = new ArrayList<>();
         try {
-            JSONArray jsonArray = convertJSONtoArray(inputStream, "planes");
+            /** Add each of Plane Obj to the Plane List */
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String name = jsonObject.optString(TAG_NAME);
                 String id = jsonObject.optString(TAG_ID);
+                boolean isActive = jsonObject.optBoolean(TAG_ACTIVE);
                 // If your json string is an array, use JSONArray
                 JSONArray cargos = jsonObject.getJSONArray(TAG_CARGO);
                 JSONArray personnel = jsonObject.getJSONArray(TAG_PERSONNEL);
-                // To get the items from the array
-                cargo_list = getItemsArray(cargos);
-                personnel_list = getItemsArray(personnel);
-                Planes plane = new Planes(name, id, cargo_list, personnel_list);
+                // To get the items from the array from "getItemsArray" helper method
+                Planes plane = new Planes(name, id, isActive, getItemsArray(cargos), getItemsArray(personnel));
                 list.add(plane);
             }
         } catch (JSONException e) {
@@ -71,26 +68,7 @@ public class FileHelper {
         return list;
     }
 
-    public void remove(List<Planes> list, int position) {
-        JSONArray newJ_Array = new JSONArray();
-        try {
-            int i = 0;
-            do {
-                if (i == position) {
-                    Planes rm = list.remove(i);
-                    System.out.println(rm.getPlane());
-                } else {
-                    JSONObject formDetailsJson = new JSONObject();
-
-                    newJ_Array.put(list.get(i));
-                }
-            } while (i < list.size());
-        } catch (Exception e) {
-            Log.e("JSON Parser", "Error parsing data as removing an item " + e.toString());
-        }
-    }
-
-    protected JSONArray convertJSONtoArray(InputStream inputStream, String data) {
+    public JSONArray convertJSONtoArray(InputStream inputStream, String data) {
         try {
             int size = inputStream.available();
             byte[] buffer = new byte[size];
@@ -103,7 +81,7 @@ public class FileHelper {
             JSONArray jsonArray = jsonRootObject.getJSONArray(data);
             return jsonArray;
         } catch (JSONException | IOException e) {
-            Log.e("JSON Parser", "Error parsing data from JSON file " + e.toString());
+            Log.e("JSON Parser", "Error extracting data from JSON file " + e.toString());
         }
         return null;
     }
@@ -119,7 +97,6 @@ public class FileHelper {
                 Log.e("JSON Parser", "Error parsing data an array of a json item " + e.toString());
             }
         }
-        Log.d("Print ", l.toString());
         return l;
     }
 }

@@ -29,24 +29,31 @@
         android:layout_marginTop="80dp"
         android:background="@drawable/rectangle_shape">
 
-        <TextView
-            android:id="@+id/plane_text"
+        <TextView android:id="@+id/plane_text"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_gravity="center_horizontal|center"
+            android:textSize="30sp"
+            android:textColor="@color/design_default_color_primary"
+            android:layout_marginLeft="10dp"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal|center"
-            android:layout_marginStart="10dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="30sp" />
+            />
 
-        <ImageView
-            android:id="@+id/edit_icon"
-            android:layout_width="50dp"
+        <LinearLayout
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="340dp"
-            android:layout_marginTop="7dp"
-            android:contentDescription="@string/edit_icon"
-            android:src="@drawable/edit_icon" />
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/edit_icon"
+                android:src="@drawable/edit_icon"
+                android:contentDescription="@string/edit_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -93,7 +100,6 @@
             android:textSize="24sp"
             android:background="@drawable/rectangle_shape"/>
 
-
         <ListView
             android:id="@+id/passenger_list"
             android:layout_width="match_parent"
@@ -101,7 +107,6 @@
             android:layout_marginTop="40dp"
             android:divider="@color/text_color"
             android:dividerHeight="1sp" />
-
     </RelativeLayout>
 
 </RelativeLayout>

@@ -21,6 +21,7 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".PlanesActivity"></activity>
         <activity android:name=".SinglePlaneActivity"></activity>
+        <activity android:name=".MissionActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

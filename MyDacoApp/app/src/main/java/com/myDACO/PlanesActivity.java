@@ -4,20 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.myDACO.data.Planes;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
+import org.json.JSONArray;
+
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlanesActivity extends AppCompatActivity {
+
+    private String plane_position;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,9 +28,24 @@ public class PlanesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planes_manifest);
 
-        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
+        // Open JSON file and extract to List
         FileHelper file = new FileHelper();
-        List<Planes> planesList = file.toList(inputStream);
+        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
+        JSONArray jsonArray = file.convertJSONtoArray(inputStream, "planes");
+        List<Planes> planesList = file.toList(jsonArray);
+
+        // If a removed plane is selected, remove that plane and update the list
+        Intent intent = getIntent();
+        plane_position = intent.getStringExtra("REMOVED_PLANE_AT");
+        if (plane_position != null) {
+            int i = 0;
+            try {
+                i = Integer.parseInt(plane_position);
+                planesList.remove(i);
+            } catch(NumberFormatException nfe) {
+                System.out.println("Could not parse " + i);
+            }
+        }
 
         // Get the handle for ListView
         ListView listView = (ListView) findViewById(R.id.planes_list);
@@ -43,7 +61,19 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
+                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlane());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
+                nextScreen.putExtra("PLANE_ACTIVE", String.valueOf(planesList.get(position).isActive()));
+                PlanesActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Go to mission activity
+        Button missionBtn = (Button) findViewById(R.id.missionBtn);
+        missionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent nextScreen = new Intent(PlanesActivity.this, MissionActivity.class);
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
