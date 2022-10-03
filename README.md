@@ -56,7 +56,28 @@ Android Studio is available for computers running Windows or Linux, and for Macs
 Read more about [here](https://developer.android.com/codelabs/build-your-first-android-app#0).
 
 <!-- RELEASE NOTES -->
+---
 # Release Notes
+## Version 0.2.0
+
+### New Features
+* Ability for users to see the current airfield manifest including all the aircrafs
+* Ability for users to select a particular plane in the current airfield page
+* Ability for users to see the plane's manifest including cargos and personnels
+* Ability for users to remove an unused plane from the airfield manifest page
+
+### Bug Fixes
+* Fixed a bug to migrate database with add/remove a plane with FirebaseFirestore
+* Fixed a bug for Edit's icon context-menu in plane manifest to a triple horizontal dots icon
+* Fixed a bug for Delete action in Edit menu that allows users to delete a plane and update a new list of planes in airfield manifest page
+* Added 2 tableview for cargos and personnels in plane's manifest
+* Added a `Start Mission` button in airfield manifest page
+
+### Known Issues
+* Query the given database to Firebase database in real-time
+* Retrieving data by invoking a blocking method on a database reference with Firebase
+
+----
 ## Version 0.1.0
 
 ### New Features
@@ -67,23 +88,6 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 
 ### Bug Fixes
 * Fixed login page redirecting to the sign-up screen and forgot password screen
-* Fixed the app as using Firebase
-
-### Known Issues
-N/A
-
----
-# Release Notes
-## Version 0.2.0
-
-### New Features
-* Ability for users to see the current airfield manifest including all the aircrafs
-* Ability for users to select a particular plane in the current airfield page
-* Ability for users to see the plane's manifest including its cargos and personnels
-* Ability for users to remove an unused plane in the plane's manifest page
-
-### Bug Fixes
-* Fixed the Edit context-menu in plane manifest 
 * Fixed the app as using Firebase
 
 ### Known Issues
