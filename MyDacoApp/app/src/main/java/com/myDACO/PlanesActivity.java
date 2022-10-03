@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanesActivity extends AppCompatActivity {
@@ -41,7 +43,7 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
-                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlane());
+                nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });

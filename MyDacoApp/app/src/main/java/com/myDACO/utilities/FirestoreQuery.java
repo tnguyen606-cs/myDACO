@@ -46,8 +46,7 @@ public class FirestoreQuery {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if(!queryDocumentSnapshots.isEmpty()) {
-                            Log.d('FirestoreQuery', 'Unable to add plane; ID is not unique');
-                            return null;
+                            Log.d("FirestoreQuery", "Unable to add plane; ID is not unique");
                         }
                     }
                 });
@@ -79,7 +78,7 @@ public class FirestoreQuery {
                         for (DocumentSnapshot snapshot : snapshotList) {
                             batch.delete(snapshot.getReference());
                         }
-                        Log.d('FirestoreQuery', 'Deleted all planes with the id ' + id);
+                        Log.d("FirestoreQuery", "Deleted all planes with the id " + planeID);
                     }
                 });
 
@@ -96,7 +95,7 @@ public class FirestoreQuery {
                             Planes plane = documentSnapshot.toObject(Planes.class);
                             planeList.add(plane);
                         }
-                        Log.d('FirestoreQuery', 'Get all planes query complete');
+                        Log.d("FirestoreQuery", "Get all planes query complete");
                     }
                 });
         return planeList;

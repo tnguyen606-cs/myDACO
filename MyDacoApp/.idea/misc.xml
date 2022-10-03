@@ -3,10 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/drawable/_bg__forgot_password_screen_ek2_shape.xml" value="0.2985" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/activity_planes_manifest.xml" value="0.36666666666666664" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/activity_single_plane.xml" value="0.36666666666666664" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/custom_single_plane.xml" value="0.36666666666666664" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/forgot_pasword_screen.xml" value="0.17831813576494426" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/main_menu_screen.xml" value="0.358695652173913" />
+        <entry key="..\:/downloads/myDACO/MyDacoApp/app/src/main/res/layout/sign_up_screen.xml" value="0.17831813576494426" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/_bg__forgot_password_screen_ek2_shape.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/_bg__login_screen_ek2_shape.xml" value="0.4885" />
-        <entry key="app/src/main/res/drawable/_bg__planes_screen_shape.xml" value="0.208" />
         <entry key="app/src/main/res/drawable/_bg__sign_up_screen_ek2_shape.xml" value="0.224" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/idbox_shape.xml" value="0.224" />
@@ -15,17 +22,10 @@
         <entry key="app/src/main/res/drawable/passwordbox_ek1_shape.xml" value="0.4885" />
         <entry key="app/src/main/res/drawable/passwordbox_shape.xml" value="0.224" />
         <entry key="app/src/main/res/drawable/rectangle_10_shape.xml" value="0.224" />
-        <entry key="app/src/main/res/drawable/rectangle_shape.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/usernamebox_shape.xml" value="0.224" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.40444634459170586" />
-        <entry key="app/src/main/res/layout/activity_planes_manifest.xml" value="0.5489583333333333" />
-        <entry key="app/src/main/res/layout/activity_single_plane.xml" value="0.5479166666666667" />
-        <entry key="app/src/main/res/layout/custom_main_planefield.xml" value="0.415625" />
-        <entry key="app/src/main/res/layout/custom_single_plane.xml" value="0.335" />
         <entry key="app/src/main/res/layout/forgot_pasword_screen.xml" value="0.40444634459170586" />
-        <entry key="app/src/main/res/layout/main_planes_screen.xml" value="0.335" />
         <entry key="app/src/main/res/layout/sign_up_screen.xml" value="0.4035912783240701" />
-        <entry key="app/src/main/res/menu/plane_popup_menu.xml" value="0.5489583333333333" />
       </map>
     </option>
   </component>

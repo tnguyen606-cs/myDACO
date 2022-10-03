@@ -36,9 +36,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
-                Set<Users> strUsersArray = file.getResource(inputStream);
-
-                String name = file.concatString(firstname.getText().toString(), lastname.getText().toString());
+                Set<Users> strUsersArray = file.getUserResource(inputStream);
+                Users user = new Users();
+                String name = user.concatString(firstname.getText().toString(), lastname.getText().toString());
                 String id = employeeId.getText().toString();
 
                 boolean validUser = false;
