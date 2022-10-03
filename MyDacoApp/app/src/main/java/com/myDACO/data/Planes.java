@@ -14,7 +14,7 @@ public class Planes {
 
     public Planes() {}
 
-    public Planes(String plane, String id, boolean isActive, List<String> assignedCargo, List<String> assignedPersonnel) {
+    public Planes(String planeName, String id, boolean isActive, List<String> assignedCargo, List<String> assignedPersonnel) {
         this.planeName = plane;
         this.id = id;
         this.isActive = isActive;
@@ -22,7 +22,12 @@ public class Planes {
         this.assignedCargo = assignedCargo;
     }
 
-    public String getPlane() {
+    public Planes(String planeName, String id) {
+        this.planeName = planeName;
+        this.id = id;
+    }
+
+    public String getPlaneName() {
         return planeName;
     }
 
@@ -56,5 +61,41 @@ public class Planes {
 
     public int getCargoCapacity() {
         return cargoCapacity;
+    }
+
+    public void setPlaneName(String planeName) {
+        this.planeName = planeName;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setAssignedPersonnel(List<Personnel> assignedPersonnel) {
+        this.assignedPersonnel = assignedPersonnel;
+    }
+
+    public void setPersonnelCount(int personnelCount) {
+        this.personnelCount = personnelCount;
+    }
+
+    public void setPersonnelCapacity(int personnelCapacity) {
+        this.personnelCapacity = personnelCapacity;
+    }
+
+    public void setAssignedCargo(List<Cargo> assignedCargo) {
+        this.assignedCargo = assignedCargo;
+    }
+
+    public void setCargoWeight(int cargoWeight) {
+        this.cargoWeight = cargoWeight;
+    }
+
+    public void setCargoCapacity(int cargoCapacity) {
+        this.cargoCapacity = cargoCapacity;
     }
 }

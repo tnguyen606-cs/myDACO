@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
-import com.myDACO.data.Planes;
+import com.myDACO.data.*;
 
 import java.util.*;
 
@@ -26,26 +26,27 @@ public class FirestoreQuery {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if(!queryDocumentSnapshots.isEmpty()) {
-                            Log.d("FirestoreQuery", "Unable to add plane; ID is not unique");
+                            Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
+                        } else {
+                            // Add the plane
+                            planeRef.add(plane).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d("FirestoreQuery", "DocumentSnapshot written with internal ID: " + documentReference.getId());
+                                }
+                            });
                         }
                     }
                 });
 
-        // Add the plane
-        planeRef.add(plane).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d("FirestoreQuery", "DocumentSnapshot written with internal ID: " + documentReference.getId());
-            }
-        });
         return plane;
     }
 
     public void deletePlane(String planeID) {
         // Delete plane based on the 'id' field of the plane
 
-        //First, query the database for the plane with the specified id
-        // There might be multiple planes with the same id since uniqueness isn't enforced (yet)
+        // First, query the database for the plane with the specified id
+        // Only 1 plane should have a given planeID because uniqueness is enforced in the add method
         planeRef.whereEqualTo("id", planeID)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -58,7 +59,7 @@ public class FirestoreQuery {
                         for (DocumentSnapshot snapshot : snapshotList) {
                             batch.delete(snapshot.getReference());
                         }
-                        Log.d("FirestoreQuery", "Deleted all planes with the id " + planeID);
+                        Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
                     }
                 });
 
@@ -68,16 +69,22 @@ public class FirestoreQuery {
         //Get all planes in the "planes" collection in the Firestore DB
         ArrayList<Planes> planeList = new ArrayList<>();
         planeRef.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Planes plane = documentSnapshot.toObject(Planes.class);
-                            planeList.add(plane);
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Planes plane = document.toObject(Planes.class);
+                                planeList.add(plane);
+                                Log.d("Firestore query", "added " + plane.getPlaneName());
+                            }
+                        } else {
+                            Log.d("Firestore query", "Error getting documents: ", task.getException());
                         }
-                        Log.d("FirestoreQuery", "Get all planes query complete");
+
                     }
                 });
         return planeList;
     }
+
 }

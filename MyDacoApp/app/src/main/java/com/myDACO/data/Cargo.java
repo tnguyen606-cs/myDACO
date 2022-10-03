@@ -3,8 +3,8 @@ package com.myDACO.data;
 public class Cargo {
     private String cargoName;
     private int weight;
-    private Planes assignedPlane;
-    private Planes bumpPlane;
+    private String assignedPlaneID;
+    private String bumpPlaneID;
 
     public Cargo() {}
 
@@ -13,17 +13,17 @@ public class Cargo {
         this.weight = weight;
     }
 
-    public Cargo(String cargoName, int weight, Planes assignedPlane) {
+    public Cargo(String cargoName, int weight, String assignedPlaneID) {
         this.cargoName = cargoName;
         this.weight = weight;
-        this.assignedPlane = assignedPlane;
+        this.assignedPlaneID = assignedPlaneID;
     }
 
-    public Cargo(String cargoName, int weight, Planes assignedPlane, Planes bumpPlane) {
+    public Cargo(String cargoName, int weight, String assignedPlaneID, String bumpPlaneID) {
         this.cargoName = cargoName;
         this.weight = weight;
-        this.assignedPlane = assignedPlane;
-        this.bumpPlane = bumpPlane;
+        this.assignedPlaneID = assignedPlaneID;
+        this.bumpPlaneID = bumpPlaneID;
     }
 
     public String getCargoName() {
@@ -34,11 +34,27 @@ public class Cargo {
         return weight;
     }
 
-    public Planes getAssignedPlane() {
-        return assignedPlane;
+    public String getAssignedPlaneID() {
+        return assignedPlaneID;
     }
 
-    public Planes getBumpPlane() {
-        return bumpPlane;
+    public String getBumpPlaneID() {
+        return bumpPlaneID;
+    }
+
+    public void setCargoName(String cargoName) {
+        this.cargoName = cargoName;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setAssignedPlaneID(String assignedPlaneID) {
+        this.assignedPlaneID = assignedPlaneID;
+    }
+
+    public void setBumpPlaneID(String bumpPlaneID) {
+        this.bumpPlaneID = bumpPlaneID;
     }
 }
