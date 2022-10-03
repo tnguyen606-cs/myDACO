@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SinglePlaneActivity">
+
+    <RelativeLayout
+        android:id="@+id/menu_search_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/daco_app_string"
+            android:textColor="@color/_bg_App_color"
+            android:textSize="35sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView android:id="@+id/plane_text"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_gravity="center_horizontal|center"
+            android:textSize="30sp"
+            android:textColor="@color/design_default_color_primary"
+            android:layout_marginLeft="10dp"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/edit_icon"
+                android:src="@drawable/edit_icon"
+                android:contentDescription="@string/edit_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/plane_content_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/cargo"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="24sp"
+            android:background="@drawable/rectangle_shape"/>
+
+
+        <ListView
+            android:id="@+id/cargo_list"
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginTop="40dp"
+            android:divider="@color/text_color"
+            android:dividerHeight="1sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/passengers"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="24sp"
+            android:background="@drawable/rectangle_shape"/>
+
+        <ListView
+            android:id="@+id/passenger_list"
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginTop="40dp"
+            android:divider="@color/text_color"
+            android:dividerHeight="1sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

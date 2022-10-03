@@ -1,4 +1,4 @@
-package com.example.myDACO.data;
+package com.myDACO.data;
 
 public class Users {
     private String id;
@@ -18,10 +18,11 @@ public class Users {
         this.password = password;
     }
 
+    public Users() {
+    }
+
     /**
-     * Getter method for the name of Personnel.
-     *
-     * @return the name value of the current Personnel
+     * Getter methods for User
      */
     public String getDacoName() {
         return this.name;
@@ -39,6 +40,26 @@ public class Users {
         return this.id;
     }
 
+    /**
+     * Setter methods for the user
+     *
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     /*
      * This method checks if whether it is a same assigned Personnel
      */
@@ -52,5 +73,14 @@ public class Users {
                     && this.password.equals(otherUser.getDacoPassword());
         }
         return false;
+    }
+
+    public String concatString(String pre, String post) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(pre);
+        builder.append(" ");
+        builder.append(post);
+        this.name =  builder.toString();
+        return  this.name;
     }
 }

@@ -1,92 +1,76 @@
 {
   "data": [
     {
+      "name": "Tam Nguyen",
+      "username": "tnguyen606",
+      "password": "tnguyen606",
+      "id": "888"
+    },
+    {
       "name": "Astra Express",
       "username": "Blackhawk",
       "password": "astra-express",
-      "id": "899",
-      "capacity": 3,
-      "status": "OPEN"
+      "id": "899"
     },
     {
       "name": "Jazz Cat",
       "username": "Parachute",
       "password": "jazz-cat",
-      "id": "1230",
-      "capacity": 2,
-      "status": "OPEN"
+      "id": "1230"
     },
     {
       "name": "Jolly Roger",
       "username": "Goosebumps",
       "password": "jolly-roger",
-      "id": "1350",
-      "capacity": 6,
-      "status": "OPEN"
+      "id": "1350"
     },
     {
       "name": "Neptune Rope",
       "username": "Grandma",
       "password": "neptune-rope",
-      "id": "50",
-      "capacity": 1,
-      "status": "OPEN"
+      "id": "50"
     },
     {
       "name": "Panorama",
       "username": "OldWitch",
       "password": "panorama",
-      "id": "2800",
-      "capacity": 8,
-      "status": "OPEN"
+      "id": "2800"
     },
     {
       "name": "Prickly Peak",
       "username": "Duck'sRevenge",
       "password": "prickly-peak",
-      "id": "1700",
-      "capacity": 3,
-      "status": "HOLD"
+      "id": "1700"
     },
     {
       "name": "Snowtooth Express",
       "username": "SneakyPete",
       "password": "snowtooth-express",
-      "id": "1480",
-      "capacity": 6,
-      "status": "CLOSED"
+      "id": "1480"
     },
     {
       "name": "Summit",
       "username": "Sunset",
       "password": "summit",
-      "id": "1481",
-      "capacity": 6,
-      "status": "HOLD"
+      "id": "1481"
     },
     {
       "name": "Wally's",
       "username": "Mark'sChute",
       "password": "wallys",
-      "id": "820",
-      "capacity": 2,
-      "status": "CLOSED"
+      "id": "820"
     },
     {
       "name": "Western States",
       "username": "HumptyDumpty",
       "password": "western-states",
-      "id": "1330",
-      "capacity": 6,
-      "status": "HOLD"
+      "id": "1330"
     },
     {
       "name": "Whirlybird",
       "username": "Meatball",
       "password": "whirlybird",
-      "id": "1003",
-      "capacity": 2,
-      "status": "OPEN"
+      "id": "1003"
     }
   ]
 }

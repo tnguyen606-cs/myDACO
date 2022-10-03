@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myDACO.data.Users;
-import com.example.myDACO.utilities.FileHelper;
+import com.myDACO.data.Users;
+import com.myDACO.utilities.FileHelper;
 
 import java.io.InputStream;
 import java.util.Set;
@@ -36,9 +36,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
-                Set<Users> strUsersArray = file.getResource(inputStream);
-
-                String name = file.concatString(firstname.getText().toString(), lastname.getText().toString());
+                Set<Users> strUsersArray = file.getUserResource(inputStream);
+                Users user = new Users();
+                String name = user.concatString(firstname.getText().toString(), lastname.getText().toString());
                 String id = employeeId.getText().toString();
 
                 boolean validUser = false;

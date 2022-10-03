@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 
-import com.example.myDACO.data.Users;
-import com.example.myDACO.utilities.FileHelper;
+import com.myDACO.data.Users;
+import com.myDACO.utilities.FileHelper;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.InputStream;
@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
         InputStream inputStream = getResources().openRawResource(R.raw.user_data);
 
-        // admin
+        // admin Login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FileHelper file = new FileHelper();
-                Set<Users> strUsersArray = file.getResource(inputStream);
+                Set<Users> strUsersArray = file.getUserResource(inputStream);
 
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
@@ -46,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 for (Users u : strUsersArray) {
                     if (u.getDacoUsername().equals(username) && u.getDacoPassword().equals(password)) {
                         validUser = true;
-                        String toastMessage = "Username: " + username + ", Password: " + password;
-                        Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_LONG).show();
+                        // Go to Plane Screen if valid login
+                        Intent nextScreen = new Intent(MainActivity.this, PlanesActivity.class);
+                        MainActivity.this.startActivity(nextScreen);
                         break;
                     }
                 }
