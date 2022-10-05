@@ -32,7 +32,7 @@ public class PlanesActivity extends AppCompatActivity {
 
     private String plane_position;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    List<Planes> planesList = new ArrayList<>();
+    static List<Planes> planesList = new ArrayList<>();
     PlaneArrayAdapter planeAdapter;
     ListenerRegistration planeListener;
 
