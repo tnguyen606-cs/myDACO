@@ -61,7 +61,7 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
-                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlane());
+                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlaneName());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
                 nextScreen.putExtra("PLANE_ACTIVE", String.valueOf(planesList.get(position).isActive()));
                 PlanesActivity.this.startActivity(nextScreen);

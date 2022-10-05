@@ -15,7 +15,7 @@ public class Planes {
     public Planes() {}
 
     public Planes(String planeName, String id, boolean isActive, List<String> assignedCargo, List<String> assignedPersonnel) {
-        this.planeName = plane;
+        this.planeName = planeName;
         this.id = id;
         this.isActive = isActive;
         this.assignedPersonnel = assignedPersonnel;
