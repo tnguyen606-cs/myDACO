@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.myDACO.data.Planes;
 import com.myDACO.utilities.FileHelper;
+import com.myDACO.utilities.FirestoreQuery;
 
 import org.json.JSONArray;
 
@@ -30,6 +31,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
     private String plane_position = null;
     private boolean plane_isActive;
 
+    //this is broken but i think i know how to fix it
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +47,17 @@ public class SinglePlaneActivity extends AppCompatActivity {
         int index = Integer.valueOf(plane_position);
 
 
-        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
-        FileHelper file = new FileHelper();
-        JSONArray jsonArray = file.convertJSONtoArray(inputStream, "planes");
-        List<Planes> planesList = file.toList(jsonArray);
+//        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
+//        FileHelper file = new FileHelper();
+//        JSONArray jsonArray = file.convertJSONtoArray(inputStream, "planes");
+        //List<Planes> planesList = file.toList(jsonArray);
+
+
+        //firebase conversion
+        FirestoreQuery fQ = new FirestoreQuery();
+        List<Planes> planesList = fQ.getAllPlanes();
         Planes singlePlane = planesList.get(index);
+
 
         // Get the handle for ListView
         ListView cargoListView = (ListView) findViewById(R.id.cargo_list);
