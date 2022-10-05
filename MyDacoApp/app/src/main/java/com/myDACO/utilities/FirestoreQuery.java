@@ -8,6 +8,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.myDACO.data.*;
 
 import java.util.*;
@@ -81,7 +83,6 @@ public class FirestoreQuery {
                         } else {
                             Log.d("Firestore query", "Error getting documents: ", task.getException());
                         }
-
                     }
                 });
         return planeList;
