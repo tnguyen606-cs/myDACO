@@ -31,7 +31,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
     private String plane_position = null;
     private boolean plane_isActive;
 
-    //this is broken but i think i know how to fix it
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

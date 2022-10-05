@@ -53,8 +53,6 @@ public class PlanesActivity extends AppCompatActivity {
                 planesList.clear();
                 for (QueryDocumentSnapshot document : value) {
                     Planes plane = document.toObject(Planes.class);
-
-                   //this needs a uniqueness check
                     planesList.add(plane);
                     planeAdapter.notifyDataSetChanged();
                 }
@@ -62,10 +60,6 @@ public class PlanesActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
