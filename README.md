@@ -87,8 +87,7 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 * New dashboard view for users with personel, cargo, and planes information
 
 ### Bug Fixes
-* Fixed login page redirecting to the sign-up screen and forgot password screen
-* Fixed the app as using Firebase
+N/A
 
 ### Known Issues
 N/A
