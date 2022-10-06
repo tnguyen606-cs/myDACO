@@ -5,16 +5,18 @@ public class Planes {
     private String planeName;
     private String id;
     private boolean isActive;
-    private List<String> assignedPersonnel;
+    private List<Personnel> assignedPersonnel;
     private int personnelCount;
     private int personnelCapacity;
-    private List<String> assignedCargo;
+    private List<Cargo> assignedCargo;
     private int cargoWeight;
     private int cargoCapacity;
 
     public Planes() {}
 
-    public Planes(String planeName, String id, boolean isActive, List<String> assignedCargo, List<String> assignedPersonnel) {
+
+    public Planes(String planeName, String id, boolean isActive, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
+
         this.planeName = planeName;
         this.id = id;
         this.isActive = isActive;
@@ -39,7 +41,7 @@ public class Planes {
         return isActive;
     }
 
-    public List<String> getAssignedPersonnel() {
+    public List<Personnel> getAssignedPersonnel() {
         return assignedPersonnel;
     }
 
@@ -51,7 +53,7 @@ public class Planes {
         return personnelCapacity;
     }
 
-    public List<String> getAssignedCargo() {
+    public List<Cargo> getAssignedCargo() {
         return assignedCargo;
     }
 

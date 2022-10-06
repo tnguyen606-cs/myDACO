@@ -46,27 +46,27 @@ public class FileHelper {
         return setUsers;
     }
 
-    public List<Planes> toList(JSONArray jsonArray) {
-        List<Planes> list = new ArrayList<Planes>();
-        try {
-            /** Add each of Plane Obj to the Plane List */
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String name = jsonObject.optString(TAG_NAME);
-                String id = jsonObject.optString(TAG_ID);
-                boolean isActive = jsonObject.optBoolean(TAG_ACTIVE);
-                // If your json string is an array, use JSONArray
-                JSONArray cargos = jsonObject.getJSONArray(TAG_CARGO);
-                JSONArray personnel = jsonObject.getJSONArray(TAG_PERSONNEL);
-                // To get the items from the array from "getItemsArray" helper method
-                Planes plane = new Planes(name, id, isActive, getItemsArray(cargos), getItemsArray(personnel));
-                list.add(plane);
-            }
-        } catch (JSONException e) {
-            Log.e("JSON Parser", "Error parsing data as converting to List  " + e.toString());
-        }
-        return list;
-    }
+//    public List<Planes> toList(JSONArray jsonArray) {
+//        List<Planes> list = new ArrayList<Planes>();
+//        try {
+//            /** Add each of Plane Obj to the Plane List */
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                String name = jsonObject.optString(TAG_NAME);
+//                String id = jsonObject.optString(TAG_ID);
+//                boolean isActive = jsonObject.optBoolean(TAG_ACTIVE);
+//                // If your json string is an array, use JSONArray
+//                JSONArray cargos = jsonObject.getJSONArray(TAG_CARGO);
+//                JSONArray personnel = jsonObject.getJSONArray(TAG_PERSONNEL);
+//                // To get the items from the array from "getItemsArray" helper method
+//                Planes plane = new Planes(name, id, isActive, getItemsArray(cargos), getItemsArray(personnel));
+//                list.add(plane);
+//            }
+//        } catch (JSONException e) {
+//            Log.e("JSON Parser", "Error parsing data as converting to List  " + e.toString());
+//        }
+//        return list;
+//    }
 
     public JSONArray convertJSONtoArray(InputStream inputStream, String data) {
         try {
@@ -86,17 +86,17 @@ public class FileHelper {
         return null;
     }
 
-    protected List<String> getItemsArray(JSONArray jArray) {
-        List<String> l = new ArrayList<>();
-        for (int i = 0; i < jArray.length(); i++)
-        {
-            try {
-                String oneItem = jArray.getString(i);
-                l.add(oneItem);
-            } catch (JSONException e) {
-                Log.e("JSON Parser", "Error parsing data an array of a json item " + e.toString());
-            }
-        }
-        return l;
-    }
+//    protected List<String> getItemsArray(JSONArray jArray) {
+//        List<String> l = new ArrayList<>();
+//        for (int i = 0; i < jArray.length(); i++)
+//        {
+//            try {
+//                String oneItem = jArray.getString(i);
+//                l.add(oneItem);
+//            } catch (JSONException e) {
+//                Log.e("JSON Parser", "Error parsing data an array of a json item " + e.toString());
+//            }
+//        }
+//        return l;
+//    }
 }

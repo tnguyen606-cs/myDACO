@@ -16,8 +16,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.myDACO.data.Planes;
 import com.myDACO.utilities.FileHelper;
+import com.myDACO.utilities.FirestoreQuery;
 
 import org.json.JSONArray;
 
@@ -30,10 +32,17 @@ public class SinglePlaneActivity extends AppCompatActivity {
     private String plane_position = null;
     private boolean plane_isActive;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_plane);
+
+      //fix all of this
+
+
 
         // Get all information from the selection Plane
         Intent intent = getIntent();
@@ -45,11 +54,11 @@ public class SinglePlaneActivity extends AppCompatActivity {
         int index = Integer.valueOf(plane_position);
 
 
-        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
-        FileHelper file = new FileHelper();
-        JSONArray jsonArray = file.convertJSONtoArray(inputStream, "planes");
-        List<Planes> planesList = file.toList(jsonArray);
-        Planes singlePlane = planesList.get(index);
+
+        //firebase conversion
+
+        Planes singlePlane = PlanesActivity.planesList.get(index);
+
 
         // Get the handle for ListView
         ListView cargoListView = (ListView) findViewById(R.id.cargo_list);

@@ -35,7 +35,7 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
             view = convertView;
         }
         PlaneViewHolder holder = (PlaneViewHolder) view.getTag();
-        holder.planeLabel.setText(list.get(position).getPlane());
+        holder.planeLabel.setText(list.get(position).getPlaneName());
         return view;
     }
 }
