@@ -89,7 +89,8 @@ public class FirestoreQuery {
                 });
         return planeList;
     }
-
+    
+    //returns all instances of cargo that contain the given search parameter in the given field
     public <T> ArrayList<Cargo> searchForCargo(String field, T searchParam) {
         ArrayList<Cargo> retCargo = new ArrayList<>();
         planeRef.get()
