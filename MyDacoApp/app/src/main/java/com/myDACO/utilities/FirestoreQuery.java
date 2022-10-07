@@ -12,6 +12,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.myDACO.data.*;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.*;
 
 public class FirestoreQuery {
@@ -88,4 +90,35 @@ public class FirestoreQuery {
         return planeList;
     }
 
+    public <T> ArrayList<Cargo> searchForCargo(String field, T searchParam) {
+        ArrayList<Cargo> retCargo = new ArrayList<>();
+        planeRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        ArrayList<CollectionReference> cargoRefs = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                cargoRefs.add(document.getReference().collection(""));
+                            }
+                            for (CollectionReference cargoRef : cargoRefs) {
+                                cargoRef.whereEqualTo(field, searchParam)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            public void onComplete(Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        retCargo.add(document.toObject(Cargo.class));
+                                                    }
+
+                                                }
+                                            }
+                                        });
+                            }
+
+                        }
+                    }
+                });
+        return retCargo;
+    }
 }
+
