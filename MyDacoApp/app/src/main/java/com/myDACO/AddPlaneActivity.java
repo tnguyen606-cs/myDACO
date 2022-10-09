@@ -64,8 +64,8 @@ public class AddPlaneActivity extends AppCompatActivity {
                             // Generate the Plane ID
                             Random rand = new Random();
                             // Autogenerate plane id (2 letter + 1 int)
-                            char c1 = (char)(rand.nextInt(26) + 'a');
-                            char c2 = (char)(rand.nextInt(26) + 'a');
+                            String c1 = Character.toString((char)(rand.nextInt(26) + 'a'));
+                            String c2 = Character.toString((char)(rand.nextInt(26) + 'a'));
                             String n = Integer.toString(rand.nextInt(10));
                             String plane_id = c1 + c2 + n;
 

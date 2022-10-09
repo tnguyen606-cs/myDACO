@@ -74,9 +74,10 @@
 
         <EditText
             android:id="@+id/plane_personnel_capacity_input"
-            android:layout_width="81dp"
+            android:layout_width="100dp"
             android:layout_height="52dp"
-            android:inputType="phone"
+            android:digits="0123456789"
+            android:inputType="number"
             tools:ignore="SpeakableTextPresentCheck"
             android:drawableStart="@drawable/user"
             android:drawablePadding="10dp"
@@ -97,16 +98,17 @@
 
         <EditText
             android:id="@+id/plane_cargo_capacity_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/plane_cargo_capacity"
-            android:layout_width="81dp"
-            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:digits="0123456789"
             android:drawableStart="@drawable/cargo_icon_drawable"
             android:drawablePadding="10dp"
-            android:digits="0123456789"
             android:inputType="number"
-            tools:ignore="SpeakableTextPresentCheck"
+            android:maxLength="7"
             android:maxLines="1"
-            android:maxLength="7"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/add_plane_button"
