@@ -147,9 +147,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
                         if (plane_isActive) { // If plane is ACTIVE, then display error message saying cannot remove plane
                             Toast.makeText(getApplicationContext(), "Cannot remove a plane while still takes on mission", Toast.LENGTH_LONG).show();
                         } else {
-                            fq.deletePlane(PlanesActivity.planesList.get(index).getId());
-                            Intent nextScreen = new Intent(SinglePlaneActivity.this, PlanesActivity.class);
-                            startActivity(nextScreen);
+                            showCustomDialog(index);
                         }
 
                     default:
@@ -161,7 +159,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    void showCustomDialog() {
+    void showCustomDialog(int index) {
         Dialog dialog = new Dialog(SinglePlaneActivity.this);
         //We have added a title in the custom layout. So let's disable the default title.
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -184,6 +182,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fq.deletePlane(PlanesActivity.planesList.get(index).getId());
                 Intent nextScreen = new Intent(SinglePlaneActivity.this, PlanesActivity.class);
                 nextScreen.putExtra("REMOVED_PLANE_AT", plane_position);
                 SinglePlaneActivity.this.startActivity(nextScreen);
