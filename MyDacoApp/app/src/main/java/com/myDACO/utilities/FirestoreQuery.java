@@ -88,4 +88,66 @@ public class FirestoreQuery {
         return planeList;
     }
 
+
+    public void addCargo(Planes plane, Cargo cargo) {
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            snapshot.getReference().collection("assignedCargo").add(cargo);
+                        }
+                        Log.d("FirestoreQuery", "Added cargo" + cargo.getCargoName() + "to" + plane.getId());
+                    }
+                });
+    }
+
+    public Cargo removeCargo(Planes plane, int id) {
+        final CollectionReference[] cargoRef = new CollectionReference[1];
+        final Cargo[] returnCargo = new Cargo[1];
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            cargoRef[0] = snapshot.getReference().collection("assignedCargo");
+                        }
+                    }
+                });
+
+        cargoRef[0].whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            returnCargo[0] = snapshot.toObject(Cargo.class);
+                            snapshot.getReference().delete();
+                        }
+                    }
+                });
+        return returnCargo[0];
+
+    }
+
 }
