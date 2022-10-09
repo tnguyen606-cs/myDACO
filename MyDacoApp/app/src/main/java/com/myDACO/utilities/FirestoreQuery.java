@@ -1,5 +1,7 @@
 package com.myDACO.utilities;
 import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,14 +56,17 @@ public class FirestoreQuery {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        WriteBatch batch = db.batch();
-
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            batch.delete(snapshot.getReference());
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            planeRef.document(doc.getId())
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
+                                        }
+                                    });
                         }
-                        Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
+
                     }
                 });
 
