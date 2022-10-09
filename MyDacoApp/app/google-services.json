@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "155288162429",
-    "project_id": "mydaco-c893c",
-    "storage_bucket": "mydaco-c893c.appspot.com"
+    "project_number": "1061772810930",
+    "project_id": "mydaco-43f5a",
+    "storage_bucket": "mydaco-43f5a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:155288162429:android:d1a20e129d64e874c06114",
+        "mobilesdk_app_id": "1:1061772810930:android:53f293c99b2cbd503c07ab",
         "android_client_info": {
           "package_name": "com.myDACO"
         }
       },
       "oauth_client": [
         {
-          "client_id": "155288162429-38ebvdcv01gk7re9q2c1kvieae8hiarf.apps.googleusercontent.com",
+          "client_id": "1061772810930-penqd44f2ugrgqs82kgm5h57r761c4o9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAEvnYAmm9GWPu25n3SiMpRnKoIqFGKC-I"
+          "current_key": "AIzaSyA_ptqoA6lkQd2WNT3SlQjK5BYHB4xH_8c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "155288162429-38ebvdcv01gk7re9q2c1kvieae8hiarf.apps.googleusercontent.com",
+              "client_id": "1061772810930-penqd44f2ugrgqs82kgm5h57r761c4o9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

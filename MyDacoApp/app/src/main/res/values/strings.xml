@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- forgot_password_screen strings -->
+    <!-- forgot_password_screen strings -->
 
-	<string name="app_name">Page 1</string>
-	<string name="firstnametext_string">First Name:</string>
-	<string name="lastnametext_string">Last Name:</string>
-	<string name="usernametext_string">Username:</string>
-	<string name="passwordtext_string">Passwords:</string>
-	<string name="idtext_string">Employee ID:</string>
-	<string name="go_back_string">Go Back </string>
-	<string name="register_string">Register</string>
-	<string name="continue_string">Continue</string>
-	<string name="contact_info_string">Please contact the Department of Registration to verify your ID.</string>
-	<string name="login_string">Login</string>
-	<string name="forgot_password_string">Forgot Password</string>
-	<string name="username_string">Username</string>
-	<string name="password_string">Password</string>
-	<string name="daco_app_string">DACO APP</string>
-	<string name="newUsers_string">New users?</string>
-	<string name="click_here_string">Click here</string>
-	<string name="airfield_manifest_string">Airfield manifest</string>
-	<string name="edit_icon">Edit</string>
-	<string name="plane_delete_confirm">Are you sure you want to remove this Plane from the Manifest?</string>
-	<string name="delete">Delete</string>
-	<string name="cancel">Cancel</string>
+    <string name="app_name">Page 1</string>
+    <string name="firstnametext_string">First Name:</string>
+    <string name="lastnametext_string">Last Name:</string>
+    <string name="usernametext_string">Username:</string>
+    <string name="passwordtext_string">Passwords:</string>
+    <string name="idtext_string">Employee ID:</string>
+    <string name="go_back_string">Go Back </string>
+    <string name="register_string">Register</string>
+    <string name="continue_string">Continue</string>
+    <string name="contact_info_string">Please contact the Department of Registration to verify your ID.</string>
+    <string name="login_string">Login</string>
+    <string name="forgot_password_string">Forgot Password</string>
+    <string name="username_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="daco_app_string">DACO APP</string>
+    <string name="newUsers_string">New users?</string>
+    <string name="click_here_string">Click here</string>
+    <string name="airfield_manifest_string">Airfield Manifest</string>
+    <string name="edit_icon">Edit</string>
+    <string name="plane_delete_confirm">Are you sure you want to remove this Plane from the Manifest?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
     <string name="cargo">Cargo</string>
     <string name="passengers">Passengers</string>
-	<string name="mission">Start Mission</string>
+    <string name="mission">Start Mission</string>
+    <string name="AddPlane">add_plane</string>
+    <string name="addPlaneForm">Add Plane</string>
 </resources>

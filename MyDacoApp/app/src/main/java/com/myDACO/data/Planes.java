@@ -24,6 +24,19 @@ public class Planes {
         this.assignedCargo = assignedCargo;
     }
 
+    public Planes(String planeName, String id, boolean isActive, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
+
+        this.planeName = planeName;
+        this.id = id;
+        this.isActive = isActive;
+        this.assignedPersonnel = assignedPersonnel;
+        this.assignedCargo = assignedCargo;
+        this.personnelCapacity = personnelCapacity;
+        this.personnelCount = personnelCount;
+        this.cargoCapacity = cargoCapacity;
+        this.cargoWeight = cargoWeight;
+    }
+
     public Planes(String planeName, String id) {
         this.planeName = planeName;
         this.id = id;
