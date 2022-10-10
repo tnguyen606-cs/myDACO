@@ -1,14 +1,20 @@
 package com.myDACO;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.firebase.ui.auth.ErrorCodes;
+import com.google.android.material.snackbar.Snackbar;
 import com.myDACO.data.Users;
+import com.myDACO.databinding.ActivityCustomDialogBinding;
+import com.myDACO.databinding.ActivityMainBinding;
 import com.myDACO.utilities.FileHelper;
 import com.google.android.material.button.MaterialButton;
 
@@ -40,6 +46,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FIREBASE_PRIVACY_POLICY_URL = "https://firebase.google" +
+            ".com/terms/analytics/#7_privacy";
+    private static final String FIREBASE_TOS_URL = "https://firebase.google.com/terms/";
 
     // [START auth_fui_create_launcher]
     // See: https://developer.android.com/training/basics/intents/result
@@ -66,15 +75,17 @@ public class MainActivity extends AppCompatActivity {
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.PhoneBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build()
+                new AuthUI.IdpConfig.PhoneBuilder().build()
+             //   new AuthUI.IdpConfig.GoogleBuilder().build()
               //  new AuthUI.IdpConfig.FacebookBuilder().build(),
-             );
+        );
 
         // Create and launch sign-in intent
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.Theme_Daco)
+                .setLogo(R.drawable.aircaft_icon)
                 .build();
         signInLauncher.launch(signInIntent);
         // [END auth_fui_create_intent]
@@ -86,12 +97,31 @@ public class MainActivity extends AppCompatActivity {
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Intent nextScreen = new Intent(MainActivity.this,PlanesActivity.class);
+            MainActivity.this.startActivity(nextScreen);
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
+            if (response == null) {
+                // User pressed back button
+                showSnackbar(R.string.sign_in_cancelled);
+                return;
+            }
+
+            if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                showSnackbar(R.string.no_internet_connection);
+                return;
+            }
+            if (response.getError().getErrorCode() == ErrorCodes.ERROR_USER_DISABLED) {
+                showSnackbar(R.string.account_disabled);
+                return;
+            }
+
+            showSnackbar(R.string.unknown_error);
+            Log.e("Login:", "Sign-in error: ", response.getError());
         }
     }
     // [END auth_fui_result]
@@ -194,5 +224,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         // [END auth_fui_email_link_catch]
+    }
+    private void showSnackbar(@StringRes int errorMessageRes) {
+        ActivityMainBinding mBinding = null;
+        Snackbar.make(mBinding.getRoot(), errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
 }
