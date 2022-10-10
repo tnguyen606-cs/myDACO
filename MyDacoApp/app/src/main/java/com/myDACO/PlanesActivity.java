@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.firestore.EventListener;
@@ -19,7 +20,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Planes;
 import com.myDACO.utilities.FileHelper;
-import com.myDACO.utilities.FirestoreQuery;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
 import org.json.JSONArray;
@@ -118,6 +118,19 @@ public class PlanesActivity extends AppCompatActivity {
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
+
+        // Go to add plane activity
+        ImageView editIcon = (ImageView) findViewById(R.id.add_plane);
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(PlanesActivity.this, AddPlaneActivity.class);
+                PlanesActivity.this.startActivity(nextScreen);
+
+            }
+        });
+
     }
 }
 
