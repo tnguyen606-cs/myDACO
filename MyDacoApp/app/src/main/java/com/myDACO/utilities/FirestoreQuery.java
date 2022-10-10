@@ -122,7 +122,7 @@ public class FirestoreQuery {
                         ArrayList<CollectionReference> cargoRefs = new ArrayList<>();
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                cargoRefs.add(document.getReference().collection(""));
+                                cargoRefs.add(document.getReference().collection("assingedCargo"));
                             }
                             for (CollectionReference cargoRef : cargoRefs) {
                                 cargoRef.whereEqualTo(field, searchParam)
@@ -143,6 +143,38 @@ public class FirestoreQuery {
                 });
         return retCargo;
     }
+
+    //returns all instances of cargo that contain the given search parameter in the given field
+    public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchParam) {
+        ArrayList<Personnel> retPersonnel = new ArrayList<>();
+        planeRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        ArrayList<CollectionReference> personnelRefs = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                personnelRefs.add(document.getReference().collection("assignedPersonnel"));
+                            }
+                            for (CollectionReference cargoRef : personnelRefs) {
+                                cargoRef.whereEqualTo(field, searchParam)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            public void onComplete(Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        retPersonnel.add(document.toObject(Personnel.class));
+                                                    }
+                                                }
+                                            }
+                                        });
+                            }
+
+                        }
+                    }
+                });
+        return retPersonnel;
+    }
+
     public void addPersonnel(Planes plane, Personnel personnel) {
         planeRef.whereEqualTo("id", plane.getId())
                 .get()
