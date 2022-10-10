@@ -4,7 +4,7 @@ import java.util.*;
 public class Planes {
     private String planeName;
     private String id;
-    private boolean isActive;
+    private boolean active;
     private List<Personnel> assignedPersonnel;
     private int personnelCount;
     private int personnelCapacity;
@@ -15,20 +15,20 @@ public class Planes {
     public Planes() {}
 
 
-    public Planes(String planeName, String id, boolean isActive, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
+    public Planes(String planeName, String id, boolean active, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
 
         this.planeName = planeName;
         this.id = id;
-        this.isActive = isActive;
+        this.active = active;
         this.assignedPersonnel = assignedPersonnel;
         this.assignedCargo = assignedCargo;
     }
 
-    public Planes(String planeName, String id, boolean isActive, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
+    public Planes(String planeName, String id, boolean active, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
 
         this.planeName = planeName;
         this.id = id;
-        this.isActive = isActive;
+        this.active = active;
         this.assignedPersonnel = assignedPersonnel;
         this.assignedCargo = assignedCargo;
         this.personnelCapacity = personnelCapacity;
@@ -50,9 +50,7 @@ public class Planes {
         return id;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
+    public boolean isActive() {return active;}
 
     public List<Personnel> getAssignedPersonnel() {
         return assignedPersonnel;
@@ -86,9 +84,7 @@ public class Planes {
         this.id = id;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
-    }
+    public void setActive(boolean active) { this.active = active; }
 
     public void setAssignedPersonnel(List<Personnel> assignedPersonnel) {
         this.assignedPersonnel = assignedPersonnel;
