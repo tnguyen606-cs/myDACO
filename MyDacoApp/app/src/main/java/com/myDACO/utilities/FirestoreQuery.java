@@ -1,6 +1,7 @@
 package com.myDACO.utilities;
 import android.app.Person;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.myDACO.SinglePlaneActivity;
 import com.myDACO.data.*;
 
 import org.checkerframework.checker.units.qual.A;
@@ -70,6 +72,21 @@ public class FirestoreQuery {
                                     });
                         }
 
+                    }
+                });
+
+    }
+
+    public void setPlaneStatus(String planeID) {
+        planeRef.whereEqualTo("id", planeID)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            boolean planeIsActive = doc.toObject(Planes.class).isActive();
+                            planeRef.document(doc.getId()).update("active", !planeIsActive);
+                        }
                     }
                 });
 
