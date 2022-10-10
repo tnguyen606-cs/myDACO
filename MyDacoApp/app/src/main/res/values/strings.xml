@@ -26,6 +26,27 @@
     <string name="cancel">Cancel</string>
     <string name="cargo">Cargo</string>
     <string name="passengers">Passengers</string>
+	<string name="mission">Start Mission</string>
+	<!-- Auth UI - Signed in -->
+	<string name="signed_in_header">You are signed in!</string>
+	<string name="sign_out">Sign out</string>
+	<string name="delete_account_label">Delete account</string>
+
+	<string name="sign_in_failed">Sign in failed</string>
+	<string name="sign_out_failed">Sign out failed</string>
+	<string name="delete_account_failed">Delete account failed</string>
+
+	<string name="user_profile_header">User profile:</string>
+	<string name="profile_picture_content_desc">Profile picture</string>
+	<string name="used_providers">Providers used: %s</string>
+	<string name="idp_token">IDP Token</string>
+	<string name="idp_secret">IDP Secret</string>
+
+	<string name="sign_in_cancelled">Sign in cancelled</string>
+	<string name="no_internet_connection">No internet connection</string>
+	<string name="account_disabled">Account is disabled by the administrator</string>
+	<string name="unknown_error">An unknown error occurred</string>
+
     <string name="mission">Start Mission</string>
     <string name="AddPlane">add_plane</string>
     <string name="addPlaneForm">Add Plane</string>
