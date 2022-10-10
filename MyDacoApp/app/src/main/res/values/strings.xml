@@ -47,7 +47,6 @@
 	<string name="account_disabled">Account is disabled by the administrator</string>
 	<string name="unknown_error">An unknown error occurred</string>
 
-    <string name="mission">Start Mission</string>
     <string name="AddPlane">add_plane</string>
     <string name="addPlaneForm">Add Plane</string>
 </resources>
