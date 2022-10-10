@@ -6,6 +6,7 @@ public class Personnel {
     private int priority;
     private String assignedPlaneID;
     private String bumpPlaneID;
+    private int id;
 
     public Personnel() {}
 
@@ -45,6 +46,8 @@ public class Personnel {
         return bumpPlaneID;
     }
 
+    public int getId() {return id;}
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -64,4 +67,7 @@ public class Personnel {
     public void setBumpPlaneID(String bumpPlaneID) {
         this.bumpPlaneID = bumpPlaneID;
     }
+
+    public void setId(int id) {this.id = id;}
+
 }

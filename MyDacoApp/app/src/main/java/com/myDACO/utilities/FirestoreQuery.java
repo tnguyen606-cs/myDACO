@@ -1,4 +1,5 @@
 package com.myDACO.utilities;
+import android.app.Person;
 import android.util.Log;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -88,8 +89,7 @@ public class FirestoreQuery {
         return planeList;
     }
 
-
-    public void addCargo(Planes plane, Cargo cargo) {
+    public void addPersonnel(Planes plane, Personnel personnel) {
         planeRef.whereEqualTo("id", plane.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -102,16 +102,16 @@ public class FirestoreQuery {
                             return;
                         }
                         for (DocumentSnapshot snapshot : snapshotList) {
-                            snapshot.getReference().collection("assignedCargo").add(cargo);
+                            snapshot.getReference().collection("assignedPersonnel").add(personnel);
                         }
-                        Log.d("FirestoreQuery", "Added cargo" + cargo.getCargoName() + "to" + plane.getId());
+                        Log.d("FirestoreQuery", "Added personnel" + personnel.getLastName() + "to" + plane.getId());
                     }
                 });
     }
 
-    public Cargo removeCargo(Planes plane, int id) {
-        final CollectionReference[] cargoRef = new CollectionReference[1];
-        final Cargo[] returnCargo = new Cargo[1];
+    public Personnel removePersonnel(Planes plane, int id) {
+        final CollectionReference[] personnelRef = new CollectionReference[1];
+        final Personnel[] returnPersonnel = new Personnel[1];
         planeRef.whereEqualTo("id", plane.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -124,12 +124,12 @@ public class FirestoreQuery {
                             return;
                         }
                         for (DocumentSnapshot snapshot : snapshotList) {
-                            cargoRef[0] = snapshot.getReference().collection("assignedCargo");
+                            personnelRef[0] = snapshot.getReference().collection("assignedPersonnel");
                         }
                     }
                 });
 
-        cargoRef[0].whereEqualTo("id", plane.getId())
+        personnelRef[0].whereEqualTo("id", plane.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -141,12 +141,12 @@ public class FirestoreQuery {
                             return;
                         }
                         for (DocumentSnapshot snapshot : snapshotList) {
-                            returnCargo[0] = snapshot.toObject(Cargo.class);
+                            returnPersonnel[0] = snapshot.toObject(Personnel.class);
                             snapshot.getReference().delete();
                         }
                     }
                 });
-        return returnCargo[0];
+        return returnPersonnel[0];
 
     }
 
