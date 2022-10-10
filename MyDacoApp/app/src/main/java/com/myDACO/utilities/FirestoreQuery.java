@@ -1,5 +1,8 @@
 package com.myDACO.utilities;
+import android.app.Person;
 import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -11,6 +14,8 @@ import com.google.firebase.firestore.WriteBatch;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.myDACO.data.*;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -54,14 +59,17 @@ public class FirestoreQuery {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        WriteBatch batch = db.batch();
-
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            batch.delete(snapshot.getReference());
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            planeRef.document(doc.getId())
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
+                                        }
+                                    });
                         }
-                        Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
+
                     }
                 });
 
@@ -87,5 +95,96 @@ public class FirestoreQuery {
                 });
         return planeList;
     }
+    
+    //returns all instances of cargo that contain the given search parameter in the given field
+    public <T> ArrayList<Cargo> searchForCargo(String field, T searchParam) {
+        ArrayList<Cargo> retCargo = new ArrayList<>();
+        planeRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        ArrayList<CollectionReference> cargoRefs = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                cargoRefs.add(document.getReference().collection(""));
+                            }
+                            for (CollectionReference cargoRef : cargoRefs) {
+                                cargoRef.whereEqualTo(field, searchParam)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            public void onComplete(Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        retCargo.add(document.toObject(Cargo.class));
+                                                    }
+                                                }
+                                            }
+                                        });
+                            }
 
+                        }
+                    }
+                });
+        return retCargo;
+    }
+    public void addPersonnel(Planes plane, Personnel personnel) {
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            snapshot.getReference().collection("assignedPersonnel").add(personnel);
+                        }
+                        Log.d("FirestoreQuery", "Added personnel" + personnel.getLastName() + "to" + plane.getId());
+                    }
+                });
+    }
+
+    public Personnel removePersonnel(Planes plane, int id) {
+        final CollectionReference[] personnelRef = new CollectionReference[1];
+        final Personnel[] returnPersonnel = new Personnel[1];
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            personnelRef[0] = snapshot.getReference().collection("assignedPersonnel");
+                        }
+                    }
+                });
+
+        personnelRef[0].whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            returnPersonnel[0] = snapshot.toObject(Personnel.class);
+                            snapshot.getReference().delete();
+                        }
+                    }
+                });
+        return returnPersonnel[0];
+
+    }
 }
+

@@ -40,6 +40,22 @@
             android:layout_height="50dp"
             android:text="@string/airfield_manifest_string"
             />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/add_plane"
+                android:src="@drawable/add_icon"
+                android:contentDescription="@string/AddPlane"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout android:id="@+id/planes_view"
