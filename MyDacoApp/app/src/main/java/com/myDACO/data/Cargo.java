@@ -5,6 +5,7 @@ public class Cargo {
     private int weight;
     private String assignedPlaneID;
     private String bumpPlaneID;
+    private int id;
 
     public Cargo() {}
 
@@ -42,6 +43,8 @@ public class Cargo {
         return bumpPlaneID;
     }
 
+    public int getId(){return id;}
+
     public void setCargoName(String cargoName) {
         this.cargoName = cargoName;
     }
@@ -57,4 +60,7 @@ public class Cargo {
     public void setBumpPlaneID(String bumpPlaneID) {
         this.bumpPlaneID = bumpPlaneID;
     }
+
+    public void setId(int id) {this.id = id;}
 }
+
