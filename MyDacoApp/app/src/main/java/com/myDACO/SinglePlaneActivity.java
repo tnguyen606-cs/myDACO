@@ -1,13 +1,17 @@
 package com.myDACO;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -16,7 +20,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.myDACO.data.Planes;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
@@ -32,6 +43,9 @@ public class SinglePlaneActivity extends AppCompatActivity {
     private String plane_position = null;
     private boolean plane_isActive;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference planeRef = db.collection("planes");
+    FirestoreQuery fq = new FirestoreQuery();
 
 
 
@@ -77,12 +91,12 @@ public class SinglePlaneActivity extends AppCompatActivity {
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMenu(view);
+                showMenu(view, index);
             }
         });
     }
 
-    public void showMenu(View v) {
+    public void showMenu(View v, int index) {
         PopupMenu popupMenu = new PopupMenu(SinglePlaneActivity.this, v);
         popupMenu.getMenuInflater().inflate(R.menu.plane_popup_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -90,14 +104,50 @@ public class SinglePlaneActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.edit_name:
-                        Toast.makeText(getApplicationContext(), "Cannot remove a plane while still takes on mission", Toast.LENGTH_LONG).show();
+                        // Alert Dialog that asks the user for name input
+                        final EditText input = new EditText(SinglePlaneActivity.this);
+
+                        // Set the default text to a link of the Queen
+                        input.setHint("New plane name");
+
+                        new AlertDialog.Builder(SinglePlaneActivity.this)
+                                .setTitle("Edit Plane Name")
+                                .setMessage("Please input the new plane name.")
+                                .setView(input)
+                                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        String newPlaneName = input.getText().toString();
+                                        // Perform update name query
+                                        if (newPlaneName.matches("")) {
+                                            Toast.makeText(SinglePlaneActivity.this, "Please enter a plane name.",Toast.LENGTH_LONG).show();
+                                        } else {
+                                            planeRef.whereEqualTo("id", PlanesActivity.planesList.get(index).getId())
+                                                    .get()
+                                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                        @Override
+                                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                            for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                                                                planeRef.document(doc.getId()).update("planeName", newPlaneName);
+                                                                Toast.makeText(SinglePlaneActivity.this, "Plane name successfully updated.",Toast.LENGTH_LONG).show();
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                    }
+                                })
+                                .show();
+
                         break;
 
                     case R.id.delete:
                         if (plane_isActive) { // If plane is ACTIVE, then display error message saying cannot remove plane
                             Toast.makeText(getApplicationContext(), "Cannot remove a plane while still takes on mission", Toast.LENGTH_LONG).show();
                         } else {
-                            showCustomDialog();
+                            showCustomDialog(index);
                         }
 
                     default:
@@ -109,7 +159,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    void showCustomDialog() {
+    void showCustomDialog(int index) {
         Dialog dialog = new Dialog(SinglePlaneActivity.this);
         //We have added a title in the custom layout. So let's disable the default title.
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -132,6 +182,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fq.deletePlane(PlanesActivity.planesList.get(index).getId());
                 Intent nextScreen = new Intent(SinglePlaneActivity.this, PlanesActivity.class);
                 nextScreen.putExtra("REMOVED_PLANE_AT", plane_position);
                 SinglePlaneActivity.this.startActivity(nextScreen);
