@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PlanesActivity">
+
+
+        <RelativeLayout
+            android:id="@+id/menu_search_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/rectangle_shape">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|center"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                android:text="Add Cargo"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="590dp"
+            android:layout_marginTop="150dp">
+
+            <TextView
+                android:id="@+id/plane_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Cargo Name:"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/plane_name_box"
+                android:layout_width="355dp"
+                android:layout_height="52dp"
+                android:layout_below="@id/plane_name"
+                android:drawableStart="@drawable/cargo_icon_drawable"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:autofillHints="" />
+
+
+            <TextView
+                android:id="@+id/plane_personnel_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/plane_name_box"
+                android:layout_marginTop="29dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Cargo ID"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/plane_personnel_capacity_input"
+                android:layout_width="355dp"
+                android:layout_height="52dp"
+                android:layout_below="@id/plane_personnel_capacity"
+                android:digits="0123456789"
+                android:drawablePadding="10dp"
+                android:inputType="number"
+                android:maxLength="4"
+                android:maxLines="1"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/plane_cargo_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/plane_personnel_capacity_input"
+                android:layout_marginTop="29dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Cargo Weight:"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/plane_cargo_capacity_input"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/plane_cargo_capacity"
+                android:layout_marginTop="7dp"
+                android:digits="0123456789"
+                android:drawablePadding="10dp"
+                android:inputType="number"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/add_plane_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/plane_cargo_capacity_input"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="29dp"
+                android:text="Enter Cargo" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/daco_app_string"
+            android:textColor="@color/_bg_App_color"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
