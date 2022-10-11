@@ -46,7 +46,7 @@
             android:layout_marginTop="150dp">
 
             <TextView
-                android:id="@+id/plane_name"
+                android:id="@+id/cargo_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-medium"
@@ -55,10 +55,10 @@
                 android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/plane_name_box"
+                android:id="@+id/cargo_name_box"
                 android:layout_width="355dp"
                 android:layout_height="52dp"
-                android:layout_below="@id/plane_name"
+                android:layout_below="@id/cargo_name"
                 android:drawableStart="@drawable/cargo_icon_drawable"
                 android:drawablePadding="10dp"
                 android:inputType="text"
@@ -67,10 +67,10 @@
 
 
             <TextView
-                android:id="@+id/plane_personnel_capacity"
+                android:id="@+id/cargo_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/plane_name_box"
+                android:layout_below="@id/cargo_name_box"
                 android:layout_marginTop="29dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Cargo ID"
@@ -78,10 +78,10 @@
                 android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/plane_personnel_capacity_input"
+                android:id="@+id/cargo_id_input"
                 android:layout_width="355dp"
                 android:layout_height="52dp"
-                android:layout_below="@id/plane_personnel_capacity"
+                android:layout_below="@id/cargo_id"
                 android:digits="0123456789"
                 android:drawablePadding="10dp"
                 android:inputType="number"
@@ -91,10 +91,10 @@
                 android:autofillHints="" />
 
             <TextView
-                android:id="@+id/plane_cargo_capacity"
+                android:id="@+id/cargo_weight_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/plane_personnel_capacity_input"
+                android:layout_below="@id/cargo_id_input"
                 android:layout_marginTop="29dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Cargo Weight:"
@@ -102,10 +102,10 @@
                 android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/plane_cargo_capacity_input"
+                android:id="@+id/cargo_weight_input"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/plane_cargo_capacity"
+                android:layout_below="@id/cargo_weight_label"
                 android:layout_marginTop="7dp"
                 android:digits="0123456789"
                 android:drawablePadding="10dp"
@@ -116,10 +116,10 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/add_plane_button"
+                android:id="@+id/add_cargo_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/plane_cargo_capacity_input"
+                android:layout_below="@id/cargo_weight_input"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="29dp"
                 android:text="Enter Cargo" />
