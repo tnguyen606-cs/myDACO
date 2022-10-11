@@ -1,5 +1,8 @@
 package com.myDACO;
 
+import static android.content.ContentValues.TAG;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +14,11 @@ import android.widget.Toast;
 import android.content.Intent;
 
 import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.data.remote.AnonymousSignInHandler;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.myDACO.data.Users;
 import com.myDACO.databinding.ActivityCustomDialogBinding;
 import com.myDACO.databinding.ActivityMainBinding;
@@ -49,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String FIREBASE_PRIVACY_POLICY_URL = "https://firebase.google" +
             ".com/terms/analytics/#7_privacy";
     private static final String FIREBASE_TOS_URL = "https://firebase.google.com/terms/";
+    private ActivityMainBinding mBinding;
+    private FirebaseAuth mAuth;
 
     // [START auth_fui_create_launcher]
     // See: https://developer.android.com/training/basics/intents/result
@@ -66,17 +75,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+
         createSignInIntent();
         setContentView(R.layout.activity_main);
     }
+    // [START on_start_check_user]
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
 
+        updateUI(currentUser);
+        signInAnonymously();
+    }
+    // [END on_start_check_user]
     public void createSignInIntent() {
         // [START auth_fui_create_intent]
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.PhoneBuilder().build()
-             //   new AuthUI.IdpConfig.GoogleBuilder().build()
+                new AuthUI.IdpConfig.PhoneBuilder().build(),
+                new AuthUI.IdpConfig.AnonymousBuilder().build()
+
+        //   new AuthUI.IdpConfig.GoogleBuilder().build()
               //  new AuthUI.IdpConfig.FacebookBuilder().build(),
         );
 
@@ -85,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setTheme(R.style.Theme_Daco)
-                .setLogo(R.drawable.aircaft_icon)
+                .setLogo(R.drawable.aircaft_icon).setTosAndPrivacyPolicyUrls(
+                        FIREBASE_TOS_URL,
+                        FIREBASE_PRIVACY_POLICY_URL)
                 .build();
         signInLauncher.launch(signInIntent);
         // [END auth_fui_create_intent]
@@ -94,13 +120,17 @@ public class MainActivity extends AppCompatActivity {
     // [START auth_fui_result]
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
+        System.out.print(response);
+        FirebaseUser user = mAuth.getCurrentUser();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            Intent nextScreen = new Intent(MainActivity.this,PlanesActivity.class);
+            //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Intent nextScreen = new Intent(MainActivity.this, PlanesActivity.class);
             MainActivity.this.startActivity(nextScreen);
             // ...
-        } else {
+
+        }
+        else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
@@ -122,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
             showSnackbar(R.string.unknown_error);
             Log.e("Login:", "Sign-in error: ", response.getError());
+
+
         }
     }
     // [END auth_fui_result]
@@ -226,7 +258,55 @@ public class MainActivity extends AppCompatActivity {
         // [END auth_fui_email_link_catch]
     }
     private void showSnackbar(@StringRes int errorMessageRes) {
-        ActivityMainBinding mBinding = null;
+
         Snackbar.make(mBinding.getRoot(), errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
+    private void updateUI(FirebaseUser user) {
+
+    }
+    private void signInAnonymously() {
+        // [START signin_anonymously]
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInAnonymously:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        //updateUI(user);
+                        Intent nextScreen = new Intent(MainActivity.this,PlanesActivity.class);
+                        MainActivity.this.startActivity(nextScreen);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInAnonymously:failure", task.getException());
+                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                    }
+                });
+        // [END signin_anonymously]
+    }
+
+    private void linkAccount() {
+        AuthCredential credential = EmailAuthProvider.getCredential("", "");
+
+        // [START link_credential]
+        mAuth.getCurrentUser().linkWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "linkWithCredential:success");
+                            FirebaseUser user = task.getResult().getUser();
+                            updateUI(user);
+                        } else {
+                            Log.w(TAG, "linkWithCredential:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+        // [END link_credential]
+    }
+
 }
