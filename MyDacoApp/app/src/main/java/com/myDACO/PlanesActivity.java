@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.myDACO.data.Planes;
+import com.myDACO.data.*;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
@@ -35,7 +35,6 @@ public class PlanesActivity extends AppCompatActivity {
     static List<Planes> planesList = new ArrayList<>();
     PlaneArrayAdapter planeAdapter;
     ListenerRegistration planeListener;
-
 
 
     @Override
@@ -114,7 +113,10 @@ public class PlanesActivity extends AppCompatActivity {
         missionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create mission class to encapsulate mission planes list, then pass it to the next screen
+                Mission currentMission = new Mission(new ArrayList<Planes>());
                 Intent nextScreen = new Intent(PlanesActivity.this, MissionActivity.class);
+                nextScreen.putExtra("MISSION", currentMission);
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });

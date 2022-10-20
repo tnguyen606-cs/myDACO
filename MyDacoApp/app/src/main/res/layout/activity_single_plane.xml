@@ -49,7 +49,7 @@
             android:background="@drawable/edit_box_shape">
 
             <ImageView android:id="@+id/edit_icon"
-                android:src="@drawable/edit_icon"
+                android:src="@drawable/edit_icon_rotated"
                 android:contentDescription="@string/edit_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />

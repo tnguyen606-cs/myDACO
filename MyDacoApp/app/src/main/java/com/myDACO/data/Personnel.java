@@ -1,6 +1,8 @@
 package com.myDACO.data;
 
-public class Personnel {
+import java.io.Serializable;
+
+public class Personnel implements Serializable {
     private String firstName;
     private String lastName;
     private int priority;

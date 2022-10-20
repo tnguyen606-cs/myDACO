@@ -39,7 +39,7 @@
         android:layout_marginRight="5dp"
         android:layout_toRightOf="@id/label"
         android:layout_gravity="center"
-        android:src="@drawable/edit_icon" />
+        android:src="@drawable/edit_icon_rotated" />
 
 
 </RelativeLayout>

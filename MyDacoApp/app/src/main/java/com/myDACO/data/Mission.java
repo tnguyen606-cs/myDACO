@@ -1,7 +1,8 @@
 package com.myDACO.data;
+import java.io.Serializable;
 import java.util.*;
 
-public class Mission {
+public class Mission implements Serializable {
     private List<Planes> missionPlanes;
 
     public Mission() {}
