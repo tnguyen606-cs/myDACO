@@ -77,7 +77,7 @@ public class FirestoreQuery {
 
     }
 
-    public void setPlaneStatus(String planeID) {
+    public void togglePlaneStatus(String planeID) {
         planeRef.whereEqualTo("id", planeID)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -86,6 +86,21 @@ public class FirestoreQuery {
                         for (DocumentSnapshot doc : queryDocumentSnapshots) {
                             boolean planeIsActive = doc.toObject(Planes.class).isActive();
                             planeRef.document(doc.getId()).update("active", !planeIsActive);
+                        }
+                    }
+                });
+
+    }
+
+    public void togglePlaneMission(String planeID) {
+        planeRef.whereEqualTo("id", planeID)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            boolean planeOnMission = doc.toObject(Planes.class).isOnMission();
+                            planeRef.document(doc.getId()).update("onMission", !planeOnMission);
                         }
                     }
                 });
