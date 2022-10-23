@@ -18,18 +18,24 @@
         <entry key="app/src/main/res/drawable/rectangle_10_shape.xml" value="0.224" />
         <entry key="app/src/main/res/drawable/rectangle_shape.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/usernamebox_shape.xml" value="0.224" />
+        <entry key="app/src/main/res/layout/activity_add_plane.xml" value="0.475" />
         <entry key="app/src/main/res/layout/activity_custom_diaglog.xml" value="0.31338178708849934" />
+        <entry key="app/src/main/res/layout/activity_custom_dialog.xml" value="0.475" />
         <entry key="app/src/main/res/layout/activity_deleted_plane.xml" value="0.4506199230440359" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.40444634459170586" />
         <entry key="app/src/main/res/layout/activity_mission_planes.xml" value="0.32407011543394615" />
         <entry key="app/src/main/res/layout/activity_planes_manifest.xml" value="0.5489583333333333" />
         <entry key="app/src/main/res/layout/activity_single_plane.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_updated_plane.xml" value="0.2731936725096195" />
+        <entry key="app/src/main/res/layout/cargo_modification_screen.xml" value="0.475" />
+        <entry key="app/src/main/res/layout/cargo_personnel_assignment_screen.xml" value="0.475" />
+        <entry key="app/src/main/res/layout/cargo_personnel_master_list_screen.xml" value="0.475" />
         <entry key="app/src/main/res/layout/custom_main_planefield.xml" value="0.415625" />
         <entry key="app/src/main/res/layout/custom_single_plane.xml" value="0.335" />
         <entry key="app/src/main/res/layout/forgot_pasword_screen.xml" value="0.40444634459170586" />
         <entry key="app/src/main/res/layout/main_planes_screen.xml" value="0.335" />
         <entry key="app/src/main/res/layout/sign_up_screen.xml" value="0.4035912783240701" />
+        <entry key="app/src/main/res/menu/page_menu.xml" value="0.4739583333333333" />
         <entry key="app/src/main/res/menu/plane_popup_menu.xml" value="0.5489583333333333" />
       </map>
     </option>

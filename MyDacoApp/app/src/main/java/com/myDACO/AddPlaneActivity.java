@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.*;
 import com.myDACO.data.*;
+import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
 
 public class AddPlaneActivity extends AppCompatActivity {
@@ -94,6 +96,11 @@ public class AddPlaneActivity extends AppCompatActivity {
 
             }
         });
+
+        // User clicks on the menu bar to sign out action
+        FileHelper file = new FileHelper();
+        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
+        file.showMenu(AddPlaneActivity.this, menuIcon);
 
     }
 }

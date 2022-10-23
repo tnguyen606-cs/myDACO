@@ -8,19 +8,50 @@
     <RelativeLayout
         android:id="@+id/menu_search_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/_bg_App_color">
 
         <TextView
             android:id="@+id/login"
             android:layout_width="360dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="20dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="@string/daco_app_string"
-            android:textColor="@color/_bg_App_color"
+            android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/menu_icon"
+                android:src="@drawable/menu_bar_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/search_icon"
+                android:src="@drawable/searching_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -63,12 +94,12 @@
         android:layout_height="550dp"
         android:layout_marginTop="130dp"
         android:background="@drawable/rectangle_shape">
-            <ListView
-                android:id = "@+id/planes_list"
-                android:layout_width = "match_parent"
-                android:layout_height = "match_parent"
-                android:divider="@color/text_color"
-                android:dividerHeight="1sp" />
+        <ListView
+            android:id = "@+id/planes_list"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:divider="@color/text_color"
+            android:dividerHeight="1sp" />
     </RelativeLayout>
 
     <Button
@@ -88,4 +119,3 @@
         />
 
 </RelativeLayout>
-
