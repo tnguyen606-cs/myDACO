@@ -2,6 +2,7 @@ package com.myDACO;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.firestore.EventListener;
@@ -47,7 +48,6 @@ public class MissionActivity extends AppCompatActivity {
                         missionPlaneAdapter.notifyDataSetChanged();
                     }
                 }
-
             }
         });
     }
@@ -70,7 +70,10 @@ public class MissionActivity extends AppCompatActivity {
         // Set the adapter with the ListView
         missionPlanesListView.setAdapter(missionPlaneAdapter);
 
-
+        // User clicks on the menu bar to sign out action
+        FileHelper file = new FileHelper();
+        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
+        file.showMenu(MissionActivity.this, menuIcon);
 
     }
 }

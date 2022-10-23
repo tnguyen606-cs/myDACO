@@ -30,12 +30,9 @@ import java.util.List;
 
 public class PlanesActivity extends AppCompatActivity {
 
-    private String plane_position;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     static List<Planes> planesList = new ArrayList<>();
     PlaneArrayAdapter planeAdapter;
-    ListenerRegistration planeListener;
-
 
     @Override
     public void onStart(){
@@ -55,7 +52,6 @@ public class PlanesActivity extends AppCompatActivity {
                     planesList.add(plane);
                     planeAdapter.notifyDataSetChanged();
                 }
-
             }
         });
     }
@@ -66,32 +62,11 @@ public class PlanesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planes_manifest);
 
-        // Open JSON file and extract to List
-        FileHelper file = new FileHelper();
-        InputStream inputStream = getResources().openRawResource(R.raw.plane_data);
-        JSONArray jsonArray = file.convertJSONtoArray(inputStream, "planes");
-        // List<Planes> planesList = file.toList(jsonArray);
-
-
-        // If a removed plane is selected, remove that plane and update the list
-        Intent intent = getIntent();
-        plane_position = intent.getStringExtra("REMOVED_PLANE_AT");
-        if (plane_position != null) {
-            int i = 0;
-            try {
-                i = Integer.parseInt(plane_position);
-                planesList.remove(i);
-            } catch (NumberFormatException nfe) {
-                System.out.println("Could not parse " + i);
-            }
-        }
-
         // Get the handle for ListView
         ListView listView = (ListView) findViewById(R.id.planes_list);
 
         // Specify an adapter and pass context along with all the arrays in constructor
         planeAdapter = new PlaneArrayAdapter(this, planesList);
-
 
         // Set the adapter with the ListView
         listView.setAdapter(planeAdapter);
@@ -103,7 +78,6 @@ public class PlanesActivity extends AppCompatActivity {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
                 nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlaneName());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
-                nextScreen.putExtra("PLANE_ACTIVE", String.valueOf(planesList.get(position).isActive()));
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
@@ -133,6 +107,10 @@ public class PlanesActivity extends AppCompatActivity {
             }
         });
 
+        // User clicks on the menu bar to sign out action
+        FileHelper file = new FileHelper();
+        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
+        file.showMenu(PlanesActivity.this, menuIcon);
     }
 }
 
