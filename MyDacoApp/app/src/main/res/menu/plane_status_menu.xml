@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/set_active"
+        android:title="Mark as active" />
+    <item
+        android:id="@+id/set_inactive"
+        android:title="Mark as inactive" />
+    <item
+        android:id="@+id/add_to_mission"
+        android:title="Add plane to mission" />
+    <item
+        android:id="@+id/remove_from_mission"
+        android:title="Remove plane from mission" />
+</menu>
