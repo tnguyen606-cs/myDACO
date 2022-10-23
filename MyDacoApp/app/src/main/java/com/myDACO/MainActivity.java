@@ -88,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
+
         updateUI(currentUser);
-        signInAnonymously();
+        // signInAnonymously();
     }
     // [END on_start_check_user]
     public void createSignInIntent() {
@@ -281,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                         updateUI(null);
+
                     }
                 });
         // [END signin_anonymously]

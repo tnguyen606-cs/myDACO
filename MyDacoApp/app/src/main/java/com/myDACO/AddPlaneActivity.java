@@ -69,7 +69,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                             String n = Integer.toString(rand.nextInt(10));
                             String plane_id = c1 + c2 + n;
 
-                            Planes newPlane = new Planes(planeName, plane_id, true, new ArrayList<>(),
+                            Planes newPlane = new Planes(planeName, plane_id, true, false, new ArrayList<>(),
                                     0,personnelCapacity,new ArrayList<>(),0,cargoCapacity);
 
                             FirestoreQuery fq = new FirestoreQuery();

@@ -1,10 +1,12 @@
 package com.myDACO.data;
+import java.io.Serializable;
 import java.util.*;
 
-public class Planes {
+public class Planes implements Serializable {
     private String planeName;
     private String id;
     private boolean active;
+    private boolean onMission;
     private List<Personnel> assignedPersonnel;
     private int personnelCount;
     private int personnelCapacity;
@@ -15,20 +17,21 @@ public class Planes {
     public Planes() {}
 
 
-    public Planes(String planeName, String id, boolean active, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
-
+    public Planes(String planeName, String id, boolean active, boolean onMission, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
         this.planeName = planeName;
         this.id = id;
         this.active = active;
+        this.onMission = onMission;
         this.assignedPersonnel = assignedPersonnel;
         this.assignedCargo = assignedCargo;
     }
 
-    public Planes(String planeName, String id, boolean active, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
+    public Planes(String planeName, String id, boolean active, boolean onMission, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
 
         this.planeName = planeName;
         this.id = id;
         this.active = active;
+        this.onMission = onMission;
         this.assignedPersonnel = assignedPersonnel;
         this.assignedCargo = assignedCargo;
         this.personnelCapacity = personnelCapacity;
@@ -108,5 +111,13 @@ public class Planes {
 
     public void setCargoCapacity(int cargoCapacity) {
         this.cargoCapacity = cargoCapacity;
+    }
+
+    public boolean isOnMission() {
+        return onMission;
+    }
+
+    public void setOnMission(boolean onMission) {
+        this.onMission = onMission;
     }
 }

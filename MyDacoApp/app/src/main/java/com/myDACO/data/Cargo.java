@@ -1,6 +1,8 @@
 package com.myDACO.data;
 
-public class Cargo {
+import java.io.Serializable;
+
+public class Cargo implements Serializable {
     private String cargoName;
     private int weight;
     private String assignedPlaneID;
