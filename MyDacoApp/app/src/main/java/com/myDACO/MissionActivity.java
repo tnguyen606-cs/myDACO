@@ -70,10 +70,6 @@ public class MissionActivity extends AppCompatActivity {
         // Set the adapter with the ListView
         missionPlanesListView.setAdapter(missionPlaneAdapter);
 
-        // User clicks on the menu bar to sign out action
-        FileHelper file = new FileHelper();
-        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
-        file.showMenu(MissionActivity.this, menuIcon);
 
     }
 }

@@ -76,10 +76,6 @@ public class SinglePlaneActivity extends AppCompatActivity {
         cargoListView.setAdapter(cargoAdapter);
         passengerListView.setAdapter(personnelAdapter);
 
-        // User clicks on the menu bar to sign out action
-        FileHelper file = new FileHelper();
-        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
-        file.showMenu(SinglePlaneActivity.this, menuIcon);
     }
 
 

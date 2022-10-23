@@ -1,39 +1,15 @@
 package com.myDACO.utilities;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.myDACO.MainActivity;
-import com.myDACO.PlanesActivity;
 import com.myDACO.R;
-import com.myDACO.SinglePlaneActivity;
-import com.myDACO.data.Planes;
-import com.myDACO.data.Users;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class FileHelper {
 

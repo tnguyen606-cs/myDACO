@@ -97,10 +97,6 @@ public class AddPlaneActivity extends AppCompatActivity {
             }
         });
 
-        // User clicks on the menu bar to sign out action
-        FileHelper file = new FileHelper();
-        ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
-        file.showMenu(AddPlaneActivity.this, menuIcon);
 
     }
 }
