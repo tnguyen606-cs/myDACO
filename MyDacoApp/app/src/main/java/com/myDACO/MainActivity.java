@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         updateUI(currentUser);
-        signInAnonymously();
+        //signInAnonymously();
     }
     // [END on_start_check_user]
     public void createSignInIntent() {
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
+
             if (response == null) {
                 // User pressed back button
                 showSnackbar(R.string.sign_in_cancelled);

@@ -4,13 +4,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,13 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanesActivity extends AppCompatActivity {
-
+    int chkId = 1001;
     private String plane_position;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String selectedPlanes;
     static List<Planes> planesList = new ArrayList<>();
     PlaneArrayAdapter planeAdapter;
     ListenerRegistration planeListener;
-
+    //private AbsListView listView;
 
 
     @Override
@@ -59,6 +64,7 @@ public class PlanesActivity extends AppCompatActivity {
 
             }
         });
+        //selectedPlanes = planesList;
     }
 
     @Override
@@ -66,6 +72,7 @@ public class PlanesActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planes_manifest);
+        //this.listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         // Open JSON file and extract to List
         FileHelper file = new FileHelper();
@@ -89,6 +96,7 @@ public class PlanesActivity extends AppCompatActivity {
 
         // Get the handle for ListView
         ListView listView = (ListView) findViewById(R.id.planes_list);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         // Specify an adapter and pass context along with all the arrays in constructor
         planeAdapter = new PlaneArrayAdapter(this, planesList);
@@ -114,6 +122,8 @@ public class PlanesActivity extends AppCompatActivity {
         missionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                displayToast("check");
+
                 Intent nextScreen = new Intent(PlanesActivity.this, MissionActivity.class);
                 PlanesActivity.this.startActivity(nextScreen);
             }
@@ -131,6 +141,23 @@ public class PlanesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+
+        boolean checked = ((CheckBox) view).isChecked();
+        if (checked) {
+            selectedPlanes+= view.toString();
+        }
+
+    }
+    /*public void startMission(View view) {
+        displayToast("sfdsfdfs");
+    }*/
+    public void displayToast(String message) {
+        Toast.makeText(getBaseContext(), message,
+                Toast.LENGTH_SHORT).show();
     }
 }
 
