@@ -76,7 +76,7 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 * Application takes up a lot of RAM and Memory 
 * Firebase Authentication guest sign in feature crashes application (Users must sign in through email or be a current user)
 * Users cannot access settings & navigate through pages from main menu button
-*
+
 ## Version 0.2.0
 
 ### New Features
