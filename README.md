@@ -61,11 +61,22 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 ## Version 0.3.0
 
 ### New Features
+* Ability for users to add/remove planes to current Airfield Page
+* Ability for users to add/remove planes to current mission --> seen on Mission Page
+* Ability for users to mark planes as active/inactive
+* Displays current planes being utilized on mission from Mission Page
+* Addition of menu bar w/search feature & settings accessibility
 
 ### Bug Fixes
+* Fixed the Firebase user permissions 
+* Fixed query issues from Firestore
+* Migrated all previous application database logic to Firestore
 
 ### Known Issues
-
+* Application takes up a lot of RAM and Memory 
+* Firebase Authentication guest sign in feature crashes application (Users must sign in through email or be a current user)
+* Users cannot access settings & navigate through pages from main menu button
+*
 ## Version 0.2.0
 
 ### New Features
