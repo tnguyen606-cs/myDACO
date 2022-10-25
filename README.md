@@ -58,6 +58,14 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 <!-- RELEASE NOTES -->
 ---
 # Release Notes
+## Version 0.3.0
+
+### New Features
+
+### Bug Fixes
+
+### Known Issues
+
 ## Version 0.2.0
 
 ### New Features
