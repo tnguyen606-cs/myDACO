@@ -48,6 +48,11 @@ public class MissionActivity extends AppCompatActivity {
                         missionPlaneAdapter.notifyDataSetChanged();
                     }
                 }
+                Collections.sort(missionPlanes, new Comparator<Planes>() {
+                    public int compare(Planes p1, Planes p2) {
+                        return p1.getPlaneName().compareTo(p2.getPlaneName());
+                    }
+                });
             }
         });
     }

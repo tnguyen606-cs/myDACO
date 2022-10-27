@@ -26,6 +26,8 @@ import org.json.JSONArray;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PlanesActivity extends AppCompatActivity {
@@ -52,6 +54,11 @@ public class PlanesActivity extends AppCompatActivity {
                     planesList.add(plane);
                     planeAdapter.notifyDataSetChanged();
                 }
+                Collections.sort(planesList, new Comparator<Planes>() {
+                    public int compare(Planes p1, Planes p2) {
+                        return p1.getPlaneName().compareTo(p2.getPlaneName());
+                    }
+                });
             }
         });
     }
