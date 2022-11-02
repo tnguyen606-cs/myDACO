@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PlanesActivity">
+    tools:context=".ListOfPersonnelActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,66 +17,29 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal|center"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            android:text="Assign Contents"
+            android:text="@string/personnel"
             android:textColor="@color/design_default_color_primary"
             android:textSize="30sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/plane_content_view"
+        android:id="@+id/personnel_content_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
         android:background="@drawable/rectangle_shape">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:background="@drawable/rectangle_shape"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="@string/cargo"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="24sp" />
-
-
         <ListView
-            android:id="@+id/cargo_list"
+            android:id="@+id/personnel_list"
             android:layout_width="match_parent"
-            android:layout_height="244dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:divider="@color/text_color"
             android:dividerHeight="1sp" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="416dp"
-        android:background="@drawable/rectangle_shape">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:background="@drawable/rectangle_shape"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="@string/personnel"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="24sp" />
-
-        <ListView
-            android:id="@+id/passenger_list"
-            android:layout_width="match_parent"
-            android:layout_height="244dp"
-            android:layout_marginTop="40dp"
-            android:divider="@color/text_color"
-            android:dividerHeight="1sp" />
     </RelativeLayout>
 
     <RelativeLayout

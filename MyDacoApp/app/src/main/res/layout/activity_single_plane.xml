@@ -111,7 +111,7 @@
             android:layout_height="43dp"
             android:gravity="center"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="@string/passengers"
+            android:text="@string/personnel"
             android:textColor="@color/design_default_color_primary"
             android:textSize="24sp"
             android:background="@drawable/rectangle_shape"/>
