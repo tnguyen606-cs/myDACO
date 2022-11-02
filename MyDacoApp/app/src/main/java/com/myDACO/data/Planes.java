@@ -120,4 +120,10 @@ public class Planes implements Serializable {
     public void setOnMission(boolean onMission) {
         this.onMission = onMission;
     }
+
+    @Override
+    public String toString() {
+        return planeName;
+    }
+
 }

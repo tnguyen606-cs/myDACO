@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -190,7 +191,7 @@ public class FirestoreQuery {
         return retPersonnel;
     }
 
-    public void addPersonnel(Planes plane, Personnel personnel) {
+    public void addPersonneltoPlane(Planes plane, Personnel personnel) {
         planeRef.whereEqualTo("id", plane.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -203,7 +204,8 @@ public class FirestoreQuery {
                             return;
                         }
                         for (DocumentSnapshot snapshot : snapshotList) {
-                            snapshot.getReference().collection("assignedPersonnel").add(personnel);
+                            //snapshot.getReference().collection("assignedPersonnel").add(personnel);
+                            snapshot.getReference().update("assignedPersonnel", FieldValue.arrayUnion(personnel));
                         }
                         Log.d("FirestoreQuery", "Added personnel" + personnel.getLastName() + "to" + plane.getId());
                     }

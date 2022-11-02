@@ -81,29 +81,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_lname_input"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Personnel Assigned Plane ID:"
+            android:text="Personnel Assigned Plane:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
-        <EditText
-            android:id="@+id/personnel_id_input"
-            android:layout_width="150dp"
-            android:layout_height="52dp"
-            android:layout_below="@id/personnel_id"
-            android:drawablePadding="10dp"
-            android:hint=""
-            android:theme="@style/EditTextThemeOverlay"
-            android:textColorHint="@color/purple_700"
-            android:inputType="number"
-            android:maxLength="4"
-            android:maxLines="1"
-            tools:ignore="SpeakableTextPresentCheck" />
+        <Spinner
+            android:id="@+id/planes_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_id" />
 
         <TextView
             android:id="@+id/personnel_priority_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/personnel_id_input"
+            android:layout_below="@id/planes_spinner"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Personnel Priority:"
             android:textColor="@color/design_default_color_primary"
