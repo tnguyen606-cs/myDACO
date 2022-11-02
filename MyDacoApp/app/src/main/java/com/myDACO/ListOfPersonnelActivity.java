@@ -97,5 +97,17 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
         file.showMenu(ListOfPersonnelActivity.this, menuIcon);
+
+        // Go to add plane activity
+        ImageView addIcon = (ImageView) findViewById(R.id.add_personnel);
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(ListOfPersonnelActivity.this, AddPersonnelActivity.class);
+                ListOfPersonnelActivity.this.startActivity(nextScreen);
+
+            }
+        });
     }
 }

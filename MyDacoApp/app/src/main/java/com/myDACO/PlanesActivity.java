@@ -100,8 +100,8 @@ public class PlanesActivity extends AppCompatActivity {
         });
 
         // Go to add plane activity
-        ImageView editIcon = (ImageView) findViewById(R.id.add_plane);
-        editIcon.setOnClickListener(new View.OnClickListener() {
+        ImageView addIcon = (ImageView) findViewById(R.id.add_plane);
+        addIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Go to screen with UI for adding a plane
