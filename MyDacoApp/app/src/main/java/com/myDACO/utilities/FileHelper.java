@@ -47,6 +47,11 @@ public class FileHelper {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
+                            case R.id.planes_manifest_item:
+                                Intent intent1 = new Intent(context, PlanesActivity.class);
+                                context.startActivity(intent1);
+                                break;
+
                             case R.id.sign_out_item:
                                 FirebaseAuth myAuth = FirebaseAuth.getInstance();
                                 myAuth.signOut();
