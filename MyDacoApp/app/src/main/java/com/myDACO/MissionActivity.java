@@ -24,7 +24,7 @@ public class MissionActivity extends AppCompatActivity {
     private Mission currentMission;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    PlaneArrayAdapter missionPlaneAdapter;
+    MissionArrayAdapter missionPlaneAdapter;
     ListenerRegistration missionPlaneListener;
     private List<Planes> missionPlanes = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class MissionActivity extends AppCompatActivity {
         ListView missionPlanesListView = (ListView) findViewById(R.id.mission_planes_list);
 
         // Specify an adapter and pass context along with all the arrays in constructor
-        missionPlaneAdapter = new PlaneArrayAdapter(this, missionPlanes);
+        missionPlaneAdapter = new MissionArrayAdapter(this, missionPlanes);
 
         // Set the adapter with the ListView
         missionPlanesListView.setAdapter(missionPlaneAdapter);
