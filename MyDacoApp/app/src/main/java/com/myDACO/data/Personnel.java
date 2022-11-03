@@ -8,7 +8,7 @@ public class Personnel implements Serializable {
     private int priority;
     private String assignedPlaneID;
     private String bumpPlaneID;
-    private int id;
+    private String id;
     private boolean manualAssign;
 
     public Personnel() {}
@@ -51,7 +51,7 @@ public class Personnel implements Serializable {
         return bumpPlaneID;
     }
 
-    public int getId() {return id;}
+    public String getId() {return id;}
 
     public boolean isManualAssign() {
         return manualAssign;
@@ -77,7 +77,7 @@ public class Personnel implements Serializable {
         this.bumpPlaneID = bumpPlaneID;
     }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(String id) {this.id = id;}
 
     public void setManualAssign(boolean manualAssign) {
         this.manualAssign = manualAssign;

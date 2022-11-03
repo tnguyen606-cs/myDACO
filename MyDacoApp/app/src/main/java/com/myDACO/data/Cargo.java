@@ -7,7 +7,7 @@ public class Cargo implements Serializable {
     private int weight;
     private String assignedPlaneID;
     private String bumpPlaneID;
-    private int id;
+    private String id;
     private boolean manualAssign;
 
     public Cargo() {}
@@ -49,7 +49,7 @@ public class Cargo implements Serializable {
         return bumpPlaneID;
     }
 
-    public int getId(){return id;}
+    public String getId(){return id;}
 
     public boolean isManualAssign() {
         return manualAssign;
@@ -75,6 +75,6 @@ public class Cargo implements Serializable {
         this.bumpPlaneID = bumpPlaneID;
     }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(String id) {this.id = id;}
 }
 
