@@ -54,8 +54,6 @@ public class FirestoreQuery {
 
     public void deletePlane(String planeID) {
         // Delete plane based on the 'id' field of the plane
-
-
         planeRef.document(planeID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -65,8 +63,8 @@ public class FirestoreQuery {
     }
 
     public void togglePlaneStatus(String planeID) {
-
         DocumentReference docRef = planeRef.document(planeID);
+
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
@@ -80,8 +78,8 @@ public class FirestoreQuery {
     }
 
     public void togglePlaneMission(String planeID) {
-
         DocumentReference docRef = planeRef.document(planeID);
+
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
@@ -115,10 +113,8 @@ public class FirestoreQuery {
     }
     
     //returns all instances of cargo that contain the given search parameter in the given field
-
     public <T> ArrayList<Cargo> searchForCargo(String field, T searchVal) {
         ArrayList<Cargo> retCargo = new ArrayList<>();
-
 
         cargoRef.whereEqualTo(field, searchVal)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -132,10 +128,8 @@ public class FirestoreQuery {
 
                     }
                 });
-
         return retCargo;
     }
-
 
     //returns all instances of cargo that contain the given search parameter in the given field
     public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchVal) {
@@ -160,7 +154,6 @@ public class FirestoreQuery {
         Integer id = r.nextInt();
         personnel.setId(id.toString());
 
-
         personnelRef.whereEqualTo("id", personnel.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -180,7 +173,6 @@ public class FirestoreQuery {
         final Personnel[] retPers = new Personnel[1];
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
         DocumentReference docRef = personnelRef.document(id);
-
         db.runTransaction(new Transaction.Function<Personnel>() {
             @Override
             public Personnel apply(Transaction transaction) throws FirebaseFirestoreException {
@@ -196,6 +188,47 @@ public class FirestoreQuery {
             }
         });
         return retPers[0];
+    }
+
+    public void addCargo(Planes plane, Cargo cargo) {
+        Random r = new Random();
+        Integer id = r.nextInt();
+        cargo.setId(id.toString());
+
+        cargoRef.whereEqualTo("id", cargo.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            Log.d("FirestoreQuery", "Unable to add cargo; Plane ID is not unique");
+                        } else {
+                            planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+                            personnelRef.document(cargo.getId()).set(cargo);
+                        }
+                    }
+                });
+    }
+
+    public Cargo removeCargo(Planes plane, String id) {
+        final Cargo[] retCargo = new Cargo[1];
+        planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayRemove(id));
+        DocumentReference docRef = cargoRef.document(id);
+        db.runTransaction(new Transaction.Function<Cargo>() {
+            @Override
+            public Cargo apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                Cargo retCar = snapshot.toObject(Cargo.class);
+                transaction.delete(docRef);
+                return retCar;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Cargo>() {
+            @Override
+            public void onSuccess(Cargo result) {
+                retCargo[0] = result;
+            }
+        });
+        return retCargo[0];
     }
 }
 
