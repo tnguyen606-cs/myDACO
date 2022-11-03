@@ -3,14 +3,19 @@ import android.app.Person;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +30,8 @@ public class FirestoreQuery {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference planeRef = db.collection("planes");
+    CollectionReference cargoRef = db.collection("cargos");
+    CollectionReference personnelRef = db.collection("personnel");
 
     public Planes addPlane(Planes plane) {
         // Adds a plane to the "planes" collection in Firestore
@@ -37,74 +44,53 @@ public class FirestoreQuery {
                         if(!queryDocumentSnapshots.isEmpty()) {
                             Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
                         } else {
-                            // Add the plane
-                            planeRef.add(plane).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d("FirestoreQuery", "DocumentSnapshot written with internal ID: " + documentReference.getId());
-                                }
-                            });
+                            // Add the plane with docRef set as ID
+                            planeRef.document(plane.getId()).set(plane);
                         }
                     }
                 });
-
         return plane;
     }
 
     public void deletePlane(String planeID) {
         // Delete plane based on the 'id' field of the plane
 
-        // First, query the database for the plane with the specified id
-        // Only 1 plane should have a given planeID because uniqueness is enforced in the add method
-        planeRef.whereEqualTo("id", planeID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                            planeRef.document(doc.getId())
-                                    .delete()
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("FirestoreQuery", "Deleted plane with the id " + planeID);
-                                        }
-                                    });
-                        }
 
-                    }
-                });
-
+        planeRef.document(planeID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("FirestoreQuery", "DocumentSnapshot successfully deleted!");
+            }
+        });
     }
 
     public void togglePlaneStatus(String planeID) {
-        planeRef.whereEqualTo("id", planeID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                            boolean planeIsActive = doc.toObject(Planes.class).isActive();
-                            planeRef.document(doc.getId()).update("active", !planeIsActive);
-                        }
-                    }
-                });
 
+        DocumentReference docRef = planeRef.document(planeID);
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                boolean status = snapshot.getBoolean("active");
+
+                transaction.update(docRef, "active", !status);
+                return null;
+            }
+        });
     }
 
     public void togglePlaneMission(String planeID) {
-        planeRef.whereEqualTo("id", planeID)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                            boolean planeOnMission = doc.toObject(Planes.class).isOnMission();
-                            planeRef.document(doc.getId()).update("onMission", !planeOnMission);
-                        }
-                    }
-                });
 
+        DocumentReference docRef = planeRef.document(planeID);
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                boolean status = snapshot.getBoolean("onMission");
+                transaction.update(docRef, "onMission", !status);
+                return null;
+            }
+        });
     }
 
     public ArrayList<Planes> getAllPlanes() {
@@ -129,61 +115,40 @@ public class FirestoreQuery {
     }
     
     //returns all instances of cargo that contain the given search parameter in the given field
-    public <T> ArrayList<Cargo> searchForCargo(String field, T searchParam) {
+
+    public <T> ArrayList<Cargo> searchForCargo(String field, T searchVal) {
         ArrayList<Cargo> retCargo = new ArrayList<>();
-        planeRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        ArrayList<CollectionReference> cargoRefs = new ArrayList<>();
+
+
+        cargoRef.whereEqualTo(field, searchVal)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                cargoRefs.add(document.getReference().collection("assingedCargo"));
+                                retCargo.add(document.toObject(Cargo.class));
                             }
-                            for (CollectionReference cargoRef : cargoRefs) {
-                                cargoRef.whereEqualTo(field, searchParam)
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            public void onComplete(Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        retCargo.add(document.toObject(Cargo.class));
-                                                    }
-                                                }
-                                            }
-                                        });
-                            }
-
                         }
+
                     }
                 });
+
         return retCargo;
     }
 
+
     //returns all instances of cargo that contain the given search parameter in the given field
-    public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchParam) {
+    public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchVal) {
         ArrayList<Personnel> retPersonnel = new ArrayList<>();
-        planeRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        ArrayList<CollectionReference> personnelRefs = new ArrayList<>();
+
+        personnelRef.whereEqualTo(field, searchVal)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                personnelRefs.add(document.getReference().collection("assignedPersonnel"));
+                                retPersonnel.add(document.toObject(Personnel.class));
                             }
-                            for (CollectionReference cargoRef : personnelRefs) {
-                                cargoRef.whereEqualTo(field, searchParam)
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            public void onComplete(Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        retPersonnel.add(document.toObject(Personnel.class));
-                                                    }
-                                                }
-                                            }
-                                        });
-                            }
-
                         }
                     }
                 });
@@ -191,64 +156,46 @@ public class FirestoreQuery {
     }
 
     public void addPersonnel(Planes plane, Personnel personnel) {
-        planeRef.whereEqualTo("id", plane.getId())
+        Random r = new Random();
+        Integer id = r.nextInt();
+        personnel.setId(id.toString());
+
+
+        personnelRef.whereEqualTo("id", personnel.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        if (snapshotList.size() > 1) {
-                            Log.d("Firestore query", "Snapshot list has more than one element");
-                            return;
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
+                        } else {
+                            planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+                            personnelRef.document(personnel.getId()).set(personnel);
                         }
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            snapshot.getReference().collection("assignedPersonnel").add(personnel);
-                        }
-                        Log.d("FirestoreQuery", "Added personnel" + personnel.getLastName() + "to" + plane.getId());
                     }
                 });
     }
 
-    public Personnel removePersonnel(Planes plane, int id) {
-        final CollectionReference[] personnelRef = new CollectionReference[1];
-        final Personnel[] returnPersonnel = new Personnel[1];
-        planeRef.whereEqualTo("id", plane.getId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+    public Personnel removePersonnel(Planes plane, String id) {
+        final Personnel[] retPers = new Personnel[1];
+        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
+        DocumentReference docRef = personnelRef.document(id);
 
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        if (snapshotList.size() > 1) {
-                            Log.d("Firestore query", "Snapshot list has more than one element");
-                            return;
-                        }
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            personnelRef[0] = snapshot.getReference().collection("assignedPersonnel");
-                        }
-                    }
-                });
-
-        personnelRef[0].whereEqualTo("id", plane.getId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        if (snapshotList.size() > 1) {
-                            Log.d("Firestore query", "Snapshot list has more than one element");
-                            return;
-                        }
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            returnPersonnel[0] = snapshot.toObject(Personnel.class);
-                            snapshot.getReference().delete();
-                        }
-                    }
-                });
-        return returnPersonnel[0];
-
+        db.runTransaction(new Transaction.Function<Personnel>() {
+            @Override
+            public Personnel apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                Personnel retPersonnel = snapshot.toObject(Personnel.class);
+                transaction.delete(docRef);
+                return retPersonnel;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Personnel>() {
+            @Override
+            public void onSuccess(Personnel result) {
+                retPers[0] = result;
+            }
+        });
+        return retPers[0];
     }
 }
 
