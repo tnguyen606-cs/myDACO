@@ -210,6 +210,26 @@ public class FirestoreQuery {
                 });
     }
 
+    public void addCargo(Planes plane, Cargo cargo) {
+        planeRef.whereEqualTo("id", plane.getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        if (snapshotList.size() > 1) {
+                            Log.d("Firestore query", "Snapshot list has more than one element");
+                            return;
+                        }
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            snapshot.getReference().collection("assignedCargo").add(cargo);
+                        }
+                        Log.d("FirestoreQuery", "Added cargo" + cargo.getCargoName() + "to" + plane.getId());
+                    }
+                });
+    }
+    
     public Personnel removePersonnel(Planes plane, int id) {
         final CollectionReference[] personnelRef = new CollectionReference[1];
         final Personnel[] returnPersonnel = new Personnel[1];
