@@ -21,12 +21,13 @@ public class Personnel implements Serializable {
         this.assignedPlaneID = assignedPlaneID;
         this.bumpPlaneID = bumpPlaneID;
     }
-    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, String id) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, int weight, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
         this.assignedPlaneID = assignedPlaneID;
         this.id = id;
+        this.weight = weight;
     }
 
     public String getFirstName() {

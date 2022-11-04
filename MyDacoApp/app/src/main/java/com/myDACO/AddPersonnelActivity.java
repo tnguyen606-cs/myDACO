@@ -76,7 +76,10 @@ public class AddPersonnelActivity extends AppCompatActivity {
         assignedPlaneDropdown.setAdapter(adapter);
 
         EditText personnelPriorityInput = (EditText) findViewById(R.id.personnel_priority_input);
+        EditText personnelWeightInput = (EditText) findViewById(R.id.personnel_weight_input);
+
         Button addBtn = (Button) findViewById(R.id.add_personnel_button);
+
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +99,11 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You did not enter a priority value.", Toast.LENGTH_SHORT).show();
                     // Show Error on edittext
                     personnelPriorityInput.setError("Please enter a priority value.");
+                } else if(personnelWeightInput.getText().toString().matches("")) {
+                    // Show Toast
+                    Toast.makeText(getApplicationContext(), "You did not enter a weight value.", Toast.LENGTH_SHORT).show();
+                    // Show Error on edittext
+                    personnelWeightInput.setError("Please enter a weight value.");
                 } else {
                     // all fields are populated, so add the plane
                     //Personnel first name and last name
@@ -105,7 +113,10 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     // Assigned plane
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
 
-                    // Cargo Capacity
+                    // Weight
+                    int personnelWeight = Integer.parseInt(personnelPriorityInput.getText().toString());
+
+                    // Priority
                     int personnelPriority = Integer.parseInt(personnelPriorityInput.getText().toString());
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddPersonnelActivity.this);
@@ -131,16 +142,17 @@ public class AddPersonnelActivity extends AppCompatActivity {
                                 assignedPlaneID = assignedPlane.getId();
                             }
                             Personnel newPersonnel = new Personnel(firstName, lastName, assignedPlaneID,
-                                    personnelPriority, personnel_id);
+                                    personnelPriority, personnelWeight, personnel_id);
 
                             // Insert Firestore query here
                             // Add the personnel to the personnel collection
                             // Add personnel to the plane
-                            fq.addPersonneltoPlane(assignedPlane, newPersonnel);
+                            fq.addPersonnel(assignedPlane, newPersonnel);
 
                             fnameInput.getText().clear();
                             lnameInput.getText().clear();
                             personnelPriorityInput.getText().clear();
+                            personnelWeightInput.getText().clear();
 
                             Toast.makeText(getApplicationContext(), "Personnel added", Toast.LENGTH_SHORT).show();
                         }
