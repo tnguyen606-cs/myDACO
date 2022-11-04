@@ -5,12 +5,12 @@ import android.widget.TextView;
 
 import com.myDACO.R;
 
-public class PlaneViewHolder {
+public class ItemViewHolder {
     // Declare the object references for our views
-    TextView planeLabel;
+    TextView itemLabel;
     // Get the handles by calling findViewById() on View object inside the constructor
-    PlaneViewHolder(View v)
+    ItemViewHolder(View v)
     {
-        planeLabel = v.findViewById(R.id.label);
+        itemLabel = v.findViewById(R.id.label);
     }
 }

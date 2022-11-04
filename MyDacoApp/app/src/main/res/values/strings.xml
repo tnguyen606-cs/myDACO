@@ -25,7 +25,7 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="cargo">Cargo</string>
-    <string name="passengers">Passengers</string>
+    <string name="personnel">Personnel</string>
 	<string name="mission">Start Mission</string>
 	<!-- Auth UI - Signed in -->
 	<string name="signed_in_header">You are signed in!</string>

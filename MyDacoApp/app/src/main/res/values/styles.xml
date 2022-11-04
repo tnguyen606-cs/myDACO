@@ -5,5 +5,8 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
+	<style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
+		<item name="colorAccent">@android:color/holo_blue_light</item>
+	</style>
 
 </resources>

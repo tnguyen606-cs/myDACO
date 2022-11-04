@@ -22,9 +22,6 @@ import com.myDACO.data.*;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
-import org.json.JSONArray;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -107,8 +104,8 @@ public class PlanesActivity extends AppCompatActivity {
         });
 
         // Go to add plane activity
-        ImageView editIcon = (ImageView) findViewById(R.id.add_plane);
-        editIcon.setOnClickListener(new View.OnClickListener() {
+        ImageView addIcon = (ImageView) findViewById(R.id.add_plane);
+        addIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Go to screen with UI for adding a plane

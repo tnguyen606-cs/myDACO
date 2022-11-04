@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PlanesActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,63 +19,98 @@
             android:layout_gravity="center_horizontal|center"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            android:text="Assign Contents"
+            android:text="Add Cargo"
             android:textColor="@color/design_default_color_primary"
             android:textSize="30sp" />
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/plane_content_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:background="@drawable/rectangle_shape">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:background="@drawable/rectangle_shape"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="@string/cargo"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="24sp" />
-
-
-        <ListView
-            android:id="@+id/cargo_list"
-            android:layout_width="match_parent"
-            android:layout_height="244dp"
-            android:layout_marginTop="40dp"
-            android:divider="@color/text_color"
-            android:dividerHeight="1sp" />
-
-    </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="416dp"
-        android:background="@drawable/rectangle_shape">
+        android:layout_width="match_parent"
+        android:layout_height="590dp"
+        android:layout_marginTop="150dp">
 
         <TextView
+            android:id="@+id/cargo_name"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:background="@drawable/rectangle_shape"
+            android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="@string/personnel"
+            android:text="Cargo Name:"
             android:textColor="@color/design_default_color_primary"
-            android:textSize="24sp" />
+            android:textSize="25sp" />
 
-        <ListView
-            android:id="@+id/passenger_list"
+        <EditText
+            android:id="@+id/cargo_name_box"
+            android:layout_width="355dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/cargo_name"
+            android:drawableStart="@drawable/cargo_icon_drawable"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:autofillHints="" />
+
+
+        <TextView
+            android:id="@+id/cargo_id"
             android:layout_width="match_parent"
-            android:layout_height="244dp"
-            android:layout_marginTop="40dp"
-            android:divider="@color/text_color"
-            android:dividerHeight="1sp" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_name_box"
+            android:layout_marginTop="29dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Cargo ID"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/cargo_id_input"
+            android:layout_width="355dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/cargo_id"
+            android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:autofillHints="" />
+
+        <TextView
+            android:id="@+id/cargo_weight_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_id_input"
+            android:layout_marginTop="29dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Cargo Weight:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/cargo_weight_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_weight_label"
+            android:layout_marginTop="7dp"
+            android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:maxLength="7"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/add_cargo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_weight_input"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="29dp"
+            android:text="Enter Cargo" />
+
+
     </RelativeLayout>
 
     <RelativeLayout

@@ -8,24 +8,25 @@ public class Personnel implements Serializable {
     private int priority;
     private String assignedPlaneID;
     private String bumpPlaneID;
+    private int weight;
     private String id;
 
     public Personnel() {}
 
-    public Personnel(String firstName, String lastName, Planes assignedPlane, Planes bumpPlane) {
+    public Personnel(String firstName, String lastName, int priority, int weight) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.priority = 0;
+        this.priority = priority;
+        this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
         this.bumpPlaneID = bumpPlaneID;
     }
-
-    public Personnel(String firstName, String lastName, int priority, Planes assignedPlane, Planes bumpPlane) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
         this.assignedPlaneID = assignedPlaneID;
-        this.bumpPlaneID = bumpPlaneID;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -38,6 +39,10 @@ public class Personnel implements Serializable {
 
     public int getPriority() {
         return priority;
+    }
+
+    public int getWeight() {
+        return this.weight;
     }
 
     public String getAssignedPlaneID() {
@@ -60,6 +65,10 @@ public class Personnel implements Serializable {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public void setAssignedPlaneID(String assignedPlaneID) {

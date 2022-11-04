@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/cargo_item"
+        android:title="@string/cargo" >
+    </item>
+    <item android:id="@+id/personnel_item"
+        android:title="@string/personnel" >
+    </item>
     <item android:id="@+id/sign_out_item"
         android:title="@string/sign_out" >
     </item>
