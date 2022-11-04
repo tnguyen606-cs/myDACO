@@ -55,8 +55,6 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
         holder.planeLabel.setText(list.get(position).getPlaneName());
 
         ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
-        PopupMenu popupMenu = new PopupMenu(context, view);
-
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
