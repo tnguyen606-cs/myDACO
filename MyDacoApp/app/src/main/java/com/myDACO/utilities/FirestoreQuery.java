@@ -181,21 +181,19 @@ public class FirestoreQuery {
     }
 
     public void updatePersonnel(String field, String value, String id) {
-        personnelRef.document(id)
-            .update(field, value)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    planeRef.document(id).update("assignedPersonnel", FieldValue.arrayUnion(id));
-                    Log.d("A Personnel UPDATED", "DocumentSnapshot successfully updated!");
+        DocumentReference docRef = personnelRef.document(id);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                String status = snapshot.getString(field);
+                if (!status.equals(value)) {
+                    transaction.update(docRef, field, value);
                 }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w("A Person UPDATED FAILED", "Error updating document", e);
-                }
-            });
+                return null;
+            }
+        });
     }
 
     //returns all instances of cargo that contain the given search parameter in the given field

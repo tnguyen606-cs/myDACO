@@ -44,9 +44,8 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
         }
 
         ItemViewHolder holder = (ItemViewHolder) view.getTag();
-        StringBuilder str = new StringBuilder();
-        str.append(list.get(position).getFirstName()).append(" ").append(list.get(position).getLastName());
-        holder.itemLabel.setText(str.toString());
+        String str = list.get(position).getFirstName() + " " + list.get(position).getLastName();
+        holder.itemLabel.setText(str);
 
         ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
         editIcon.setOnClickListener(new View.OnClickListener() {

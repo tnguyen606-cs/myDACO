@@ -36,12 +36,12 @@ public class SinglePersonnelActivity extends AppCompatActivity {
 
         // Get the selected cargo from "ListOfPersonnelActivity.class"
         Intent intent = getIntent();
-        id = intent.getStringExtra("PERSONNEL_ID");
         String fpersonnel = intent.getStringExtra("PERSONNEL_FTEXT");
         String lpersonnel = intent.getStringExtra("PERSONNEL_LTEXT");
         String planedid = intent.getStringExtra("PERSONNEL_planeID");
         String weight = intent.getStringExtra("PERSONNEL_WEIGHT");
         String priority = intent.getStringExtra("PERSONNEL_PRIORITY");
+        id = intent.getStringExtra("PERSONNEL_ID");
         person = new Personnel(fpersonnel, lpersonnel, planedid, id, priority, weight);
 
 //        FirestoreQuery fq = new FirestoreQuery();
@@ -78,42 +78,44 @@ public class SinglePersonnelActivity extends AppCompatActivity {
     }
 
     private void isClicked() {
-        String fname = person.getFirstName();
-        String lname = person.getLastName();
-        String pId = person.getAssignedPlaneID();
-        String weight = person.getWeight();
-        String priority = person.getPriority();
+        final String fname = personnel_fname.getText().toString();
+        final String lname = personnel_lname.getText().toString();
+        final String pId = personnel_id.getText().toString();
+        final String weight = personnel_weight.getText().toString();
+        final String priority = personnel_priority.getText().toString();
         boolean isChanged = false;
 
         // 1. Check if any text field is changed, then update them to firebase
         FirestoreQuery fq = new FirestoreQuery();
-        if (!fname.equals(personnel_fname.getText().toString())) {
+        if (!(fname.matches(person.getFirstName()))) {
             isChanged = true;
-            fq.updatePersonnel("firstName", personnel_fname.getText().toString(), id);
-            Toast.makeText(getApplicationContext(), "You did update " + personnel_fname.getText().toString(), Toast.LENGTH_SHORT).show();
+            Log.d("FirestoreQuery 1", " Found that person " + fname);
+            fq.updatePersonnel("firstName", fname, id);
         }
-        if (!lname.equals(personnel_lname.getText().toString())) {
+        if (!(lname.matches(person.getLastName()))) {
             isChanged = true;
-            fq.updatePersonnel("lastName", personnel_lname.getText().toString(), id);
-            Toast.makeText(getApplicationContext(), "You did update " + personnel_lname.getText().toString(), Toast.LENGTH_SHORT).show();
+            Log.d("FirestoreQuery 2", " Found that person " + fname);
+            fq.updatePersonnel("lastName", lname, id);
         }
-        if (!pId.equals(personnel_id.getText().toString())) {
+        if (!(pId.matches(person.getAssignedPlaneID()))) {
             isChanged = true;
-            fq.updatePersonnel("assignedPlaneID", personnel_id.getText().toString(), id);
-            Toast.makeText(getApplicationContext(), "You did update " + personnel_id.getText().toString(), Toast.LENGTH_SHORT).show();
+            Log.d("FirestoreQuery 3", " Found that person " + fname);
+            fq.updatePersonnel("assignedPlaneID", pId, id);
         }
-        if (!(weight).equals(personnel_weight.getText().toString())) {
+        if (!(weight.matches(person.getWeight()))) {
             isChanged = true;
-            fq.updatePersonnel("weight", personnel_weight.getText().toString(), id);
-            Toast.makeText(getApplicationContext(), "You did update " + personnel_weight.getText().toString(), Toast.LENGTH_SHORT).show();
+            Log.d("FirestoreQuery 4", " Found that person " + fname);
+            fq.updatePersonnel("weight", weight, id);
         }
-        if (!(priority).equals(personnel_priority.getText().toString())) {
+        if (!(priority.matches(person.getPriority()))) {
             isChanged = true;
-            fq.updatePersonnel("priority", personnel_priority.getText().toString(), id);
-            Toast.makeText(getApplicationContext(), "You did update " + personnel_priority.getText().toString(), Toast.LENGTH_SHORT).show();
+            Log.d("FirestoreQuery 5", " Found that person " + fname);
+            fq.updatePersonnel("priority", priority, id);
         }
         if (!isChanged) {
             Toast.makeText(getApplicationContext(), "You did not update anything", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "You Did update", Toast.LENGTH_SHORT).show();
         }
     }
 }
