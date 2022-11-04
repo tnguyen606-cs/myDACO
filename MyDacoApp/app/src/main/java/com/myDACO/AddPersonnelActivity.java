@@ -106,13 +106,13 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
 
                     // Cargo Capacity
-                    int personnelPriority = Integer.parseInt(personnelPriorityInput.getText().toString());
+                    String personnelPriority = personnelPriorityInput.getText().toString();
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddPersonnelActivity.this);
                     alert.setTitle("Add Personnel Confirmation");
                     alert.setMessage("Are you sure you want to add this personnel?\nFirst Name: "
                             + firstName + "\nLast Name: " + lastName + "\nAssigned Plane: " + assignedPlane.getPlaneName()
-                            + "\nPersonnel Priority: " + Integer.toString(personnelPriority));
+                            + "\nPersonnel Priority: " + personnelPriority);
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -120,7 +120,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                             // Generate the personnel ID
                             Random rand = new Random();
                             // Autogenerate personnel id ('p' + 2 letter + 1 int)
-                            String p = "p";
+                            String p = "P";
                             String c1 = Character.toString((char)(rand.nextInt(26) + 'a'));
                             String c2 = Character.toString((char)(rand.nextInt(26) + 'a'));
                             String n = Integer.toString(rand.nextInt(10));
@@ -131,7 +131,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                                 assignedPlaneID = assignedPlane.getId();
                             }
                             Personnel newPersonnel = new Personnel(firstName, lastName, assignedPlaneID,
-                                    personnelPriority, personnel_id);
+                                    personnel_id, personnelPriority, "");
 
                             // Insert Firestore query here
                             // Add the personnel to the personnel collection

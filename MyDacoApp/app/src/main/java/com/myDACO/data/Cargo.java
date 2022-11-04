@@ -11,22 +11,25 @@ public class Cargo implements Serializable {
 
     public Cargo() {}
 
-    public Cargo(String cargoName, int weight) {
+    public Cargo(String cargoName, String id, int weight) {
         this.cargoName = cargoName;
         this.weight = weight;
+        this.id = id;
     }
 
-    public Cargo(String cargoName, int weight, String assignedPlaneID) {
+    public Cargo(String cargoName, String id, int weight, String assignedPlaneID) {
         this.cargoName = cargoName;
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
+        this.id = id;
     }
 
-    public Cargo(String cargoName, int weight, String assignedPlaneID, String bumpPlaneID) {
+    public Cargo(String cargoName, String id, int weight, String assignedPlaneID, String bumpPlaneID) {
         this.cargoName = cargoName;
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
         this.bumpPlaneID = bumpPlaneID;
+        this.id = id;
     }
 
     public String getCargoName() {

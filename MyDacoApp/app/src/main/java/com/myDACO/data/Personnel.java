@@ -5,28 +5,21 @@ import java.io.Serializable;
 public class Personnel implements Serializable {
     private String firstName;
     private String lastName;
-    private int priority;
+    private String priority;
     private String assignedPlaneID;
     private String bumpPlaneID;
-    private int weight;
+    private String weight;
     private String id;
 
     public Personnel() {}
 
-    public Personnel(String firstName, String lastName, int priority, int weight) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.priority = priority;
-        this.weight = weight;
-        this.assignedPlaneID = assignedPlaneID;
-        this.bumpPlaneID = bumpPlaneID;
-    }
-    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, String id) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, String id, String priority, String weight) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
         this.assignedPlaneID = assignedPlaneID;
         this.id = id;
+        this.weight = weight;
     }
 
     public String getFirstName() {
@@ -37,11 +30,11 @@ public class Personnel implements Serializable {
         return lastName;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return this.weight;
     }
 
@@ -63,11 +56,11 @@ public class Personnel implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 

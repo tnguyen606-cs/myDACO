@@ -82,13 +82,13 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Log.d("Print first", "Print out as clicked");
                 Intent nextScreen = new Intent(ListOfPersonnelActivity.this, SinglePersonnelActivity.class);
                 nextScreen.putExtra("PERSONNEL_FTEXT", personnelList.get(position).getFirstName());
                 nextScreen.putExtra("PERSONNEL_LTEXT", personnelList.get(position).getLastName());
-                nextScreen.putExtra("PERSONNEL_ID", personnelList.get(position).getAssignedPlaneID());
+                nextScreen.putExtra("PERSONNEL_planeID", personnelList.get(position).getAssignedPlaneID());
                 nextScreen.putExtra("PERSONNEL_WEIGHT", personnelList.get(position).getWeight());
                 nextScreen.putExtra("PERSONNEL_PRIORITY", personnelList.get(position).getPriority());
+                nextScreen.putExtra("PERSONNEL_ID", personnelList.get(position).getId());
                 ListOfPersonnelActivity.this.startActivity(nextScreen);
             }
         });

@@ -154,7 +154,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/update_cargo_button"
+            android:id="@+id/update_personnel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_priority_input"
