@@ -7,17 +7,17 @@ public class Planes implements Serializable {
     private String id;
     private boolean active;
     private boolean onMission;
-    private List<Personnel> assignedPersonnel;
+    private List<String> assignedPersonnel;
     private int personnelCount;
     private int personnelCapacity;
-    private List<Cargo> assignedCargo;
+    private List<String> assignedCargo;
     private int cargoWeight;
     private int cargoCapacity;
 
     public Planes() {}
 
 
-    public Planes(String planeName, String id, boolean active, boolean onMission, List<Cargo> assignedCargo, List<Personnel> assignedPersonnel) {
+    public Planes(String planeName, String id, boolean active, boolean onMission, List<String> assignedCargo, List<String> assignedPersonnel) {
         this.planeName = planeName;
         this.id = id;
         this.active = active;
@@ -26,7 +26,7 @@ public class Planes implements Serializable {
         this.assignedCargo = assignedCargo;
     }
 
-    public Planes(String planeName, String id, boolean active, boolean onMission, List<Personnel> assignedPersonnel, int personnelCount, int personnelCapacity, List<Cargo> assignedCargo, int cargoWeight, int cargoCapacity) {
+    public Planes(String planeName, String id, boolean active, boolean onMission, List<String> assignedPersonnel, int personnelCount, int personnelCapacity, List<String> assignedCargo, int cargoWeight, int cargoCapacity) {
 
         this.planeName = planeName;
         this.id = id;
@@ -55,7 +55,7 @@ public class Planes implements Serializable {
 
     public boolean isActive() {return active;}
 
-    public List<Personnel> getAssignedPersonnel() {
+    public List<String> getAssignedPersonnel() {
         return assignedPersonnel;
     }
 
@@ -67,7 +67,7 @@ public class Planes implements Serializable {
         return personnelCapacity;
     }
 
-    public List<Cargo> getAssignedCargo() {
+    public List<String> getAssignedCargo() {
         return assignedCargo;
     }
 
@@ -89,7 +89,7 @@ public class Planes implements Serializable {
 
     public void setActive(boolean active) { this.active = active; }
 
-    public void setAssignedPersonnel(List<Personnel> assignedPersonnel) {
+    public void setAssignedPersonnel(List<String> assignedPersonnel) {
         this.assignedPersonnel = assignedPersonnel;
     }
 
@@ -101,7 +101,7 @@ public class Planes implements Serializable {
         this.personnelCapacity = personnelCapacity;
     }
 
-    public void setAssignedCargo(List<Cargo> assignedCargo) {
+    public void setAssignedCargo(List<String> assignedCargo) {
         this.assignedCargo = assignedCargo;
     }
 

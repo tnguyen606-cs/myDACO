@@ -9,7 +9,7 @@ public class Personnel implements Serializable {
     private String assignedPlaneID;
     private String bumpPlaneID;
     private int weight;
-    private int id;
+    private String id;
 
     public Personnel() {}
 
@@ -55,7 +55,7 @@ public class Personnel implements Serializable {
         return bumpPlaneID;
     }
 
-    public int getId() {return id;}
+    public String getId() {return id;}
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -81,7 +81,7 @@ public class Personnel implements Serializable {
         this.bumpPlaneID = bumpPlaneID;
     }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(String id) {this.id = id;}
 
     public String toString() {
         return firstName + " " + lastName;
