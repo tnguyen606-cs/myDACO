@@ -80,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_lname_input"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Personnel Assigned Plane:"
             android:textColor="@color/design_default_color_primary"
@@ -89,13 +90,15 @@
             android:id="@+id/planes_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/personnel_id" />
+            android:layout_below="@id/personnel_id"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/personnel_priority_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/planes_spinner"
+            android:layout_marginTop="12dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Personnel Priority:"
             android:textColor="@color/design_default_color_primary"
@@ -106,7 +109,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_priority_label"
-            android:layout_marginTop="7dp"
             android:drawablePadding="10dp"
             android:digits="0123456789"
             android:inputType="number"

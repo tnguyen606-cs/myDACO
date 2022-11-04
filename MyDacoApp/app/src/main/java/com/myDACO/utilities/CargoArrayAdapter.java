@@ -1,6 +1,7 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myDACO.R;
+import com.myDACO.SingleCargoActivity;
+import com.myDACO.SinglePersonnelActivity;
 import com.myDACO.data.Cargo;
 
 import java.util.List;
@@ -57,7 +60,8 @@ public class CargoArrayAdapter extends ArrayAdapter<Cargo> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.edit:
-                                Toast.makeText(context.getApplicationContext(), "Edit " + list.get(position).getCargoName(), Toast.LENGTH_SHORT).show();
+                                Intent nextScreen = new Intent(context, SingleCargoActivity.class);
+                                context.startActivity(nextScreen);
                                 break;
                             case R.id.delete:
                                 Toast.makeText(context.getApplicationContext(), "Delete " + list.get(position).getCargoName(), Toast.LENGTH_SHORT).show();
