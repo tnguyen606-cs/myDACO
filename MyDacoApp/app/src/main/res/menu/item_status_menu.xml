@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/edit_name"
-        android:title="Edit Plane Name" />
+        android:id="@+id/edit"
+        android:title="Edit" />
     <item
         android:id="@+id/delete"
         android:title="Delete" />

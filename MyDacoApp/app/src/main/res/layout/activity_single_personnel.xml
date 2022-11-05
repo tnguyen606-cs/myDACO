@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PlanesActivity">
+    tools:context=".SinglePersonnelActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,12 +19,11 @@
             android:layout_gravity="center_horizontal|center"
             android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center"
-            android:text="Add Cargo"
+            android:text="@string/personnel"
             android:textColor="@color/design_default_color_primary"
             android:textSize="30sp" />
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,83 +31,136 @@
         android:layout_marginTop="150dp">
 
         <TextView
-            android:id="@+id/cargo_name"
+            android:id="@+id/personnel_fname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Cargo Name:"
+            android:text="Personnel First Name:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
         <EditText
-            android:id="@+id/cargo_name_box"
+            android:id="@+id/personnel_fname_input"
             android:layout_width="355dp"
             android:layout_height="52dp"
-            android:layout_below="@id/cargo_name"
-            android:drawableStart="@drawable/cargo_icon_drawable"
+            android:layout_below="@id/personnel_fname"
+            android:drawableStart="@drawable/username_icon"
             android:drawablePadding="10dp"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck"
-            android:autofillHints="" />
-
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"/>
 
         <TextView
-            android:id="@+id/cargo_id"
+            android:id="@+id/personnel_lname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_name_box"
-            android:layout_marginTop="29dp"
+            android:layout_below="@id/personnel_fname_input"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Cargo ID"
+            android:text="Personnel Last Name:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
         <EditText
-            android:id="@+id/cargo_id_input"
+            android:id="@+id/personnel_lname_input"
             android:layout_width="355dp"
             android:layout_height="52dp"
-            android:layout_below="@id/cargo_id"
-            android:digits="0123456789"
+            android:layout_below="@id/personnel_lname"
+            android:drawableStart="@drawable/username_icon"
             android:drawablePadding="10dp"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"/>
+
+        <TextView
+            android:id="@+id/peronnel_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_lname_input"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Assigned Plane ID:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/personnel_id_input"
+            android:layout_width="150dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/peronnel_id"
+            android:drawablePadding="10dp"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"
             android:inputType="number"
             android:maxLength="4"
             android:maxLines="1"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:autofillHints="" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/cargo_weight_label"
+            android:id="@+id/personnel_weight_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_id_input"
-            android:layout_marginTop="29dp"
+            android:layout_below="@id/personnel_id_input"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Cargo Weight:"
+            android:text="Personnel Weight:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
         <EditText
-            android:id="@+id/cargo_weight_input"
+            android:id="@+id/personnel_weight_input"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_weight_label"
+            android:layout_below="@id/personnel_weight_label"
             android:layout_marginTop="7dp"
-            android:digits="0123456789"
             android:drawablePadding="10dp"
+            android:hint=""
+            android:digits="0123456789"
             android:inputType="number"
             android:maxLength="7"
             android:maxLines="1"
             android:minHeight="48dp"
+            android:textColorHint="@color/purple_700"
+            android:theme="@style/EditTextThemeOverlay"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/personnel_priority_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_weight_input"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Priority:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/personnel_priority_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_priority_label"
+            android:layout_marginTop="7dp"
+            android:drawablePadding="10dp"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/add_cargo_button"
+            android:id="@+id/update_cargo_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_weight_input"
+            android:layout_below="@id/personnel_priority_input"
             android:layout_centerInParent="true"
             android:layout_marginTop="29dp"
-            android:text="Enter Cargo" />
+            android:text="Update Personnel" />
 
 
     </RelativeLayout>

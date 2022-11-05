@@ -22,9 +22,6 @@ import com.myDACO.data.*;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
-import org.json.JSONArray;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

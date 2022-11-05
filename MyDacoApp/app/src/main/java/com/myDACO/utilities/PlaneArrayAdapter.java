@@ -1,9 +1,7 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,10 +14,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.List;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.myDACO.MainActivity;
-import com.myDACO.SinglePlaneActivity;
-import com.myDACO.utilities.*;
 import com.myDACO.R;
 import com.myDACO.data.Planes;
 
@@ -39,8 +33,8 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
         if (convertView == null) {
             LayoutInflater inflator = context.getLayoutInflater();
             view = inflator.inflate(R.layout.custom_single_plane, null);
-            PlaneViewHolder viewHolder = new PlaneViewHolder(view);
-            viewHolder.planeLabel = (TextView) view.findViewById(R.id.label);
+            ItemViewHolder viewHolder = new  ItemViewHolder(view);
+            viewHolder.itemLabel = (TextView) view.findViewById(R.id.label);
             view.setTag(viewHolder);
         } else {
             view = convertView;
@@ -51,11 +45,10 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
             view.setBackgroundColor(Color.WHITE);
         }
 
-        PlaneViewHolder holder = (PlaneViewHolder) view.getTag();
-        holder.planeLabel.setText(list.get(position).getPlaneName());
+        ItemViewHolder holder = (ItemViewHolder) view.getTag();
+        holder.itemLabel.setText(list.get(position).getPlaneName());
 
         ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
-        PopupMenu popupMenu = new PopupMenu(context, view);
 
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override

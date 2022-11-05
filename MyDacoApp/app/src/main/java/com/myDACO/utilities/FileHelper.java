@@ -1,39 +1,17 @@
 package com.myDACO.utilities;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.myDACO.ListOfCargosActivity;
+import com.myDACO.ListOfPersonnelActivity;
 import com.myDACO.MainActivity;
-import com.myDACO.PlanesActivity;
 import com.myDACO.R;
-import com.myDACO.SinglePlaneActivity;
-import com.myDACO.data.Planes;
-import com.myDACO.data.Users;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class FileHelper {
 
@@ -47,9 +25,20 @@ public class FileHelper {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                            case R.id.planes_manifest_item:
-                                Intent intent1 = new Intent(context, PlanesActivity.class);
+
+                            case R.id.cargo_item:
+                                Intent intent1 = new Intent(context, ListOfCargosActivity.class);
                                 context.startActivity(intent1);
+                                break;
+
+                            case R.id.personnel_item:
+                                Intent intent2 = new Intent(context, ListOfPersonnelActivity.class);
+                                context.startActivity(intent2);
+                                break;
+                                
+                            case R.id.planes_manifest_item:
+                                Intent intent3 = new Intent(context, PlanesActivity.class);
+                                context.startActivity(intent3);
                                 break;
 
                             case R.id.sign_out_item:

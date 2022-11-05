@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/cargo_item"
+        android:title="@string/cargo" >
+    </item>
+    <item android:id="@+id/personnel_item"
+        android:title="@string/personnel" >
+    </item> 
     <item android:id="@+id/planes_manifest_item"
         android:title="@string/airfield_manifest_string" >
     </item>
