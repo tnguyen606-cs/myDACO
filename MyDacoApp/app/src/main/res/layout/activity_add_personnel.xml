@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SinglePersonnelActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Add Personnel"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="590dp"
+        android:layout_marginTop="150dp">
+
+        <TextView
+            android:id="@+id/personnel_fname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel First Name:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/personnel_fname_input"
+            android:layout_width="355dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/personnel_fname"
+            android:drawableStart="@drawable/username_icon"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"/>
+
+        <TextView
+            android:id="@+id/personnel_lname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_fname_input"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Last Name:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/personnel_lname_input"
+            android:layout_width="355dp"
+            android:layout_height="52dp"
+            android:layout_below="@id/personnel_lname"
+            android:drawableStart="@drawable/username_icon"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"/>
+
+        <TextView
+            android:id="@+id/personnel_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_lname_input"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Assigned Plane:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <Spinner
+            android:id="@+id/planes_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_id" />
+
+        <TextView
+            android:id="@+id/personnel_weight_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/planes_spinner"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Weight:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+
+        <EditText
+            android:id="@+id/personnel_weight_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_weight_label"
+            android:layout_marginTop="7dp"
+            android:drawablePadding="10dp"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/personnel_priority_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_weight_input"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Personnel Priority:"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/personnel_priority_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_priority_label"
+            android:layout_marginTop="7dp"
+            android:drawablePadding="10dp"
+            android:digits="12345"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:hint=""
+            android:theme="@style/EditTextThemeOverlay"
+            android:textColorHint="@color/purple_700"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/add_personnel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/personnel_priority_input"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="29dp"
+            android:text="Add Personnel" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/menu_search_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/_bg_App_color">
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="80dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/daco_app_string"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/menu_icon"
+                android:src="@drawable/menu_bar_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/search_icon"
+                android:src="@drawable/searching_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
