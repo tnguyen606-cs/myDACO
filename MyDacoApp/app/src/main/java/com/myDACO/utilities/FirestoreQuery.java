@@ -134,7 +134,6 @@ public class FirestoreQuery {
     //returns all instances of cargo that contain the given search parameter in the given field
     public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchVal) {
         ArrayList<Personnel> retPersonnel = new ArrayList<>();
-
         personnelRef.whereEqualTo(field, searchVal)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -229,6 +228,56 @@ public class FirestoreQuery {
             }
         });
         return retCargo[0];
+    }
+
+    public void reassignCargo(Cargo cargo, Planes plane) {
+        planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
+        planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+        cargoRef.document(cargo.getId()).update("assignedPlaneId", plane.getId());
+    }
+
+    public void reassignPersonnel(Personnel personnel, Planes plane) {
+        planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
+        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+        cargoRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
+    }
+
+    public List<Cargo> getCargo(List<Planes> planes) {
+        ArrayList<String> cargoIDs = new ArrayList<>();
+        ArrayList<Cargo> retCargo = new ArrayList<>();
+
+        for (Planes plane : planes) {
+           cargoIDs.addAll(plane.getAssignedCargo());
+        }
+
+        for (String id : cargoIDs) {
+            cargoRef.document(id).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            retCargo.add(documentSnapshot.toObject(Cargo.class));
+                        }
+                    });
+        }
+        return retCargo;
+    }
+
+    public List<Personnel> getPersonnel(List<Planes> planes) {
+        ArrayList<String> personnelIDs = new ArrayList<>();
+        ArrayList<Personnel> retPersonnel = new ArrayList<>();
+        for (Planes plane : planes) {
+            personnelIDs.addAll(plane.getAssignedPersonnel());
+        }
+        for (String id : personnelIDs) {
+            personnelRef.document(id).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            retPersonnel.add(documentSnapshot.toObject(Personnel.class));
+                        }
+                    });
+        }
+        return retPersonnel;
     }
 }
 
