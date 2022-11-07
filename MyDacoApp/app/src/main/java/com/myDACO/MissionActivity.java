@@ -26,6 +26,7 @@ public class MissionActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     PlaneArrayAdapter missionPlaneAdapter;
     ListenerRegistration missionPlaneListener;
+
     private List<Planes> missionPlanes = new ArrayList<>();
 
     @Override
@@ -80,5 +81,9 @@ public class MissionActivity extends AppCompatActivity {
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
         file.showMenu(MissionActivity.this, menuIcon);
 
+    }
+    //getter for mission planes
+    public List<Planes> getMissionPlanes() {
+        return this.missionPlanes;
     }
 }
