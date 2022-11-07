@@ -84,5 +84,17 @@ public class ListOfCargosActivity extends AppCompatActivity {
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
         file.showMenu(ListOfCargosActivity.this, menuIcon);
+
+        // Go to add cargo activity
+        ImageView addIcon = (ImageView) findViewById(R.id.add_cargo);
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(ListOfCargosActivity.this, AddCargoActivity.class);
+                ListOfCargosActivity.this.startActivity(nextScreen);
+
+            }
+        });
     }
 }
