@@ -22,6 +22,7 @@ import com.myDACO.data.Cargo;
 import com.myDACO.data.Mission;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
+import com.myDACO.utilities.FirestoreQuery;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +32,7 @@ import java.util.List;
 public class AssignCargoActivity extends AppCompatActivity {
 
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
+        private FirestoreQuery fq  = new FirestoreQuery();
         static List<Cargo> cargoList = new ArrayList<>();
         CargoArrayAdapter cargoAdapter;
         private Mission currentMission;
@@ -81,6 +83,7 @@ public class AssignCargoActivity extends AppCompatActivity {
                     nextScreen.putExtra("MISSION", currentMission);
                     nextScreen.putExtra("CARGO_TEXT", cargoList.get(position).getCargoName());
                     nextScreen.putExtra("CARGO_ID", cargoList.get(position).getAssignedPlaneID());
+
                     Toast.makeText(getApplicationContext(), "You did not enter a plane name.", Toast.LENGTH_SHORT).show();
 
                     com.myDACO.AssignCargoActivity.this.startActivity(nextScreen);

@@ -102,11 +102,13 @@ public class MissionArrayAdapter extends ArrayAdapter<Planes> {
                                 break;
                             case R.id.add_cargo:
                                 Intent cargoScreen = new Intent(context, AssignCargoActivity.class);
+                                cargoScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 cargoScreen.putExtra("MISSION", (Mission) context.getIntent().getSerializableExtra("MISSION"));
-                                context.startActivity(cargoScreen);
+                                context.getApplicationContext().startActivity(cargoScreen);
                                 break;
                             case R.id.add_personnel:
                                 Intent personnelScreen = new Intent(context, AssignPersonnelActivity.class);
+                                personnelScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 personnelScreen.putExtra("MISSION", context.getIntent().getSerializableExtra("MISSION"));
                                 context.startActivity(personnelScreen);
                                 break;
