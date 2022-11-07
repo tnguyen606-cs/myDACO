@@ -46,11 +46,11 @@
             android:layout_below="@id/personnel_fname"
             android:drawableStart="@drawable/username_icon"
             android:drawablePadding="10dp"
-            android:inputType="text"
-            tools:ignore="SpeakableTextPresentCheck"
             android:hint=""
+            android:inputType="text"
+            android:textColorHint="@color/purple_700"
             android:theme="@style/EditTextThemeOverlay"
-            android:textColorHint="@color/purple_700"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/personnel_lname"
@@ -69,11 +69,11 @@
             android:layout_below="@id/personnel_lname"
             android:drawableStart="@drawable/username_icon"
             android:drawablePadding="10dp"
-            android:inputType="text"
-            tools:ignore="SpeakableTextPresentCheck"
             android:hint=""
+            android:inputType="text"
+            android:textColorHint="@color/purple_700"
             android:theme="@style/EditTextThemeOverlay"
-            android:textColorHint="@color/purple_700"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/personnel_id"
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_id"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:id="@+id/personnel_weight_label"
@@ -111,15 +111,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_weight_label"
             android:layout_marginTop="7dp"
-            android:drawablePadding="10dp"
             android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:hint=""
             android:inputType="number"
             android:maxLength="4"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:hint=""
-            android:theme="@style/EditTextThemeOverlay"
             android:textColorHint="@color/purple_700"
+            android:theme="@style/EditTextThemeOverlay"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
@@ -137,15 +137,15 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_priority_label"
-            android:drawablePadding="10dp"
             android:digits="12345"
+            android:drawablePadding="10dp"
+            android:hint=""
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:hint=""
-            android:theme="@style/EditTextThemeOverlay"
             android:textColorHint="@color/purple_700"
+            android:theme="@style/EditTextThemeOverlay"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button

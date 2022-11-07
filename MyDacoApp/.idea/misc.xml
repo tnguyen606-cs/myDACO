@@ -26,7 +26,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.40444634459170586" />
         <entry key="app/src/main/res/layout/activity_mission_planes.xml" value="0.32407011543394615" />
         <entry key="app/src/main/res/layout/activity_planes_manifest.xml" value="0.5489583333333333" />
-        <entry key="app/src/main/res/layout/activity_single_personnel.xml" value="0.5447916666666667" />
+        <entry key="app/src/main/res/layout/activity_single_cargo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_single_personnel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_single_plane.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_updated_plane.xml" value="0.2731936725096195" />
         <entry key="app/src/main/res/layout/cargo_modification_screen.xml" value="0.475" />

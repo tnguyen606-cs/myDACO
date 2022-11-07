@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Cargo implements Serializable {
     private String cargoName;
-    private int weight;
     private String assignedPlaneID;
     private String bumpPlaneID;
+    private int weight;
     private String id;
 
     public Cargo() {}
@@ -17,7 +17,7 @@ public class Cargo implements Serializable {
         this.id = id;
     }
 
-    public Cargo(String cargoName, String id, int weight, String assignedPlaneID) {
+    public Cargo(String cargoName, String assignedPlaneID, String id, int weight) {
         this.cargoName = cargoName;
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
@@ -70,6 +70,20 @@ public class Cargo implements Serializable {
 
     public String toString() {
         return cargoName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (o instanceof Cargo) {
+            Cargo otherPer = (Cargo) o;
+            return this.cargoName.equals(otherPer.getCargoName())
+                    && this.assignedPlaneID.equals(otherPer.getAssignedPlaneID())
+                    && this.id.equals(otherPer.getId())
+                    && (this.weight == otherPer.getWeight());
+        }
+        return false;
     }
 }
 

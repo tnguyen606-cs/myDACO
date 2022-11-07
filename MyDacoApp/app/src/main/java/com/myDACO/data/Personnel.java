@@ -1,19 +1,21 @@
 package com.myDACO.data;
 
+import android.app.Person;
+
 import java.io.Serializable;
 
 public class Personnel implements Serializable {
     private String firstName;
     private String lastName;
-    private String priority;
     private String assignedPlaneID;
     private String bumpPlaneID;
-    private String weight;
+    private int priority;
+    private int weight;
     private String id;
 
     public Personnel() {}
 
-    public Personnel(String firstName, String lastName, String assignedPlaneID, String id, String priority, String weight) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, String id, int priority, int weight) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
@@ -31,11 +33,11 @@ public class Personnel implements Serializable {
         return lastName;
     }
 
-    public String getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public String getWeight() {
+    public int getWeight() {
         return this.weight;
     }
 
@@ -57,11 +59,11 @@ public class Personnel implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -77,5 +79,24 @@ public class Personnel implements Serializable {
 
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    /*
+     * This method checks if whether it is a same assigned Personnel
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (o instanceof Personnel) {
+            Personnel otherPer = (Personnel) o;
+            return this.firstName.equals(otherPer.getFirstName())
+                    && this.lastName.equals(otherPer.getLastName())
+                    && this.assignedPlaneID.equals(otherPer.getAssignedPlaneID())
+                    && this.id.equals(otherPer.getId())
+                    && (this.priority == otherPer.getPriority())
+                    && (this.weight == otherPer.getWeight());
+        }
+        return false;
     }
 }

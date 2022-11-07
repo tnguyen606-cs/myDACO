@@ -106,7 +106,6 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
                 // Go to screen with UI for adding a plane
                 Intent nextScreen = new Intent(ListOfPersonnelActivity.this, AddPersonnelActivity.class);
                 ListOfPersonnelActivity.this.startActivity(nextScreen);
-
             }
         });
     }

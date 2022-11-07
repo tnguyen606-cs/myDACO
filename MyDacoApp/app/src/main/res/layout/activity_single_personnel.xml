@@ -85,25 +85,19 @@
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
-        <EditText
-            android:id="@+id/personnel_id_input"
+        <Spinner
+            android:id="@+id/planes_spinner"
             android:layout_width="150dp"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:layout_below="@id/peronnel_id"
-            android:drawablePadding="10dp"
-            android:hint=""
-            android:theme="@style/EditTextThemeOverlay"
-            android:textColorHint="@color/purple_700"
-            android:inputType="number"
-            android:maxLength="4"
-            android:maxLines="1"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:drawablePadding="10dp" />
 
         <TextView
             android:id="@+id/personnel_weight_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/personnel_id_input"
+            android:layout_below="@id/planes_spinner"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Personnel Weight:"
             android:textColor="@color/design_default_color_primary"
@@ -115,9 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_weight_label"
             android:layout_marginTop="7dp"
+            android:digits="0123456789"
             android:drawablePadding="10dp"
             android:hint=""
-            android:digits="0123456789"
             android:inputType="number"
             android:maxLength="7"
             android:maxLines="1"
