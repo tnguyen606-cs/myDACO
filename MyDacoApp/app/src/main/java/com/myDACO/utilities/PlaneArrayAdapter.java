@@ -45,11 +45,10 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
         if (!list.get(position).isActive()) {
             view.setBackgroundColor(Color.RED);
         } else {
-            view.setBackgroundColor(ContextCompat.getColor(context,R.color.rectangle_color));
+            view.setBackgroundColor(Color.TRANSPARENT);
         }
-
         ItemViewHolder holder = (ItemViewHolder) view.getTag();
-        holder.itemLabel.setText(list.get(position).getPlaneName());
+        holder.itemLabel.setText(list.get(position).toString());
 
         ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
 
