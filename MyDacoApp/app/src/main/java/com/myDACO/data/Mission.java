@@ -38,6 +38,8 @@ public class Mission implements Serializable {
             //while personnel is empty && cargo not empty && planes not full
                 //fq.reassign(cargo.pop(),plane)
         }
+
+        return null;
     }
 
 
