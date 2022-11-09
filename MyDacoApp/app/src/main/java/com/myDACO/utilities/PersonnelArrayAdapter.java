@@ -32,7 +32,7 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
         View view = null;
         if (convertView == null) {
             LayoutInflater inflator = context.getLayoutInflater();
-            view = inflator.inflate(R.layout.custom_single_item, null);
+            view = inflator.inflate(R.layout.custom_single_personnel, null);
             ItemViewHolder viewHolder = new  ItemViewHolder(view);
             viewHolder.itemLabel = (TextView) view.findViewById(R.id.label);
             view.setTag(viewHolder);
