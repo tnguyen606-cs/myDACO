@@ -20,6 +20,7 @@ import com.myDACO.PlanesActivity;
 import com.myDACO.R;
 import com.myDACO.SinglePlaneActivity;
 import com.myDACO.data.Mission;
+
 import com.myDACO.data.Planes;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
 public class MissionArrayAdapter extends ArrayAdapter<Planes> {
     private List<Planes> list;
     private Activity context;
+
 
 
         public MissionArrayAdapter(Activity context, List<Planes> list) {
@@ -78,6 +80,7 @@ public class MissionArrayAdapter extends ArrayAdapter<Planes> {
                         m.removeItem(m.findItem(R.id.remove_from_mission).getItemId());
                     }
 
+
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -102,13 +105,11 @@ public class MissionArrayAdapter extends ArrayAdapter<Planes> {
                                 break;
                             case R.id.add_cargo:
                                 Intent cargoScreen = new Intent(context, AssignCargoActivity.class);
-                                cargoScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                cargoScreen.putExtra("MISSION", (Mission) context.getIntent().getSerializableExtra("MISSION"));
-                                context.getApplicationContext().startActivity(cargoScreen);
+                                cargoScreen.putExtra("MISSION", context.getIntent().getSerializableExtra("MISSION"));
+                                context.startActivity(cargoScreen);
                                 break;
                             case R.id.add_personnel:
                                 Intent personnelScreen = new Intent(context, AssignPersonnelActivity.class);
-                                personnelScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 personnelScreen.putExtra("MISSION", context.getIntent().getSerializableExtra("MISSION"));
                                 context.startActivity(personnelScreen);
                                 break;

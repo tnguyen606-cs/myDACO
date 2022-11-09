@@ -77,7 +77,6 @@ public class Cargo implements Serializable {
 
     public void setId(String id) {this.id = id;}
 
-
     public String toString() {
         return cargoName;
     }
