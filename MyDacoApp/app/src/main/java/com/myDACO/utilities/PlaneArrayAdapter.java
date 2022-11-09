@@ -12,6 +12,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
 import com.myDACO.R;
@@ -42,7 +45,7 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
         if (!list.get(position).isActive()) {
             view.setBackgroundColor(Color.RED);
         } else {
-            view.setBackgroundColor(Color.WHITE);
+            view.setBackgroundColor(ContextCompat.getColor(context,R.color.rectangle_color));
         }
 
         ItemViewHolder holder = (ItemViewHolder) view.getTag();
