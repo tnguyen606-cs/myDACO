@@ -82,6 +82,7 @@ public class PlanesActivity extends AppCompatActivity {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
                 nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlaneName());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
+                nextScreen.putExtra("PLANE_ID", planesList.get(position).getId());
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
