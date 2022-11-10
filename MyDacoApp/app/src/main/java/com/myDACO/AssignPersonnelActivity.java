@@ -21,8 +21,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Cargo;
 import com.myDACO.data.Mission;
 import com.myDACO.data.Personnel;
+import com.myDACO.data.Planes;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
+import com.myDACO.utilities.FirestoreQuery;
 import com.myDACO.utilities.PersonnelArrayAdapter;
 
 import java.util.ArrayList;
@@ -37,6 +39,8 @@ public class AssignPersonnelActivity extends AppCompatActivity {
     static List<Personnel> personnelList = new ArrayList<>();
     PersonnelArrayAdapter personnelAdapter;
     private Mission currentMission;
+    FirestoreQuery fq = new FirestoreQuery();
+    private Planes currentPlane;
 
     @Override
     public void onStart() {
@@ -71,6 +75,7 @@ public class AssignPersonnelActivity extends AppCompatActivity {
         setContentView(R.layout.personnel_master_list_screen);
 
         currentMission = (Mission) getIntent().getSerializableExtra("MISSION");
+        currentPlane = (Planes) getIntent().getSerializableExtra("PLANE");
         // Get the list view of personnels
         ListView listView = (ListView) findViewById(R.id.personnel_list);
         personnelAdapter = new PersonnelArrayAdapter(this, personnelList);
@@ -80,12 +85,11 @@ public class AssignPersonnelActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(com.myDACO.AssignPersonnelActivity.this, MissionActivity.class);
-
+                fq.reassignPersonnel(personnelList.get(position), currentPlane);
                 nextScreen.putExtra("MISSION", currentMission);
                 nextScreen.putExtra("PERSONNEL_FTEXT", personnelList.get(position).getFirstName());
                 nextScreen.putExtra("PERSONNEL_LTEXT", personnelList.get(position).getLastName());
                 nextScreen.putExtra("PERSONNEL_ID", personnelList.get(position).getAssignedPlaneID());
-
                 com.myDACO.AssignPersonnelActivity.this.startActivity(nextScreen);
             }
         });

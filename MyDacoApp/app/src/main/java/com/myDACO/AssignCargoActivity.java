@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Cargo;
 import com.myDACO.data.Mission;
+import com.myDACO.data.Planes;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
@@ -36,6 +37,7 @@ public class AssignCargoActivity extends AppCompatActivity {
         static List<Cargo> cargoList = new ArrayList<>();
         CargoArrayAdapter cargoAdapter;
         private Mission currentMission;
+        private Planes currentPlane;
 
         @Override
         public void onStart(){
@@ -70,6 +72,7 @@ public class AssignCargoActivity extends AppCompatActivity {
             setContentView(R.layout.cargo_master_list_screen);
 
             currentMission = (Mission) getIntent().getSerializableExtra("MISSION");
+            currentPlane = (Planes) getIntent().getSerializableExtra("PLANE");
             // Get the list view of cargos
             ListView listView = (ListView) findViewById(R.id.cargo_list);
             cargoAdapter = new CargoArrayAdapter(this, cargoList);
@@ -79,13 +82,13 @@ public class AssignCargoActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                     Intent nextScreen = new Intent(com.myDACO.AssignCargoActivity.this, MissionActivity.class);
+                    fq.reassignCargo(cargoList.get(position), currentPlane);
 
                     nextScreen.putExtra("MISSION", currentMission);
                     nextScreen.putExtra("CARGO_TEXT", cargoList.get(position).getCargoName());
                     nextScreen.putExtra("CARGO_ID", cargoList.get(position).getAssignedPlaneID());
 
                     Toast.makeText(getApplicationContext(), "You did not enter a plane name.", Toast.LENGTH_SHORT).show();
-
                     com.myDACO.AssignCargoActivity.this.startActivity(nextScreen);
                 }
             });
