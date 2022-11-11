@@ -51,7 +51,6 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
         holder.itemLabel.setText(list.get(position).toString());
 
         ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
-
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

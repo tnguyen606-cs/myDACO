@@ -1,6 +1,8 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myDACO.R;
+import com.myDACO.SinglePersonnelActivity;
 import com.myDACO.data.Personnel;
 
 import java.util.List;
@@ -47,7 +50,6 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirestoreQuery fq = new FirestoreQuery();
 
                 // Creates popup menu
                 PopupMenu popupMenu = new PopupMenu(context, v);
@@ -57,10 +59,24 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.edit:
-                                Toast.makeText(context.getApplicationContext(), "Edit " + list.get(position).getFirstName(), Toast.LENGTH_SHORT).show();
+                                Intent nextScreen = new Intent(context, SinglePersonnelActivity.class);
+                                nextScreen.putExtra("PERSONNEL_FTEXT", list.get(position).getFirstName());
+                                nextScreen.putExtra("PERSONNEL_LTEXT", list.get(position).getLastName());
+                                nextScreen.putExtra("PERSONNEL_ID", list.get(position).getAssignedPlaneID());
+                                nextScreen.putExtra("PERSONNEL_WEIGHT", list.get(position).getWeight());
+                                nextScreen.putExtra("PERSONNEL_PRIORITY", list.get(position).getPriority());
+                                nextScreen.putExtra("PERSONNEL_ID", list.get(position).getId());
+                                context.startActivity(nextScreen);
                                 break;
                             case R.id.delete:
-                                Toast.makeText(context.getApplicationContext(), "Delete " + list.get(position).getLastName(), Toast.LENGTH_SHORT).show();
+                                FirestoreQuery fq = new FirestoreQuery();
+                                // 1. check if the personnel is already assigned to a plane?
+                                if (list.get(position).getAssignedPlaneID() == null) {
+                                    fq.removePersonnel(list.get(position).getId());
+                                    Toast.makeText(context.getApplicationContext(), "Deleted " + list.get(position).getFirstName() + " " + list.get(position).getLastName(), Toast.LENGTH_LONG).show();
+                                } else { // If the personnel is serving, then cannot delete it
+                                    Toast.makeText(context.getApplicationContext(), "Cannot Deleted " + list.get(position).getFirstName() + " " + list.get(position).getLastName() + " , who is on duty", Toast.LENGTH_LONG).show();
+                                }
                                 break;
                             default:
                                 break;

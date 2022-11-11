@@ -74,8 +74,9 @@ public class ListOfCargosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(ListOfCargosActivity.this, SingleCargoActivity.class);
                 nextScreen.putExtra("CARGO_TEXT", cargoList.get(position).getCargoName());
-                nextScreen.putExtra("CARGO_ID", cargoList.get(position).getAssignedPlaneID());
+                nextScreen.putExtra("CARGO_planeID", cargoList.get(position).getAssignedPlaneID());
                 nextScreen.putExtra("CARGO_WEIGHT", cargoList.get(position).getWeight());
+                nextScreen.putExtra("CARGO_ID", cargoList.get(position).getId());
                 ListOfCargosActivity.this.startActivity(nextScreen);
             }
         });

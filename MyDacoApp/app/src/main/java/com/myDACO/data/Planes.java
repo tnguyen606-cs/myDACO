@@ -16,7 +16,6 @@ public class Planes implements Serializable {
 
     public Planes() {}
 
-
     public Planes(String planeName, String id, boolean active, boolean onMission, List<String> assignedCargo, List<String> assignedPersonnel) {
         this.planeName = planeName;
         this.id = id;
@@ -38,11 +37,6 @@ public class Planes implements Serializable {
         this.personnelCount = personnelCount;
         this.cargoCapacity = cargoCapacity;
         this.cargoWeight = cargoWeight;
-    }
-
-    public Planes(String planeName, String id) {
-        this.planeName = planeName;
-        this.id = id;
     }
 
     public String getPlaneName() {

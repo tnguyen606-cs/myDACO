@@ -1,8 +1,6 @@
 package com.myDACO.utilities;
-import android.app.Person;
-import android.util.Log;
-import android.widget.Toast;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,13 +14,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
-import com.google.firebase.firestore.WriteBatch;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.myDACO.SinglePlaneActivity;
 import com.myDACO.data.*;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -62,6 +56,18 @@ public class FirestoreQuery {
         });
     }
 
+    public void updatePlaneField(String field, String value, String planeID) {
+        DocumentReference docRef = planeRef.document(planeID);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                transaction.update(docRef, field, FieldValue.arrayUnion(value));
+                return null;
+            }
+        });
+    }
+
     public void togglePlaneStatus(String planeID) {
         DocumentReference docRef = planeRef.document(planeID);
 
@@ -70,7 +76,6 @@ public class FirestoreQuery {
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
                 DocumentSnapshot snapshot = transaction.get(docRef);
                 boolean status = snapshot.getBoolean("active");
-
                 transaction.update(docRef, "active", !status);
                 return null;
             }
@@ -111,65 +116,25 @@ public class FirestoreQuery {
                 });
         return planeList;
     }
-    
-    //returns all instances of cargo that contain the given search parameter in the given field
-    public <T> ArrayList<Cargo> searchForCargo(String field, T searchVal) {
-        ArrayList<Cargo> retCargo = new ArrayList<>();
-
-        cargoRef.whereEqualTo(field, searchVal)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                retCargo.add(document.toObject(Cargo.class));
-                            }
-                        }
-
-                    }
-                });
-        return retCargo;
-    }
-
-    //returns all instances of cargo that contain the given search parameter in the given field
-    public <T> ArrayList<Personnel> searchForPersonnel(String field, T searchVal) {
-        ArrayList<Personnel> retPersonnel = new ArrayList<>();
-        personnelRef.whereEqualTo(field, searchVal)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                retPersonnel.add(document.toObject(Personnel.class));
-                            }
-                        }
-                    }
-                });
-        return retPersonnel;
-    }
 
     public void addPersonnel(Planes plane, Personnel personnel) {
-        Random r = new Random();
-        Integer id = r.nextInt();
-        personnel.setId(id.toString());
-
         personnelRef.whereEqualTo("id", personnel.getId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
-                        } else {
-                            planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-                            personnelRef.document(personnel.getId()).set(personnel);
-                        }
+            .get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
+                    } else {
+                        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+                        personnelRef.document(personnel.getId()).set(personnel);
                     }
-                });
+                }
+            });
     }
 
-    public Personnel removePersonnel(Planes plane, String id) {
-        final Personnel[] retPers = new Personnel[1];
+    public Personnel removePersonnelFromPlane(Planes plane, String id) {
+        Personnel[] retPers = new Personnel[1];
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
         DocumentReference docRef = personnelRef.document(id);
         db.runTransaction(new Transaction.Function<Personnel>() {
@@ -189,11 +154,24 @@ public class FirestoreQuery {
         return retPers[0];
     }
 
-    public void addCargo(Planes plane, Cargo cargo) {
-        Random r = new Random();
-        Integer id = r.nextInt();
-        cargo.setId(id.toString());
+    public void removePersonnel(String id) {
+        personnelRef.document(id)
+            .delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("A Personnel DELETION", "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("A Personnel DELETION", "Error deleting document", e);
+                }
+            });
+    }
 
+    public void addCargo(Planes plane, Cargo cargo) {
         cargoRef.whereEqualTo("id", cargo.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -209,8 +187,8 @@ public class FirestoreQuery {
                 });
     }
 
-    public Cargo removeCargo(Planes plane, String id) {
-        final Cargo[] retCargo = new Cargo[1];
+    public Cargo removeCargoFromPlane(Planes plane, String id) {
+        Cargo[] retCargo = new Cargo[1];
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayRemove(id));
         DocumentReference docRef = cargoRef.document(id);
         db.runTransaction(new Transaction.Function<Cargo>() {
@@ -230,6 +208,23 @@ public class FirestoreQuery {
         return retCargo[0];
     }
 
+    public void removeCargo(String id) {
+        cargoRef.document(id)
+            .delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("A Cargo DELETION", "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("A Cargo DELETION", "Error deleting document", e);
+                }
+            });
+    }
+
     public void reassignCargo(Cargo cargo, Planes plane) {
         planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
@@ -239,7 +234,7 @@ public class FirestoreQuery {
     public void reassignPersonnel(Personnel personnel, Planes plane) {
         planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-        cargoRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
+        personnelRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
     }
 
     public List<Cargo> getCargo(List<Planes> planes) {
@@ -278,6 +273,14 @@ public class FirestoreQuery {
                     });
         }
         return retPersonnel;
+    }
+
+    public void updatePersonnel(String id, Personnel person) {
+        personnelRef.document(id).set(person);
+    }
+
+    public void updateCargo(String id, Cargo cargo) {
+        cargoRef.document(id).set(cargo);
     }
 }
 
