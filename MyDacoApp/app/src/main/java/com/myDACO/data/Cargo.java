@@ -22,11 +22,11 @@ public class Cargo implements Serializable {
         this.assignedPlaneID = assignedPlaneID;
     }
 
-    public Cargo(String cargoName, int weight, String assignedPlaneID, String bumpPlaneID) {
+    public Cargo(String cargoName, int weight, String assignedPlaneID, String id) {
         this.cargoName = cargoName;
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
-        this.bumpPlaneID = bumpPlaneID;
+        this.id = id;
     }
 
     public String getCargoName() {
