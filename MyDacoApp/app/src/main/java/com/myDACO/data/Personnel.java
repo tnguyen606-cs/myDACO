@@ -103,6 +103,7 @@ public class Personnel implements Serializable {
 
     public void setManualAssign(boolean manualAssign) {
         this.manualAssign = manualAssign;
+    }
 
     /*
      * This method checks if whether it is a same assigned Personnel
