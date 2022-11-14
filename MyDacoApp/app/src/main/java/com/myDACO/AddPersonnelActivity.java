@@ -114,7 +114,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
 
                     // Weight
-                    int personnelWeight = Integer.parseInt(personnelPriorityInput.getText().toString());
+                    int personnelWeight = Integer.parseInt(personnelWeightInput.getText().toString());
 
                     // Priority
                     int personnelPriority = Integer.parseInt(personnelPriorityInput.getText().toString());
@@ -123,7 +123,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     alert.setTitle("Add Personnel Confirmation");
                     alert.setMessage("Are you sure you want to add this personnel?\nFirst Name: "
                             + firstName + "\nLast Name: " + lastName + "\nAssigned Plane: " + assignedPlane.getPlaneName()
-                            + "\nPersonnel Priority: " + Integer.toString(personnelPriority));
+                            + "\nPersonnel Priority: " + Integer.toString(personnelPriority) + "\nPersonnel Weight: "+ Integer.toString(personnelWeight));
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -147,14 +147,16 @@ public class AddPersonnelActivity extends AppCompatActivity {
                             // Insert Firestore query here
                             // Add the personnel to the personnel collection
                             // Add personnel to the plane
-                            fq.addPersonnel(assignedPlane, newPersonnel);
-
-                            fnameInput.getText().clear();
-                            lnameInput.getText().clear();
-                            personnelPriorityInput.getText().clear();
-                            personnelWeightInput.getText().clear();
-
-                            Toast.makeText(getApplicationContext(), "Personnel added", Toast.LENGTH_SHORT).show();
+                            if (assignedPlane.getCargoWeight() + newPersonnel.getWeight() <= assignedPlane.getCargoCapacity()) {
+                                fq.addPersonnel(assignedPlane, newPersonnel);
+                                fnameInput.getText().clear();
+                                lnameInput.getText().clear();
+                                personnelPriorityInput.getText().clear();
+                                personnelWeightInput.getText().clear();
+                                Toast.makeText(getApplicationContext(), "Personnel added", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Could not add personnel. Personnel weight exceeds remaining capacity.", Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 

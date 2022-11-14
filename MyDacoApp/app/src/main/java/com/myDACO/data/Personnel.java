@@ -31,7 +31,6 @@ public class Personnel implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.priority = priority;
-        this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
         this.id = id;
         this.weight = weight;

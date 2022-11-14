@@ -177,6 +177,7 @@ public class FirestoreQuery {
                     } else {
                         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
                         personnelRef.document(personnel.getId()).set(personnel);
+                        planeRef.document(plane.getId()).update("cargoWeight", FieldValue.increment(personnel.getWeight()));
                     }
                 }
             });
