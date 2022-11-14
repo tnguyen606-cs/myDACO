@@ -28,7 +28,7 @@ public class Personnel implements Serializable {
         this.bumpPlaneID = bumpPlaneID;
         this.manualAssign = false;
     }
-    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, int weight, String id) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, String id, int priority, int weight ) {
 
         this.firstName = firstName;
         this.lastName = lastName;
