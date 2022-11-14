@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -261,14 +262,26 @@ public class FirestoreQuery {
     }
 
     public void reassignCargo(Cargo cargo, Planes plane) {
-        planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
-        planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+        DocumentReference oldPlane = planeRef.document(cargo.getAssignedPlaneID());
+        oldPlane.update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
+        oldPlane.update("cargoWeight", FieldValue.increment(- cargo.getWeight()));
+
+        DocumentReference newPlane = planeRef.document(plane.getId());
+        newPlane.update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+        newPlane.update("cargoWeight", FieldValue.increment(cargo.getWeight()));
+
         cargoRef.document(cargo.getId()).update("assignedPlaneId", plane.getId());
     }
 
     public void reassignPersonnel(Personnel personnel, Planes plane) {
-        planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
-        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+        DocumentReference oldPlane= planeRef.document(personnel.getAssignedPlaneID());
+        oldPlane.update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
+        oldPlane.update("personnelCount", FieldValue.increment(-1));
+
+        DocumentReference newPlane = planeRef.document(plane.getId());
+        newPlane.update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+        newPlane.update("personnelCount", FieldValue.increment(1));
+
         personnelRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
     }
 
