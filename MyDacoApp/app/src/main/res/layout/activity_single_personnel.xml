@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/personnel_lname_input"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Personnel Assigned Plane ID:"
+            android:text="Personnel Assigned Plane:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 

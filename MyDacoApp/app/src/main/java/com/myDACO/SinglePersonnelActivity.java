@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -41,9 +42,9 @@ public class SinglePersonnelActivity extends AppCompatActivity {
     private Button updateBtn;
     private Personnel person;
 
-    private ArrayList<String> planesList = new ArrayList<>();
+    private ArrayList<Planes> planesList = new ArrayList<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<Planes> adapter;
 
     @Override
     public void onStart(){
@@ -60,12 +61,12 @@ public class SinglePersonnelActivity extends AppCompatActivity {
                 planesList.clear();
                 for (QueryDocumentSnapshot document : value) {
                     Planes plane = document.toObject(Planes.class);
-                    planesList.add(plane.getId());
+                    planesList.add(plane);
                     adapter.notifyDataSetChanged();
                 }
-                Collections.sort(planesList, new Comparator<String>() {
-                    public int compare(String p1, String p2) {
-                        return p1.compareTo(p2);
+                Collections.sort(planesList, new Comparator<Planes>() {
+                    public int compare(Planes p1, Planes p2) {
+                        return p1.getPlaneName().compareTo(p2.getPlaneName());
                     }
                 });
             }
@@ -91,7 +92,7 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         personnel_fname = (EditText) findViewById(R.id.personnel_fname_input);
         personnel_lname = (EditText) findViewById(R.id.personnel_lname_input);
         assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
-        adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, planesList);
+        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item, planesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         personnel_weight = (EditText) findViewById(R.id.personnel_weight_input);
         personnel_priority = (EditText) findViewById(R.id.personnel_priority_input);
@@ -123,21 +124,19 @@ public class SinglePersonnelActivity extends AppCompatActivity {
 
         String fname = personnel_fname.getText().toString().matches("") ? person.getFirstName() : personnel_fname.getText().toString();
         String lname = personnel_lname.getText().toString().matches("") ? person.getLastName() : personnel_lname.getText().toString();
-        String pId = (String) assignedPlaneDropdown.getSelectedItem();
+        Planes plane = (Planes) assignedPlaneDropdown.getSelectedItem();
+        String pId = plane.getId();
         int priority = personnel_priority.getText().toString().matches("") ? person.getPriority() : Integer.parseInt(personnel_priority.getText().toString());
         int weight = personnel_weight.getText().toString().matches("") ? person.getWeight() : Integer.parseInt(personnel_weight.getText().toString());
 
-        Personnel p = new Personnel(fname, lname, pId, person.getId(), priority, weight);
+        Personnel updatedPersonnel = new Personnel(fname, lname, person.getAssignedPlaneID(), person.getId(), priority, weight);
 
-        if (person.equals(p)) {
+        if (person.equals(updatedPersonnel) && pId.equals(updatedPersonnel.getAssignedPlaneID())) {
             Toast.makeText(getApplicationContext(), "You did not make any change", Toast.LENGTH_SHORT).show();
         } else {
-            // If an assinged plane is updated, update it in Firebase of planes
-            if (!(pId.matches(person.getAssignedPlaneID()))) {
-                fq.updatePlaneField("assignedPersonnel", person.getId(), pId);
-            }
-            fq.updatePersonnel(person.getId(), p);
+            fq.updatePersonnel(person.getId(), updatedPersonnel);
             Toast.makeText(getApplicationContext(), "Personnel is updated", Toast.LENGTH_SHORT).show();
+            fq.reassignPersonnel(updatedPersonnel,plane);
         }
 
         // Go back to the list view

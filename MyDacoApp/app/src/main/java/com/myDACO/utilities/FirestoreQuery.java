@@ -265,13 +265,13 @@ public class FirestoreQuery {
     public void reassignCargo(Cargo cargo, Planes plane) {
         planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
-        cargoRef.document(cargo.getId()).update("assignedPlaneId", plane.getId());
+        cargoRef.document(cargo.getId()).update("assignedPlaneID", plane.getId());
     }
 
     public void reassignPersonnel(Personnel personnel, Planes plane) {
         planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-        personnelRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
+        personnelRef.document(personnel.getId()).update("assignedPlaneID", plane.getId());
     }
 
     public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {
