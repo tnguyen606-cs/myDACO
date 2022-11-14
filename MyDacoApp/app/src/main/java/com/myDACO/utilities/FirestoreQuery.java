@@ -1,9 +1,11 @@
 package com.myDACO.utilities;
 
 import android.util.Log;
-import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -96,26 +98,72 @@ public class FirestoreQuery {
         });
     }
 
-    public ArrayList<Planes> getAllPlanes() {
+    public MutableLiveData<List<Planes>> getAllPlanes() {
         //Get all planes in the "planes" collection in the Firestore DB
-        ArrayList<Planes> planeList = new ArrayList<>();
+        MutableLiveData<List<Planes>> output = new MutableLiveData<>();
         planeRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(Task<QuerySnapshot> task) {
+                        ArrayList<Planes> planeList = new ArrayList<>();
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Planes plane = document.toObject(Planes.class);
                                 planeList.add(plane);
                                 Log.d("Firestore query", "added " + plane.getPlaneName());
                             }
+                            output.setValue(planeList);
                         } else {
                             Log.d("Firestore query", "Error getting documents: ", task.getException());
                         }
                     }
                 });
-        return planeList;
+        return output;
     }
+
+    
+    //returns all instances of cargo that contain the given search parameter in the given field
+    public <T> MutableLiveData<List<Cargo>> searchForCargo(String field, T searchVal) {
+        MutableLiveData<List<Cargo>> output = new MutableLiveData<>();
+
+
+        cargoRef.whereEqualTo(field, searchVal)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<Cargo> retCargo = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                retCargo.add(document.toObject(Cargo.class));
+                            }
+                            output.setValue(retCargo);
+                        }
+
+                    }
+                });
+        return output;
+    }
+
+    //returns all instances of cargo that contain the given search parameter in the given field
+    public <T> MutableLiveData<List<Personnel>> searchForPersonnel(String field, T searchVal) {
+        MutableLiveData<List<Personnel>> output = new MutableLiveData<>();
+        personnelRef.whereEqualTo(field, searchVal)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<Personnel> retPersonnel = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                retPersonnel.add(document.toObject(Personnel.class));
+                            }
+                            output.setValue(retPersonnel);
+                        }
+                    }
+                });
+        return output;
+    }
+
 
     public void addPersonnel(Planes plane, Personnel personnel) {
         personnelRef.whereEqualTo("id", personnel.getId())
@@ -133,25 +181,19 @@ public class FirestoreQuery {
             });
     }
 
-    public Personnel removePersonnelFromPlane(Planes plane, String id) {
-        Personnel[] retPers = new Personnel[1];
+
+    public void removePersonnel(Planes plane, String id) {
+
+  
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
         DocumentReference docRef = personnelRef.document(id);
         db.runTransaction(new Transaction.Function<Personnel>() {
             @Override
             public Personnel apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(docRef);
-                Personnel retPersonnel = snapshot.toObject(Personnel.class);
                 transaction.delete(docRef);
-                return retPersonnel;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Personnel>() {
-            @Override
-            public void onSuccess(Personnel result) {
-                retPers[0] = result;
+                return null;
             }
         });
-        return retPers[0];
     }
 
     public void removePersonnel(String id) {
@@ -187,25 +229,18 @@ public class FirestoreQuery {
                 });
     }
 
-    public Cargo removeCargoFromPlane(Planes plane, String id) {
-        Cargo[] retCargo = new Cargo[1];
+
+    public void removeCargo(Planes plane, String id) {
+
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayRemove(id));
         DocumentReference docRef = cargoRef.document(id);
         db.runTransaction(new Transaction.Function<Cargo>() {
             @Override
             public Cargo apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(docRef);
-                Cargo retCar = snapshot.toObject(Cargo.class);
                 transaction.delete(docRef);
-                return retCar;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Cargo>() {
-            @Override
-            public void onSuccess(Cargo result) {
-                retCargo[0] = result;
+                return null;
             }
         });
-        return retCargo[0];
     }
 
     public void removeCargo(String id) {
@@ -237,42 +272,40 @@ public class FirestoreQuery {
         personnelRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
     }
 
-    public List<Cargo> getCargo(List<Planes> planes) {
+    public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {
+        MutableLiveData<List<Cargo>> output = new MutableLiveData<>();
         ArrayList<String> cargoIDs = new ArrayList<>();
-        ArrayList<Cargo> retCargo = new ArrayList<>();
-
         for (Planes plane : planes) {
            cargoIDs.addAll(plane.getAssignedCargo());
         }
 
         for (String id : cargoIDs) {
-            cargoRef.document(id).get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            cargoRef.whereIn("id", cargoIDs).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            retCargo.add(documentSnapshot.toObject(Cargo.class));
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            output.setValue(queryDocumentSnapshots.toObjects(Cargo.class));
                         }
                     });
         }
-        return retCargo;
+        return output;
     }
 
-    public List<Personnel> getPersonnel(List<Planes> planes) {
+    public MutableLiveData<List<Personnel>> getPersonnel(List<Planes> planes) {
+        MutableLiveData<List<Personnel>> output = new MutableLiveData<>();
         ArrayList<String> personnelIDs = new ArrayList<>();
-        ArrayList<Personnel> retPersonnel = new ArrayList<>();
+
         for (Planes plane : planes) {
             personnelIDs.addAll(plane.getAssignedPersonnel());
         }
-        for (String id : personnelIDs) {
-            personnelRef.document(id).get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            retPersonnel.add(documentSnapshot.toObject(Personnel.class));
-                        }
-                    });
-        }
-        return retPersonnel;
+        personnelRef.whereIn("id", personnelIDs).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                 output.setValue(queryDocumentSnapshots.toObjects(Personnel.class));
+
+            }
+        });
+        return output;
     }
 
     public void updatePersonnel(String id, Personnel person) {

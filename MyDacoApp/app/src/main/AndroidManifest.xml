@@ -29,6 +29,8 @@
         <activity android:name=".ListOfPersonnelActivity"></activity>
         <activity android:name=".SinglePersonnelActivity"></activity>
         <activity android:name=".AddPersonnelActivity"></activity>
+        <activity android:name=".AssignPersonnelActivity"></activity>
+        <activity android:name=".AssignCargoActivity"></activity>
         <activity
             android:name=".PlanesActivity"
             android:exported="true">

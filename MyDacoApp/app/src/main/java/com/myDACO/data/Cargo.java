@@ -8,20 +8,29 @@ public class Cargo implements Serializable {
     private String bumpPlaneID;
     private int weight;
     private String id;
+    private boolean manualAssign;
 
     public Cargo() {}
 
     public Cargo(String cargoName, String id, int weight) {
         this.cargoName = cargoName;
         this.weight = weight;
+
+        this.manualAssign = false;
+
         this.id = id;
+
     }
 
     public Cargo(String cargoName, String assignedPlaneID, String id, int weight) {
         this.cargoName = cargoName;
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
+
+        this.manualAssign = false;
+
         this.id = id;
+
     }
 
     public Cargo(String cargoName, String id, int weight, String assignedPlaneID, String bumpPlaneID) {
@@ -29,7 +38,11 @@ public class Cargo implements Serializable {
         this.weight = weight;
         this.assignedPlaneID = assignedPlaneID;
         this.bumpPlaneID = bumpPlaneID;
+
+        this.manualAssign = false;
+
         this.id = id;
+
     }
 
     public String getCargoName() {
@@ -49,6 +62,14 @@ public class Cargo implements Serializable {
     }
 
     public String getId(){return id;}
+
+    public boolean isManualAssign() {
+        return manualAssign;
+    }
+
+    public void setManualAssign(boolean manualAssign) {
+        this.manualAssign = manualAssign;
+    }
 
     public void setCargoName(String cargoName) {
         this.cargoName = cargoName;
