@@ -47,9 +47,13 @@ public class PlanesActivity extends AppCompatActivity {
                 }
                 planesList.clear();
                 for (QueryDocumentSnapshot document : value) {
-                    Planes plane = document.toObject(Planes.class);
-                    planesList.add(plane);
-                    planeAdapter.notifyDataSetChanged();
+                    try{
+                        Planes plane = document.toObject(Planes.class);
+                        planesList.add(plane);
+                        planeAdapter.notifyDataSetChanged();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
                 Collections.sort(planesList, new Comparator<Planes>() {
                     public int compare(Planes p1, Planes p2) {
@@ -82,6 +86,7 @@ public class PlanesActivity extends AppCompatActivity {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
                 nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlaneName());
                 nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
+                nextScreen.putExtra("PLANE_ID", planesList.get(position).getId());
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });

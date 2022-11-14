@@ -142,7 +142,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                                 assignedPlaneID = assignedPlane.getId();
                             }
                             Personnel newPersonnel = new Personnel(firstName, lastName, assignedPlaneID,
-                                    personnelPriority, personnelWeight, personnel_id);
+                                    personnel_id, personnelPriority, personnelWeight);
 
                             // Insert Firestore query here
                             // Add the personnel to the personnel collection

@@ -1,6 +1,8 @@
 package com.myDACO.utilities;
+
 import android.util.Log;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -56,6 +58,18 @@ public class FirestoreQuery {
         });
     }
 
+    public void updatePlaneField(String field, String value, String planeID) {
+        DocumentReference docRef = planeRef.document(planeID);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                transaction.update(docRef, field, FieldValue.arrayUnion(value));
+                return null;
+            }
+        });
+    }
+
     public void togglePlaneStatus(String planeID) {
         DocumentReference docRef = planeRef.document(planeID);
 
@@ -64,7 +78,6 @@ public class FirestoreQuery {
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
                 DocumentSnapshot snapshot = transaction.get(docRef);
                 boolean status = snapshot.getBoolean("active");
-
                 transaction.update(docRef, "active", !status);
                 return null;
             }
@@ -107,6 +120,7 @@ public class FirestoreQuery {
                 });
         return output;
     }
+
     
     //returns all instances of cargo that contain the given search parameter in the given field
     public <T> MutableLiveData<List<Cargo>> searchForCargo(String field, T searchVal) {
@@ -150,27 +164,27 @@ public class FirestoreQuery {
         return output;
     }
 
-    public void addPersonnel(Planes plane, Personnel personnel) {
-        Random r = new Random();
-        Integer id = r.nextInt();
-        personnel.setId(id.toString());
 
+    public void addPersonnel(Planes plane, Personnel personnel) {
         personnelRef.whereEqualTo("id", personnel.getId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
-                        } else {
-                            planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-                            personnelRef.document(personnel.getId()).set(personnel);
-                        }
+            .get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        Log.d("FirestoreQuery", "Unable to add plane; Plane ID is not unique");
+                    } else {
+                        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+                        personnelRef.document(personnel.getId()).set(personnel);
                     }
-                });
+                }
+            });
     }
 
+
     public void removePersonnel(Planes plane, String id) {
+
+  
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
         DocumentReference docRef = personnelRef.document(id);
         db.runTransaction(new Transaction.Function<Personnel>() {
@@ -182,11 +196,24 @@ public class FirestoreQuery {
         });
     }
 
-    public void addCargo(Planes plane, Cargo cargo) {
-        Random r = new Random();
-        Integer id = r.nextInt();
-        cargo.setId(id.toString());
+    public void removePersonnel(String id) {
+        personnelRef.document(id)
+            .delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("A Personnel DELETION", "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("A Personnel DELETION", "Error deleting document", e);
+                }
+            });
+    }
 
+    public void addCargo(Planes plane, Cargo cargo) {
         cargoRef.whereEqualTo("id", cargo.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -202,7 +229,9 @@ public class FirestoreQuery {
                 });
     }
 
+
     public void removeCargo(Planes plane, String id) {
+
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayRemove(id));
         DocumentReference docRef = cargoRef.document(id);
         db.runTransaction(new Transaction.Function<Cargo>() {
@@ -214,6 +243,23 @@ public class FirestoreQuery {
         });
     }
 
+    public void removeCargo(String id) {
+        cargoRef.document(id)
+            .delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("A Cargo DELETION", "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("A Cargo DELETION", "Error deleting document", e);
+                }
+            });
+    }
+
     public void reassignCargo(Cargo cargo, Planes plane) {
         planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
@@ -223,7 +269,7 @@ public class FirestoreQuery {
     public void reassignPersonnel(Personnel personnel, Planes plane) {
         planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-        cargoRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
+        personnelRef.document(personnel.getId()).update("assignedPlaneId", plane.getId());
     }
 
     public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {
@@ -260,6 +306,14 @@ public class FirestoreQuery {
             }
         });
         return output;
+    }
+
+    public void updatePersonnel(String id, Personnel person) {
+        personnelRef.document(id).set(person);
+    }
+
+    public void updateCargo(String id, Cargo cargo) {
+        cargoRef.document(id).set(cargo);
     }
 }
 
