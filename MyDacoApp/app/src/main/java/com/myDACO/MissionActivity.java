@@ -2,6 +2,8 @@ package com.myDACO;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -49,6 +51,9 @@ public class MissionActivity extends AppCompatActivity {
                         missionPlaneAdapter.notifyDataSetChanged();
                     }
                 }
+
+                //TODO add cargo and personnel listeners here
+
                 Collections.sort(missionPlanes, new Comparator<Planes>() {
                     public int compare(Planes p1, Planes p2) {
                         return p1.getPlaneName().compareTo(p2.getPlaneName());
@@ -80,6 +85,24 @@ public class MissionActivity extends AppCompatActivity {
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
         file.showMenu(MissionActivity.this, menuIcon);
+
+        Button missionBtn = (Button) findViewById(R.id.bumpPlanBtn);
+        missionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Planes> downed = new ArrayList<>();
+                ArrayList<Planes> notDowned = new ArrayList<>();
+                for (Planes p : missionPlanes) {
+                    if (!p.isActive()) {
+                        downed.add(p);
+                    } else {
+                        notDowned.add(p);
+                    }
+
+                    //TODO implement bump plan stuff here
+                }
+            }
+        });
 
     }
     //getter for mission planes
