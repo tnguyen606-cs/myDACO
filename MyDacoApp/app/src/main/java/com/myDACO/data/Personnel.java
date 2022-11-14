@@ -14,8 +14,6 @@ public class Personnel implements Serializable {
     private String id;
     private boolean manualAssign;
 
-
-
     public Personnel() {}
 
 
@@ -28,7 +26,7 @@ public class Personnel implements Serializable {
         this.bumpPlaneID = bumpPlaneID;
         this.manualAssign = false;
     }
-    public Personnel(String firstName, String lastName, String assignedPlaneID, int priority, int weight, String id) {
+    public Personnel(String firstName, String lastName, String assignedPlaneID, String id, int priority, int weight) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -103,6 +101,7 @@ public class Personnel implements Serializable {
 
     public void setManualAssign(boolean manualAssign) {
         this.manualAssign = manualAssign;
+    }
 
     /*
      * This method checks if whether it is a same assigned Personnel
