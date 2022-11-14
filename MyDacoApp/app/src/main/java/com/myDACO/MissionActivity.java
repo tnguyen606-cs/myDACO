@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -58,7 +62,44 @@ public class MissionActivity extends AppCompatActivity {
                 });
             }
         });
+        CollectionReference cargoRef = db.collection("cargo");
+        cargoRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w("snapshot listener", "Listen failed.", e);
+                    return;
+                }
 
+                List<String> cargos = new ArrayList<>();
+                for (QueryDocumentSnapshot doc : snapshot) {
+                    if (doc.get("cargoName") != null) {
+                        cargos.add(doc.getString("cargoName"));
+                    }
+                }
+                Log.d("snapshot listener", "current cargos " + cargos);
+            }
+        });
+        CollectionReference personnelRef = db.collection("personnel");
+        personnelRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w("snapshot listener", "Listen failed.", e);
+                    return;
+                }
+
+                List<String> personnel = new ArrayList<>();
+                for (QueryDocumentSnapshot doc : snapshot) {
+                    if (doc.get("firstName") != null) {
+                        personnel.add(doc.getString("firstName") + doc.getString("lastName"));
+                    }
+                }
+                Log.d("snapshot listener", "current personnel " + personnel);
+            }
+        });
         //TODO add cargo and personnel listeners here like above
     }
 
