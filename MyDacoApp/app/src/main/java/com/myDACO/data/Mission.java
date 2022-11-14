@@ -1,5 +1,6 @@
 package com.myDACO.data;
 import com.myDACO.MissionActivity;
+import com.myDACO.utilities.FirestoreQuery;
 
 import java.io.Serializable;
 import java.util.*;
@@ -8,6 +9,8 @@ public class Mission implements Serializable {
     private List<Planes> missionPlanes;
     private PriorityQueue cargos = new PriorityQueue<Cargo>();
     private PriorityQueue personnels = new PriorityQueue<Personnel>();
+
+
 
 
     public Mission() {
@@ -31,12 +34,20 @@ public class Mission implements Serializable {
     }
 
     //TODO: Implement bump plan method
-    public List<Planes> bumpPlan(List<Planes> planes) {
-        for (Planes p : missionPlanes) {
-            //while planes not full && personnel is not empty
-                //fq.reassign(personnel.pop(), plane)
-            //while personnel is empty && cargo not empty && planes not full
-                //fq.reassign(cargo.pop(),plane)
+    public List<Planes> bumpPlan(List<Planes> planes, PriorityQueue<Personnel> personnel, PriorityQueue<Cargo> cargo, FirestoreQuery fq) {
+        for (Planes p : planes) {
+            while (p.getPersonnelCount() < p.getPersonnelCapacity() && !personnel.isEmpty()) {
+                fq.reassignPersonnel(personnel.poll(), p);
+                p.setPersonnelCount(p.getPersonnelCount() + 1);
+            }
+
+
+            while (p.getCargoCapacity() < p.getCargoCapacity() && !cargo.isEmpty()) {
+                Cargo currCargo = cargo.poll();
+                fq.reassignCargo(currCargo, p);
+                p.setCargoWeight(currCargo.getWeight() + p.getCargoWeight());
+            }
+
         }
 
         return null;
