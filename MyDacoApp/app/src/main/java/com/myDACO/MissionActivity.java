@@ -51,9 +51,6 @@ public class MissionActivity extends AppCompatActivity {
                         missionPlaneAdapter.notifyDataSetChanged();
                     }
                 }
-
-                //TODO add cargo and personnel listeners here
-
                 Collections.sort(missionPlanes, new Comparator<Planes>() {
                     public int compare(Planes p1, Planes p2) {
                         return p1.getPlaneName().compareTo(p2.getPlaneName());
@@ -61,6 +58,8 @@ public class MissionActivity extends AppCompatActivity {
                 });
             }
         });
+
+        //TODO add cargo and personnel listeners here like above
     }
 
     @Override
@@ -93,13 +92,15 @@ public class MissionActivity extends AppCompatActivity {
                 ArrayList<Planes> downed = new ArrayList<>();
                 ArrayList<Planes> notDowned = new ArrayList<>();
                 for (Planes p : missionPlanes) {
+
+                    //get downed plane and notDowned plane
                     if (!p.isActive()) {
                         downed.add(p);
                     } else {
                         notDowned.add(p);
                     }
 
-                    //TODO implement bump plan stuff here
+                    //TODO implement bump plan stuff here using needed data from the listeners implemented in the onStart method
                 }
             }
         });
