@@ -43,7 +43,7 @@ public class AddCargoActivity extends AppCompatActivity {
         super.onStart();
 
         //listens for changes to the firestore databases in real time
-        ListenerRegistration planeListener = db.collection("cargo").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+        ListenerRegistration planeListener = db.collection("planes").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
