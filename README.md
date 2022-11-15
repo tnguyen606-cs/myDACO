@@ -63,8 +63,9 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 ### New Features
 * New UI Options
   * Ability for users to switch between views 
-    * Option 1: Master list of Personnels
-    * Option 2: Master list of Cargos
+    * Option 1: Master list of Personnels within airfield
+    * Option 2: Master list of Cargos within airfield
+    * Option 3: Master list of Planes within airfield (Default option)
 * 
 * Ability for users to search for specific items with the new Airfield Smart Search Feature
 
