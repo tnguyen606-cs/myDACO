@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -111,6 +112,18 @@ public class PlanesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Go to screen with UI for adding a plane
                 Intent nextScreen = new Intent(PlanesActivity.this, AddPlaneActivity.class);
+                PlanesActivity.this.startActivity(nextScreen);
+
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(PlanesActivity.this, SearchActivity.class);
                 PlanesActivity.this.startActivity(nextScreen);
 
             }
