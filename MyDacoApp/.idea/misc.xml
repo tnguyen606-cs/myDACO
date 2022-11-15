@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/activity_single_personnel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_single_plane.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_updated_plane.xml" value="0.2731936725096195" />
+        <entry key="app/src/main/res/layout/cargo_master_list_screen.xml" value="0.2695035460992908" />
         <entry key="app/src/main/res/layout/cargo_modification_screen.xml" value="0.475" />
         <entry key="app/src/main/res/layout/cargo_personnel_assignment_screen.xml" value="0.475" />
         <entry key="app/src/main/res/layout/cargo_personnel_master_list_screen.xml" value="0.475" />
@@ -42,7 +43,7 @@
         <entry key="app/src/main/res/layout/personnel_master_list_screen.xml" value="0.5447916666666667" />
         <entry key="app/src/main/res/layout/sign_up_screen.xml" value="0.4035912783240701" />
         <entry key="app/src/main/res/menu/item_status_menu.xml" value="0.5447916666666667" />
-        <entry key="app/src/main/res/menu/mission_status_menu.xml" value="0.45416666666666666" />
+        <entry key="app/src/main/res/menu/mission_status_menu.xml" value="0.38686131386861317" />
         <entry key="app/src/main/res/menu/page_menu.xml" value="0.4739583333333333" />
         <entry key="app/src/main/res/menu/plane_popup_menu.xml" value="0.5489583333333333" />
         <entry key="app/src/main/res/menu/plane_status_menu.xml" value="0.45416666666666666" />

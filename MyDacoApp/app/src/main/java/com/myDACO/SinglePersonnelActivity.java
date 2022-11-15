@@ -21,8 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.myDACO.data.Cargo;
 import com.myDACO.data.Personnel;
 import com.myDACO.data.Planes;
+import com.myDACO.searching.SearchPersonnelActivity;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
 import com.myDACO.utilities.PersonnelArrayAdapter;
@@ -47,62 +49,26 @@ public class SinglePersonnelActivity extends AppCompatActivity {
     ArrayAdapter<Planes> adapter;
 
     @Override
-    public void onStart(){
-        super.onStart();
-
-        //listens for changes to the firestore databases in real time
-        ListenerRegistration planeListener = db.collection("planes").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.w("snapshot listener", "listen failed", error);
-                    return;
-                }
-                planesList.clear();
-                for (QueryDocumentSnapshot document : value) {
-                    Planes plane = document.toObject(Planes.class);
-                    planesList.add(plane);
-                    adapter.notifyDataSetChanged();
-                }
-                Collections.sort(planesList, new Comparator<Planes>() {
-                    public int compare(Planes p1, Planes p2) {
-                        return p1.getPlaneName().compareTo(p2.getPlaneName());
-                    }
-                });
-            }
-        });
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_personnel);
 
         // Get the selected cargo from "ListOfPersonnelActivity.class"
         Intent intent = getIntent();
-        String fpersonnel = intent.getStringExtra("PERSONNEL_FTEXT");
-        String lpersonnel = intent.getStringExtra("PERSONNEL_LTEXT");
-        String planedid = intent.getStringExtra("PERSONNEL_planeID");
-        int weight = intent.getIntExtra("PERSONNEL_WEIGHT", 0);
-        int priority = intent.getIntExtra("PERSONNEL_PRIORITY", 0);
-        String id = intent.getStringExtra("PERSONNEL_ID");
-        person = new Personnel(fpersonnel, lpersonnel, planedid, id, priority, weight);
+        person = (Personnel) getIntent().getSerializableExtra("PERSONNEL");
 
         // Get the values of EditText
         personnel_fname = (EditText) findViewById(R.id.personnel_fname_input);
         personnel_lname = (EditText) findViewById(R.id.personnel_lname_input);
-        assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
-        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item, planesList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         personnel_weight = (EditText) findViewById(R.id.personnel_weight_input);
         personnel_priority = (EditText) findViewById(R.id.personnel_priority_input);
 
         // Set default input fields to stored values
         personnel_fname.setHint(person.getFirstName());
         personnel_lname.setHint(person.getLastName());
-        assignedPlaneDropdown.setAdapter(adapter);
         personnel_weight.setHint(String.valueOf(person.getWeight()));
         personnel_priority.setHint(String.valueOf(person.getPriority()));
+        assignedPlaneDropdown.setAdapter(AddPersonnelActivity.adapter);
 
         // Button is clicked to update
         updateBtn = (Button) findViewById(R.id.update_personnel_button);
@@ -110,6 +76,18 @@ public class SinglePersonnelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isClicked();
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(SinglePersonnelActivity.this, SearchPersonnelActivity.class);
+                SinglePersonnelActivity.this.startActivity(nextScreen);
+
             }
         });
 
@@ -129,14 +107,18 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         int priority = personnel_priority.getText().toString().matches("") ? person.getPriority() : Integer.parseInt(personnel_priority.getText().toString());
         int weight = personnel_weight.getText().toString().matches("") ? person.getWeight() : Integer.parseInt(personnel_weight.getText().toString());
 
-        Personnel updatedPersonnel = new Personnel(fname, lname, person.getAssignedPlaneID(), person.getId(), priority, weight);
+        Personnel updatedPersonnel = new Personnel(fname, lname, pId, person.getId(), priority, weight);
 
-        if (person.equals(updatedPersonnel) && pId.equals(updatedPersonnel.getAssignedPlaneID())) {
+        if (person.equals(updatedPersonnel)) {
             Toast.makeText(getApplicationContext(), "You did not make any change", Toast.LENGTH_SHORT).show();
         } else {
-            fq.updatePersonnel(person.getId(), updatedPersonnel);
+            // If an assinged plane is updated, update it in Firebase of planes
+            if (!(pId.matches(updatedPersonnel.getAssignedPlaneID()))) {
+                fq.reassignPersonnel(updatedPersonnel, pId);
+            } else {
+                fq.updatePersonnel(updatedPersonnel.getId(), updatedPersonnel);
+            }
             Toast.makeText(getApplicationContext(), "Personnel is updated", Toast.LENGTH_SHORT).show();
-            fq.reassignPersonnel(updatedPersonnel,plane);
         }
 
         // Go back to the list view

@@ -29,63 +29,58 @@ public class MissionArrayAdapter extends ArrayAdapter<Planes> {
     private List<Planes> list;
     private Activity context;
 
+    public MissionArrayAdapter(Activity context, List<Planes> list) {
+        super(context, R.layout.custom_single_plane, list);
+        this.context = context;
+        this.list = list;
+    }
 
-
-        public MissionArrayAdapter(Activity context, List<Planes> list) {
-            super(context, R.layout.custom_single_plane, list);
-            this.context = context;
-            this.list = list;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = null;
+        if (convertView == null) {
+            LayoutInflater inflator = context.getLayoutInflater();
+            view = inflator.inflate(R.layout.custom_single_plane, null);
+            ItemViewHolder viewHolder = new  ItemViewHolder(view);
+            viewHolder.itemLabel = (TextView) view.findViewById(R.id.label);
+            view.setTag(viewHolder);
+        } else {
+            view = convertView;
+        }
+        if (!list.get(position).isActive()) {
+            view.setBackgroundColor(Color.RED);
+        } else {
+            view.setBackgroundColor(Color.WHITE);
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = null;
-            if (convertView == null) {
-                LayoutInflater inflator = context.getLayoutInflater();
-                view = inflator.inflate(R.layout.custom_single_plane, null);
-                ItemViewHolder viewHolder = new  ItemViewHolder(view);
-                viewHolder.itemLabel = (TextView) view.findViewById(R.id.label);
-                view.setTag(viewHolder);
-            } else {
-                view = convertView;
-            }
-            if (!list.get(position).isActive()) {
-                view.setBackgroundColor(Color.RED);
-            } else {
-                view.setBackgroundColor(Color.WHITE);
-            }
+        ItemViewHolder holder = (ItemViewHolder) view.getTag();
+        holder.itemLabel.setText(list.get(position).getPlaneName());
 
-            ItemViewHolder holder = (ItemViewHolder) view.getTag();
-            holder.itemLabel.setText(list.get(position).getPlaneName());
+        ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
 
-            ImageView editIcon = (ImageView) view.findViewById(R.id.edit_icon);
+        editIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirestoreQuery fq = new FirestoreQuery();
 
-            editIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FirestoreQuery fq = new FirestoreQuery();
-
-                    // Creates popup menu
-                    PopupMenu popupMenu = new PopupMenu(context, v);
-                    popupMenu.getMenuInflater().inflate(R.menu.mission_status_menu, popupMenu.getMenu());
-                    Menu m = popupMenu.getMenu();
-                    if (list.get(position).isActive()) {
-                        m.removeItem(m.findItem(R.id.set_active).getItemId());
-                    } else {
-                        m.removeItem(m.findItem(R.id.set_inactive).getItemId());
-                    }
-                    if (list.get(position).isOnMission()) {
-                        m.removeItem(m.findItem(R.id.add_to_mission).getItemId());
-                    } else {
-                        m.removeItem(m.findItem(R.id.remove_from_mission).getItemId());
-                    }
-
+                // Creates popup menu
+                PopupMenu popupMenu = new PopupMenu(context, v);
+                popupMenu.getMenuInflater().inflate(R.menu.mission_status_menu, popupMenu.getMenu());
+                Menu m = popupMenu.getMenu();
+                if (list.get(position).isActive()) {
+                    m.removeItem(m.findItem(R.id.set_active).getItemId());
+                } else {
+                    m.removeItem(m.findItem(R.id.set_inactive).getItemId());
+                }
+                if (list.get(position).isOnMission()) {
+                    m.removeItem(m.findItem(R.id.add_to_mission).getItemId());
+                } else {
+                    m.removeItem(m.findItem(R.id.remove_from_mission).getItemId());
+                }
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        boolean onMission = list.get(position).isOnMission();
-                        boolean active = list.get(position).isActive();
                         switch (menuItem.getItemId()) {
                             case R.id.set_active:
                                 fq.togglePlaneStatus(list.get(position).getId());

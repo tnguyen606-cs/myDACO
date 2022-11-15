@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +19,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.*;
+import com.myDACO.searching.SearchPlaneActivity;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PlaneArrayAdapter;
 
@@ -31,7 +31,7 @@ import java.util.List;
 public class PlanesActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static List<Planes> planesList = new ArrayList<>();
+    public static List<Planes> planesList = new ArrayList<>();
     PlaneArrayAdapter planeAdapter;
 
     @Override
@@ -85,9 +85,7 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(PlanesActivity.this, SinglePlaneActivity.class);
-                nextScreen.putExtra("PLANE_TEXT", planesList.get(position).getPlaneName());
-                nextScreen.putExtra("PLANE_POSITION", String.valueOf(position));
-                nextScreen.putExtra("PLANE_ID", planesList.get(position).getId());
+                nextScreen.putExtra("PLANE", planesList.get(position));
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
@@ -98,9 +96,7 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create mission class to encapsulate mission planes list, then pass it to the next screen
-                Mission currentMission = new Mission(new ArrayList<Planes>());
                 Intent nextScreen = new Intent(PlanesActivity.this, MissionActivity.class);
-                nextScreen.putExtra("MISSION", currentMission);
                 PlanesActivity.this.startActivity(nextScreen);
             }
         });
@@ -123,7 +119,7 @@ public class PlanesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Go to screen with UI for adding a plane
-                Intent nextScreen = new Intent(PlanesActivity.this, SearchActivity.class);
+                Intent nextScreen = new Intent(PlanesActivity.this, SearchPlaneActivity.class);
                 PlanesActivity.this.startActivity(nextScreen);
 
             }

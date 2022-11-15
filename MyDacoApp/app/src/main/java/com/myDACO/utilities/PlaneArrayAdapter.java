@@ -74,8 +74,6 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        boolean onMission = list.get(position).isOnMission();
-                        boolean active = list.get(position).isActive();
                         switch (menuItem.getItemId()) {
                             case R.id.set_active:
                                 fq.togglePlaneStatus(list.get(position).getId());
