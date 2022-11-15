@@ -43,7 +43,7 @@ public class AddCargoActivity extends AppCompatActivity {
         super.onStart();
 
         //listens for changes to the firestore databases in real time
-        ListenerRegistration planeListener = db.collection("planes").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+        ListenerRegistration planeListener = db.collection("cargo").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -105,13 +105,13 @@ public class AddCargoActivity extends AppCompatActivity {
                     cargoWeightInput.setError("Please enter a cargo weight value.");
                 } else {
                     // all fields are populated, so add the plane
-                    //Plane Name
+                    //Cargo Name
                     String cargoName = cargoNameInput.getText().toString();
-                    // Personnel Capacity
+                    // Cargo ID
                     String cargoID = cargoIdInput.getText().toString();
                     // Assigned plane
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
-                    // Cargo Capacity
+                    // Cargo Weight
                     int cargoWeight = Integer.parseInt(cargoWeightInput.getText().toString());
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddCargoActivity.this);
@@ -138,7 +138,7 @@ public class AddCargoActivity extends AppCompatActivity {
                                 assignedPlaneID = assignedPlane.getId();
                             }
 
-                            Cargo newCargo = new Cargo(cargoName, cargoWeight, assignedPlaneID, cargoID);
+                            Cargo newCargo = new Cargo(cargoName, cargoWeight, assignedPlaneID, cargo_id);
 
                             // Insert Firestore query here
                             // Add the cargo to the cargo collection
