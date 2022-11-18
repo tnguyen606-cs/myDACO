@@ -38,6 +38,7 @@ public class SingleCargoActivity extends AppCompatActivity {
     private Spinner assignedPlaneDropdown;
     private Button updateBtn;
     private Cargo cargo;
+    private ArrayAdapter<Planes> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,12 @@ public class SingleCargoActivity extends AppCompatActivity {
         cargo_name = (EditText) findViewById(R.id.cargo_name_input);
         cargo_weight = (EditText) findViewById(R.id.cargo_weight_input);
         assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
+        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item, PlanesActivity.planesList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         cargo_name.setHint(cargo.getCargoName());
         cargo_weight.setHint(String.valueOf(cargo.getWeight()));
-        assignedPlaneDropdown.setAdapter(AddPersonnelActivity.adapter);
+        assignedPlaneDropdown.setAdapter(adapter);
 
         // Button is clicked to update
         updateBtn = (Button) findViewById(R.id.update_personnel_button);

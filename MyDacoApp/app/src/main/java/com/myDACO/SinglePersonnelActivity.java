@@ -43,10 +43,7 @@ public class SinglePersonnelActivity extends AppCompatActivity {
     private EditText personnel_priority;
     private Button updateBtn;
     private Personnel person;
-
-    private ArrayList<Planes> planesList = new ArrayList<>();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayAdapter<Planes> adapter;
+    private ArrayAdapter<Planes> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_personnel);
 
         // Get the selected cargo from "ListOfPersonnelActivity.class"
-        Intent intent = getIntent();
         person = (Personnel) getIntent().getSerializableExtra("PERSONNEL");
 
         // Get the values of EditText
@@ -62,13 +58,16 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         personnel_lname = (EditText) findViewById(R.id.personnel_lname_input);
         personnel_weight = (EditText) findViewById(R.id.personnel_weight_input);
         personnel_priority = (EditText) findViewById(R.id.personnel_priority_input);
+        assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
+        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item, PlanesActivity.planesList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Set default input fields to stored values
         personnel_fname.setHint(person.getFirstName());
         personnel_lname.setHint(person.getLastName());
         personnel_weight.setHint(String.valueOf(person.getWeight()));
         personnel_priority.setHint(String.valueOf(person.getPriority()));
-        assignedPlaneDropdown.setAdapter(AddPersonnelActivity.adapter);
+        assignedPlaneDropdown.setAdapter(adapter);
 
         // Button is clicked to update
         updateBtn = (Button) findViewById(R.id.update_personnel_button);
