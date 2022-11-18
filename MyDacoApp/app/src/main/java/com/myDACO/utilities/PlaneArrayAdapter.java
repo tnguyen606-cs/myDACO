@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
-
 import java.util.List;
 
 import com.myDACO.R;

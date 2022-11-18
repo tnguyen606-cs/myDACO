@@ -19,7 +19,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Cargo;
 import com.myDACO.searching.SearchCargoActivity;
-import com.myDACO.searching.SearchPersonnelActivity;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
 

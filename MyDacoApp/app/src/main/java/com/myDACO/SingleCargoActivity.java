@@ -2,7 +2,6 @@ package com.myDACO;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,25 +10,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Cargo;
-import com.myDACO.data.Personnel;
 import com.myDACO.data.Planes;
 import com.myDACO.searching.SearchCargoActivity;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class SingleCargoActivity extends AppCompatActivity {
 
