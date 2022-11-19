@@ -90,18 +90,6 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
             }
         });
 
-        // Search for an item
-        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to screen with UI for adding a plane
-                Intent nextScreen = new Intent(ListOfPersonnelActivity.this, SearchPersonnelActivity.class);
-                ListOfPersonnelActivity.this.startActivity(nextScreen);
-
-            }
-        });
-
         // User clicks on the menu bar to sign out action
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
@@ -115,6 +103,18 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
                 // Go to screen with UI for adding a plane
                 Intent nextScreen = new Intent(ListOfPersonnelActivity.this, AddPersonnelActivity.class);
                 ListOfPersonnelActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(ListOfPersonnelActivity.this, SearchPersonnelActivity.class);
+                ListOfPersonnelActivity.this.startActivity(nextScreen);
+
             }
         });
     }

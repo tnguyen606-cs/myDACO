@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SearchCargoActivity extends AppCompatActivity {
 
-    static List<Cargo>  cargo = new ArrayList<>();
+    private List<Cargo>  cargo = new ArrayList<>();
     private CargoArrayAdapter cargoAdapter;
 
     private EditText searchText;
@@ -56,9 +56,16 @@ public class SearchCargoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Go back
-                finish();
+                Intent nextScreen = new Intent(SearchCargoActivity.this, ListOfCargosActivity.class);
+                SearchCargoActivity.this.startActivity(nextScreen);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent nextScreen = new Intent(SearchCargoActivity.this, ListOfCargosActivity.class);
+        SearchCargoActivity.this.startActivity(nextScreen);
     }
 
     private void searchItem() {

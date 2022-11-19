@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SearchPlaneActivity extends AppCompatActivity {
 
-    static List<Planes> singlePlane = new ArrayList<>();
+    private List<Planes> singlePlane = new ArrayList<>();
     private PlaneArrayAdapter planeAdapter;
 
     private EditText searchText;
@@ -32,8 +32,9 @@ public class SearchPlaneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_engine);
 
-        searchText = (EditText) findViewById(R.id.search_box);
+        singlePlane.clear();
 
+        searchText = (EditText) findViewById(R.id.search_box);
         Button search_Btn = (Button) findViewById(R.id.search_btn);
         search_Btn.setOnClickListener(new View.OnClickListener() {
             @Override

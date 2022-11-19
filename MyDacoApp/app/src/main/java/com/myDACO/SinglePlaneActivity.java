@@ -1,6 +1,8 @@
 package com.myDACO;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.myDACO.data.Planes;
+import com.myDACO.searching.SearchPlaneActivity;
 import com.myDACO.utilities.FileHelper;
 
 public class SinglePlaneActivity extends AppCompatActivity {
@@ -43,5 +46,17 @@ public class SinglePlaneActivity extends AppCompatActivity {
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
         file.showMenu(SinglePlaneActivity.this, menuIcon);
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(SinglePlaneActivity.this, SearchPlaneActivity.class);
+                SinglePlaneActivity.this.startActivity(nextScreen);
+
+            }
+        });
     }
 }

@@ -1,5 +1,7 @@
 package com.myDACO.searching;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +28,7 @@ import java.util.List;
 
 public class SearchPersonnelActivity extends AppCompatActivity {
 
-    static List<Personnel> person= new ArrayList<>();
+    private List<Personnel> person= new ArrayList<>();
     private PersonnelArrayAdapter personnelAdapter;
 
     private EditText searchText;
@@ -35,6 +37,8 @@ public class SearchPersonnelActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_engine);
+
+        person.clear();
 
         searchText = (EditText) findViewById(R.id.search_box);
 
@@ -53,9 +57,17 @@ public class SearchPersonnelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Go back
-                finish();
+//                finish();
+                Intent nextScreen = new Intent(SearchPersonnelActivity.this, ListOfPersonnelActivity.class);
+                SearchPersonnelActivity.this.startActivity(nextScreen);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent nextScreen = new Intent(SearchPersonnelActivity.this, ListOfPersonnelActivity.class);
+        SearchPersonnelActivity.this.startActivity(nextScreen);
     }
 
     private void searchItem() {
