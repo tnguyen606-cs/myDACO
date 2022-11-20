@@ -1,5 +1,6 @@
 package com.myDACO.utilities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
@@ -10,14 +11,14 @@ import android.widget.PopupMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.myDACO.ListOfCargosActivity;
 import com.myDACO.ListOfPersonnelActivity;
+import com.myDACO.MissionActivity;
 import com.myDACO.PlanesActivity;
 import com.myDACO.MainActivity;
-import com.myDACO.PlanesActivity;
 import com.myDACO.R;
 
 public class FileHelper {
 
-    public void showMenu(Context context, ImageView menuIcon) {
+    public void showMenu(Activity context, ImageView menuIcon) {
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +42,11 @@ public class FileHelper {
                             case R.id.planes_manifest_item:
                                 Intent intent3 = new Intent(context, PlanesActivity.class);
                                 context.startActivity(intent3);
+                                break;
+
+                            case R.id.mission_manifest_item:
+                                Intent intent4 = new Intent(context, MissionActivity.class);
+                                context.startActivity(intent4);
                                 break;
 
                             case R.id.sign_out_item:

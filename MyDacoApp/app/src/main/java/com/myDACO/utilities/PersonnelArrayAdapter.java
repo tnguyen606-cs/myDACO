@@ -2,7 +2,6 @@ package com.myDACO.utilities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,12 +59,7 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
                         switch (menuItem.getItemId()) {
                             case R.id.edit:
                                 Intent nextScreen = new Intent(context, SinglePersonnelActivity.class);
-                                nextScreen.putExtra("PERSONNEL_FTEXT", list.get(position).getFirstName());
-                                nextScreen.putExtra("PERSONNEL_LTEXT", list.get(position).getLastName());
-                                nextScreen.putExtra("PERSONNEL_ID", list.get(position).getAssignedPlaneID());
-                                nextScreen.putExtra("PERSONNEL_WEIGHT", list.get(position).getWeight());
-                                nextScreen.putExtra("PERSONNEL_PRIORITY", list.get(position).getPriority());
-                                nextScreen.putExtra("PERSONNEL_ID", list.get(position).getId());
+                                nextScreen.putExtra("PERSONNEL", list.get(position));
                                 context.startActivity(nextScreen);
                                 break;
                             case R.id.delete:
@@ -75,7 +69,7 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
                                     fq.removePersonnel(list.get(position).getId());
                                     Toast.makeText(context.getApplicationContext(), "Deleted " + list.get(position).getFirstName() + " " + list.get(position).getLastName(), Toast.LENGTH_LONG).show();
                                 } else { // If the personnel is serving, then cannot delete it
-                                    Toast.makeText(context.getApplicationContext(), "Cannot Deleted " + list.get(position).getFirstName() + " " + list.get(position).getLastName() + " , who is on duty", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context.getApplicationContext(), "Cannot Delete " + list.get(position).getFirstName() + " " + list.get(position).getLastName() + " , who is on duty", Toast.LENGTH_LONG).show();
                                 }
                                 break;
                             default:

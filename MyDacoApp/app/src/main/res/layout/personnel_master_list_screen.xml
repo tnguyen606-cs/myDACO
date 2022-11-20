@@ -96,8 +96,7 @@
             android:layout_marginStart="350dp"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical"
-            android:background="@drawable/edit_box_shape">
+            android:orientation="vertical">
 
             <ImageView android:id="@+id/search_icon"
                 android:src="@drawable/searching_icon"

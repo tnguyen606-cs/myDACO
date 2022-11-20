@@ -59,18 +59,6 @@ public class FirestoreQuery {
         });
     }
 
-    public void updatePlaneField(String field, String value, String planeID) {
-        DocumentReference docRef = planeRef.document(planeID);
-
-        db.runTransaction(new Transaction.Function<Void>() {
-            @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                transaction.update(docRef, field, FieldValue.arrayUnion(value));
-                return null;
-            }
-        });
-    }
-
     public void togglePlaneStatus(String planeID) {
         DocumentReference docRef = planeRef.document(planeID);
 
@@ -185,8 +173,6 @@ public class FirestoreQuery {
 
 
     public void removePersonnel(Planes plane, String id) {
-
-  
         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayRemove(id));
         DocumentReference docRef = personnelRef.document(id);
         db.runTransaction(new Transaction.Function<Personnel>() {
@@ -199,20 +185,14 @@ public class FirestoreQuery {
     }
 
     public void removePersonnel(String id) {
-        personnelRef.document(id)
-            .delete()
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Log.d("A Personnel DELETION", "DocumentSnapshot successfully deleted!");
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w("A Personnel DELETION", "Error deleting document", e);
-                }
-            });
+        DocumentReference docRef = personnelRef.document(id);
+        db.runTransaction(new Transaction.Function<Personnel>() {
+            @Override
+            public Personnel apply(Transaction transaction) throws FirebaseFirestoreException {
+                transaction.delete(docRef);
+                return null;
+            }
+        });
     }
 
     public void addCargo(Planes plane, Cargo cargo) {
@@ -233,7 +213,6 @@ public class FirestoreQuery {
 
 
     public void removeCargo(Planes plane, String id) {
-
         planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayRemove(id));
         DocumentReference docRef = cargoRef.document(id);
         db.runTransaction(new Transaction.Function<Cargo>() {
@@ -246,32 +225,26 @@ public class FirestoreQuery {
     }
 
     public void removeCargo(String id) {
-        cargoRef.document(id)
-            .delete()
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Log.d("A Cargo DELETION", "DocumentSnapshot successfully deleted!");
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w("A Cargo DELETION", "Error deleting document", e);
-                }
-            });
+        DocumentReference docRef = cargoRef.document(id);
+        db.runTransaction(new Transaction.Function<Cargo>() {
+            @Override
+            public Cargo apply(Transaction transaction) throws FirebaseFirestoreException {
+                transaction.delete(docRef);
+                return null;
+            }
+        });
     }
 
-    public void reassignCargo(Cargo cargo, Planes plane) {
+    public void reassignCargo(Cargo cargo, String id) {
         planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
-        planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
-        cargoRef.document(cargo.getId()).update("assignedPlaneID", plane.getId());
+        planeRef.document(id).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+        cargoRef.document(cargo.getId()).update("assignedPlaneID", id);
     }
 
-    public void reassignPersonnel(Personnel personnel, Planes plane) {
+    public void reassignPersonnel(Personnel personnel, String id) {
         planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
-        planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-        personnelRef.document(personnel.getId()).update("assignedPlaneID", plane.getId());
+        planeRef.document(id).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+        personnelRef.document(personnel.getId()).update("assignedPlaneID", id);
     }
 
     public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {

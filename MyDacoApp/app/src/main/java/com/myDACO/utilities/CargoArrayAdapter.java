@@ -14,9 +14,7 @@ import android.widget.Toast;
 
 import com.myDACO.R;
 import com.myDACO.SingleCargoActivity;
-import com.myDACO.SinglePersonnelActivity;
 import com.myDACO.data.Cargo;
-import com.myDACO.data.Personnel;
 
 import java.util.List;
 

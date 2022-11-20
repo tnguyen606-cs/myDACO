@@ -73,8 +73,7 @@
             android:inputType="number"
             android:maxLength="4"
             android:maxLines="1"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:autofillHints="" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/cargo_weight_label"
