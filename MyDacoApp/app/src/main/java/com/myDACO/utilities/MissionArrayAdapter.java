@@ -50,7 +50,7 @@ public class MissionArrayAdapter extends ArrayAdapter<Planes> {
         if (!list.get(position).isActive()) {
             view.setBackgroundColor(Color.RED);
         } else {
-            view.setBackgroundColor(Color.WHITE);
+            view.setBackgroundColor(Color.TRANSPARENT);
         }
 
         ItemViewHolder holder = (ItemViewHolder) view.getTag();
