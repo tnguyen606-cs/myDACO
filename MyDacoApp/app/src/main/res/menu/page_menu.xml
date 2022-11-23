@@ -9,6 +9,9 @@
     <item android:id="@+id/planes_manifest_item"
         android:title="@string/airfield_manifest_string" >
     </item>
+    <item android:id="@+id/mission_manifest_item"
+        android:title="Mission Manifest" >
+    </item>
     <item android:id="@+id/sign_out_item"
         android:title="@string/sign_out" >
     </item>

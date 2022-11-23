@@ -18,6 +18,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Cargo;
+import com.myDACO.searching.SearchCargoActivity;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
 
@@ -29,8 +30,8 @@ import java.util.List;
 public class ListOfCargosActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static List<Cargo> cargoList = new ArrayList<>();
-    CargoArrayAdapter cargoAdapter;
+    public static List<Cargo> cargoList = new ArrayList<>();
+    private CargoArrayAdapter cargoAdapter;
 
     @Override
     public void onStart(){
@@ -73,10 +74,18 @@ public class ListOfCargosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(ListOfCargosActivity.this, SingleCargoActivity.class);
-                nextScreen.putExtra("CARGO_TEXT", cargoList.get(position).getCargoName());
-                nextScreen.putExtra("CARGO_planeID", cargoList.get(position).getAssignedPlaneID());
-                nextScreen.putExtra("CARGO_WEIGHT", cargoList.get(position).getWeight());
-                nextScreen.putExtra("CARGO_ID", cargoList.get(position).getId());
+                nextScreen.putExtra("CARGO", cargoList.get(position));
+                ListOfCargosActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(ListOfCargosActivity.this, SearchCargoActivity.class);
                 ListOfCargosActivity.this.startActivity(nextScreen);
             }
         });

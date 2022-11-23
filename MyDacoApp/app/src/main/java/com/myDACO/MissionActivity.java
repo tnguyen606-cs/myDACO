@@ -1,5 +1,6 @@
 package com.myDACO;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,23 +18,21 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.myDACO.data.*;
+import com.myDACO.searching.SearchPlaneActivity;
 import com.myDACO.utilities.*;
 
 import java.util.*;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MissionActivity extends AppCompatActivity {
 
-    private Mission currentMission;
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    MissionArrayAdapter missionPlaneAdapter;
-    ListenerRegistration missionPlaneListener;
-
-    private List<Planes> missionPlanes = new ArrayList<>();
+    static List<Planes> missionPlanes = new ArrayList<>();
 
     @Override
     public void onStart(){
@@ -102,24 +101,41 @@ public class MissionActivity extends AppCompatActivity {
         });
         //TODO add cargo and personnel listeners here like above
     }
+    private Mission currentMission;
+    private MissionArrayAdapter missionPlaneAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_planes);
 
+        for (Planes plane : PlanesActivity.planesList) {
+            if (plane.isOnMission()) {
+                missionPlanes.add(plane);
+            }
+        }
+
         // Take in Mission object passed in from manifest activity
         currentMission = (Mission) getIntent().getSerializableExtra("MISSION");
-        currentMission.setMissionPlanes(missionPlanes);
+        // TODO: Fix setMissionPlanes method, Cannot directly assign two Lists
+//        currentMission.setMissionPlanes(missionPlanes);
 
         // Get the handle for ListView
         ListView missionPlanesListView = (ListView) findViewById(R.id.mission_planes_list);
-
-        // Specify an adapter and pass context along with all the arrays in constructor
         missionPlaneAdapter = new MissionArrayAdapter(this, missionPlanes);
-
-        // Set the adapter with the ListView
         missionPlanesListView.setAdapter(missionPlaneAdapter);
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(MissionActivity.this, SearchPlaneActivity.class);
+                MissionActivity.this.startActivity(nextScreen);
+
+            }
+        });
 
         // User clicks on the menu bar to sign out action
         FileHelper file = new FileHelper();
@@ -146,9 +162,5 @@ public class MissionActivity extends AppCompatActivity {
             }
         });
 
-    }
-    //getter for mission planes
-    public List<Planes> getMissionPlanes() {
-        return this.missionPlanes;
     }
 }

@@ -58,6 +58,29 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 <!-- RELEASE NOTES -->
 ---
 # Release Notes
+## Version 0.4.0
+
+### New Features
+* New UI Options
+  * Ability for users to switch between views and add items to the airfield from each view
+    * Option 1: Master list of Personnel within airfield
+    * Option 2: Master list of Cargo within airfield
+    * Option 3: Master list of Planes within airfield (Default option)
+* Ability for users to add personnel to the manifest
+* Ability for users to manually designate certain items to certain planes before every Bump Plan (Pre-existing Inputs Feature)
+* Ability for users to search for specific items with the new Airfield Smart Search Feature
+
+### Bug Fixes
+* Functionality of Menu Bar
+* Users can now switch between views from menu bar
+* Fixed bugs caused by querying data from Firebase
+
+### Known Issues
+* Application takes up a lot of RAM and Memory 
+* Firebase Authentication guest sign in feature crashes application (Users must sign in through email or be a current user)
+* Settings menu has no information
+* Bump plan UI button has no functionality
+
 ## Version 0.3.0
 
 ### New Features

@@ -15,7 +15,7 @@
         android:title="Remove plane from mission" />
     <item
         android:id="@+id/add_cargo"
-        android:title="Add cargo" />
+        android:title="Add Cargo" />
     <item
         android:id="@+id/add_personnel"
         android:title="Add Personnel" />

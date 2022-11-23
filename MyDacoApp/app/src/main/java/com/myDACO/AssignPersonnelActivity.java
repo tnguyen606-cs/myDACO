@@ -22,6 +22,7 @@ import com.myDACO.data.Cargo;
 import com.myDACO.data.Mission;
 import com.myDACO.data.Personnel;
 import com.myDACO.data.Planes;
+import com.myDACO.searching.SearchPersonnelActivity;
 import com.myDACO.utilities.CargoArrayAdapter;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
@@ -34,40 +35,9 @@ import java.util.List;
 
 public class AssignPersonnelActivity extends AppCompatActivity {
 
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static List<Personnel> personnelList = new ArrayList<>();
-    PersonnelArrayAdapter personnelAdapter;
+    private FirestoreQuery fq  = new FirestoreQuery();
     private Mission currentMission;
-    FirestoreQuery fq = new FirestoreQuery();
     private Planes currentPlane;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        //listens for changes to the firestore databases in real time
-        ListenerRegistration personnelListener = db.collection("personnel").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.w("snapshot listener", "listen failed", error);
-                    return;
-                }
-                personnelList.clear();
-                for (QueryDocumentSnapshot document : value) {
-                    Personnel personnel = document.toObject(Personnel.class);
-                    personnelList.add(personnel);
-                    personnelAdapter.notifyDataSetChanged();
-                }
-                Collections.sort(personnelList, new Comparator<Personnel>() {
-                    public int compare(Personnel c1, Personnel c2) {
-                        return c1.getLastName().compareTo(c2.getLastName());
-                    }
-                });
-            }
-        });
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,25 +48,37 @@ public class AssignPersonnelActivity extends AppCompatActivity {
         currentPlane = (Planes) getIntent().getSerializableExtra("PLANE");
         // Get the list view of personnels
         ListView listView = (ListView) findViewById(R.id.personnel_list);
-        personnelAdapter = new PersonnelArrayAdapter(this, personnelList);
+        PersonnelArrayAdapter personnelAdapter = new PersonnelArrayAdapter(this, ListOfPersonnelActivity.personnelList);
         listView.setAdapter(personnelAdapter);
         // Go to see a personnel
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent nextScreen = new Intent(com.myDACO.AssignPersonnelActivity.this, MissionActivity.class);
-                fq.reassignPersonnel(personnelList.get(position), currentPlane);
+                Intent nextScreen = new Intent(AssignPersonnelActivity.this, MissionActivity.class);
+                fq.reassignPersonnel(ListOfPersonnelActivity.personnelList.get(position), currentPlane.getId());
                 nextScreen.putExtra("MISSION", currentMission);
-                nextScreen.putExtra("PERSONNEL_FTEXT", personnelList.get(position).getFirstName());
-                nextScreen.putExtra("PERSONNEL_LTEXT", personnelList.get(position).getLastName());
-                nextScreen.putExtra("PERSONNEL_ID", personnelList.get(position).getAssignedPlaneID());
-                com.myDACO.AssignPersonnelActivity.this.startActivity(nextScreen);
+                nextScreen.putExtra("PERSONNEL_FTEXT", ListOfPersonnelActivity.personnelList.get(position).getFirstName());
+                nextScreen.putExtra("PERSONNEL_LTEXT", ListOfPersonnelActivity.personnelList.get(position).getLastName());
+                nextScreen.putExtra("PERSONNEL_ID", ListOfPersonnelActivity.personnelList.get(position).getAssignedPlaneID());
+                AssignPersonnelActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(AssignPersonnelActivity.this, SearchPersonnelActivity.class);
+                AssignPersonnelActivity.this.startActivity(nextScreen);
+
             }
         });
 
         // User clicks on the menu bar to sign out action
         FileHelper file = new FileHelper();
         ImageView menuIcon = (ImageView) findViewById(R.id.menu_icon);
-        file.showMenu(com.myDACO.AssignPersonnelActivity.this, menuIcon);
+        file.showMenu(AssignPersonnelActivity.this, menuIcon);
     }
 }

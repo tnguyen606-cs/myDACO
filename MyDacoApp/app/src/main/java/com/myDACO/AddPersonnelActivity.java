@@ -2,6 +2,7 @@ package com.myDACO;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,41 +24,13 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.*;
+import com.myDACO.searching.SearchPersonnelActivity;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.FirestoreQuery;
 
 public class AddPersonnelActivity extends AppCompatActivity {
 
-    private ArrayList<Planes> planesList = new ArrayList<>();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayAdapter<Planes> adapter;
-
-    @Override
-    public void onStart(){
-        super.onStart();
-
-        //listens for changes to the firestore databases in real time
-        ListenerRegistration planeListener = db.collection("planes").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.w("snapshot listener", "listen failed", error);
-                    return;
-                }
-                planesList.clear();
-                for (QueryDocumentSnapshot document : value) {
-                    Planes plane = document.toObject(Planes.class);
-                    planesList.add(plane);
-                    adapter.notifyDataSetChanged();
-                }
-                Collections.sort(planesList, new Comparator<Planes>() {
-                    public int compare(Planes p1, Planes p2) {
-                        return p1.getPlaneName().compareTo(p2.getPlaneName());
-                    }
-                });
-            }
-        });
-    }
+    static ArrayAdapter<Planes> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +43,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
         EditText lnameInput= (EditText) findViewById(R.id.personnel_lname_input);
 
         Spinner assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
-        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item,
-                planesList);
+        adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item, PlanesActivity.planesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         assignedPlaneDropdown.setAdapter(adapter);
 
@@ -79,7 +51,6 @@ public class AddPersonnelActivity extends AppCompatActivity {
         EditText personnelWeightInput = (EditText) findViewById(R.id.personnel_weight_input);
 
         Button addBtn = (Button) findViewById(R.id.add_personnel_button);
-
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +85,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
 
                     // Weight
-                    int personnelWeight = Integer.parseInt(personnelPriorityInput.getText().toString());
+                    int personnelWeight = Integer.parseInt(personnelWeightInput.getText().toString());
 
                     // Priority
                     int personnelPriority = Integer.parseInt(personnelPriorityInput.getText().toString());
@@ -123,7 +94,7 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     alert.setTitle("Add Personnel Confirmation");
                     alert.setMessage("Are you sure you want to add this personnel?\nFirst Name: "
                             + firstName + "\nLast Name: " + lastName + "\nAssigned Plane: " + assignedPlane.getPlaneName()
-                            + "\nPersonnel Priority: " + Integer.toString(personnelPriority));
+                            + "\nPersonnel Priority: " + Integer.toString(personnelPriority) + "\nPersonnel Weight: "+ Integer.toString(personnelWeight));
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -147,14 +118,16 @@ public class AddPersonnelActivity extends AppCompatActivity {
                             // Insert Firestore query here
                             // Add the personnel to the personnel collection
                             // Add personnel to the plane
-                            fq.addPersonnel(assignedPlane, newPersonnel);
-
-                            fnameInput.getText().clear();
-                            lnameInput.getText().clear();
-                            personnelPriorityInput.getText().clear();
-                            personnelWeightInput.getText().clear();
-
-                            Toast.makeText(getApplicationContext(), "Personnel added", Toast.LENGTH_SHORT).show();
+                            if (assignedPlane.getCargoWeight() + newPersonnel.getWeight() <= assignedPlane.getCargoCapacity()) {
+                                fq.addPersonnel(assignedPlane, newPersonnel);
+                                fnameInput.getText().clear();
+                                lnameInput.getText().clear();
+                                personnelPriorityInput.getText().clear();
+                                personnelWeightInput.getText().clear();
+                                Toast.makeText(getApplicationContext(), "Personnel added", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Could not add personnel. Personnel weight exceeds remaining capacity.", Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 
@@ -166,6 +139,18 @@ public class AddPersonnelActivity extends AppCompatActivity {
                     alert.show();
 
                 }
+
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(AddPersonnelActivity.this, SearchPersonnelActivity.class);
+                AddPersonnelActivity.this.startActivity(nextScreen);
 
             }
         });

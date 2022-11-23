@@ -18,6 +18,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.myDACO.data.Personnel;
+import com.myDACO.searching.SearchPersonnelActivity;
 import com.myDACO.utilities.FileHelper;
 import com.myDACO.utilities.PersonnelArrayAdapter;
 
@@ -29,8 +30,8 @@ import java.util.List;
 public class ListOfPersonnelActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static List<Personnel> personnelList = new ArrayList<>();
-    PersonnelArrayAdapter personnelAdapter;
+    public static List<Personnel> personnelList = new ArrayList<>();
+    private PersonnelArrayAdapter personnelAdapter;
 
     @Override
     public void onStart(){
@@ -65,6 +66,7 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
                         }
                     }
                 });
+
             }
         });
     }
@@ -83,12 +85,7 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent nextScreen = new Intent(ListOfPersonnelActivity.this, SinglePersonnelActivity.class);
-                nextScreen.putExtra("PERSONNEL_FTEXT", personnelList.get(position).getFirstName());
-                nextScreen.putExtra("PERSONNEL_LTEXT", personnelList.get(position).getLastName());
-                nextScreen.putExtra("PERSONNEL_planeID", personnelList.get(position).getAssignedPlaneID());
-                nextScreen.putExtra("PERSONNEL_WEIGHT", personnelList.get(position).getWeight());
-                nextScreen.putExtra("PERSONNEL_PRIORITY", personnelList.get(position).getPriority());
-                nextScreen.putExtra("PERSONNEL_ID", personnelList.get(position).getId());
+                nextScreen.putExtra("PERSONNEL", personnelList.get(position));
                 ListOfPersonnelActivity.this.startActivity(nextScreen);
             }
         });
@@ -106,6 +103,18 @@ public class ListOfPersonnelActivity extends AppCompatActivity {
                 // Go to screen with UI for adding a plane
                 Intent nextScreen = new Intent(ListOfPersonnelActivity.this, AddPersonnelActivity.class);
                 ListOfPersonnelActivity.this.startActivity(nextScreen);
+            }
+        });
+
+        // Search for an item
+        ImageView searchIcon = (ImageView) findViewById(R.id.search_icon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to screen with UI for adding a plane
+                Intent nextScreen = new Intent(ListOfPersonnelActivity.this, SearchPersonnelActivity.class);
+                ListOfPersonnelActivity.this.startActivity(nextScreen);
+
             }
         });
     }
