@@ -73,7 +73,6 @@ public class AddCargoActivity extends AppCompatActivity {
         FirestoreQuery fq = new FirestoreQuery();
 
         EditText cargoNameInput = (EditText) findViewById(R.id.cargo_name_box);
-        EditText cargoIdInput = (EditText) findViewById(R.id.cargo_id_input);
 
         Spinner assignedPlaneDropdown = (Spinner) findViewById(R.id.planes_spinner);
         adapter = new ArrayAdapter<Planes>(this,R.layout.spinner_item,
@@ -93,11 +92,6 @@ public class AddCargoActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You did not enter a cargo name.", Toast.LENGTH_SHORT).show();
                     // Show Error on edittext
                     cargoNameInput.setError("Please enter a cargo name.");
-                } else if(cargoIdInput.getText().toString().matches("")) {
-                    // Show Toast
-                    Toast.makeText(getApplicationContext(), "You did not enter a cargo ID.", Toast.LENGTH_SHORT).show();
-                    // Show Error on edittext
-                    cargoIdInput.setError("Please enter a cargo ID.");
                 } else if(cargoWeightInput.getText().toString().matches("")) {
                     // Show Toast
                     Toast.makeText(getApplicationContext(), "You did not enter a cargo weight value.", Toast.LENGTH_SHORT).show();
@@ -107,8 +101,6 @@ public class AddCargoActivity extends AppCompatActivity {
                     // all fields are populated, so add the plane
                     //Cargo Name
                     String cargoName = cargoNameInput.getText().toString();
-                    // Cargo ID
-                    String cargoID = cargoIdInput.getText().toString();
                     // Assigned plane
                     Planes assignedPlane = (Planes) assignedPlaneDropdown.getSelectedItem();
                     // Cargo Weight
@@ -117,7 +109,7 @@ public class AddCargoActivity extends AppCompatActivity {
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddCargoActivity.this);
                     alert.setTitle("Add Cargo Confirmation");
                     alert.setMessage("Are you sure you want to add this cargo?\nCargo Name: "
-                            + cargoName + "\nCargo ID: " + cargoID +
+                            + cargoName +
                             "\nCargo Weight: " + Integer.toString(cargoWeight));
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -147,7 +139,6 @@ public class AddCargoActivity extends AppCompatActivity {
 
                             cargoNameInput.getText().clear();
                             cargoWeightInput.getText().clear();
-                            cargoIdInput.getText().clear();
 
                             Toast.makeText(getApplicationContext(), "Cargo added", Toast.LENGTH_SHORT).show();
                         }

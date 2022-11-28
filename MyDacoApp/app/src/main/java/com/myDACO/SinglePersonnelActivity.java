@@ -95,8 +95,8 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         if (person.equals(updatedPersonnel)) {
             Toast.makeText(getApplicationContext(), "You did not make any change", Toast.LENGTH_SHORT).show();
         } else {
-            // If an assinged plane is updated, update it in Firebase of planes
-            if (!(pId.matches(updatedPersonnel.getAssignedPlaneID()))) {
+            // If an assigned plane is updated, update it in Firebase of planes
+            if (!(pId.matches(person.getAssignedPlaneID()))) {
                 // If the plane assigned is different from the current plane, call the reassign query before updating personnel.
                 fq.reassignPersonnel(updatedPersonnel, pId);
             }
