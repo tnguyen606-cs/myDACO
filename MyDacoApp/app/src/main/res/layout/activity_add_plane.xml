@@ -71,7 +71,7 @@
             android:digits="0123456789"
             android:inputType="number"
             tools:ignore="SpeakableTextPresentCheck"
-            android:drawableStart="@drawable/user"
+            android:drawableStart="@drawable/personnel"
             android:drawablePadding="10dp"
             android:layout_below="@id/plane_personnel_capacity"
             android:maxLines="1"

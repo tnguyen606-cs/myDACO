@@ -1,6 +1,7 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myDACO.R;
+import com.myDACO.SingleCargoActivity;
 import com.myDACO.data.Cargo;
 
 import java.util.List;
@@ -47,8 +49,6 @@ public class CargoArrayAdapter extends ArrayAdapter<Cargo> {
         editIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirestoreQuery fq = new FirestoreQuery();
-
                 // Creates popup menu
                 PopupMenu popupMenu = new PopupMenu(context, v);
                 popupMenu.getMenuInflater().inflate(R.menu.item_status_menu, popupMenu.getMenu());
@@ -57,10 +57,21 @@ public class CargoArrayAdapter extends ArrayAdapter<Cargo> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.edit:
-                                Toast.makeText(context.getApplicationContext(), "Edit " + list.get(position).getCargoName(), Toast.LENGTH_SHORT).show();
+                                Intent nextScreen = new Intent(context, SingleCargoActivity.class);
+                                nextScreen.putExtra("CARGO_TEXT", list.get(position).getCargoName());
+                                nextScreen.putExtra("CARGO_ID", list.get(position).getAssignedPlaneID());
+                                nextScreen.putExtra("CARGO_WEIGHT", list.get(position).getWeight());
+                                context.startActivity(nextScreen);
                                 break;
                             case R.id.delete:
-                                Toast.makeText(context.getApplicationContext(), "Delete " + list.get(position).getCargoName(), Toast.LENGTH_SHORT).show();
+                                FirestoreQuery fq = new FirestoreQuery();
+                                // 1. check if the cargo is already assigned to a plane?
+                                if (list.get(position).getAssignedPlaneID() == null) {
+                                    fq.removeCargo(list.get(position).getId());
+                                    Toast.makeText(context.getApplicationContext(), "Deleted " + list.get(position).getCargoName(), Toast.LENGTH_LONG).show();
+                                } else { // If the cargo is on plane, then cannot delete it
+                                    Toast.makeText(context.getApplicationContext(), "Cannot Deleted " + list.get(position).getCargoName() + " , which is on planes", Toast.LENGTH_LONG).show();
+                                }
                                 break;
                             default:
                                 break;
