@@ -205,7 +205,8 @@ public class FirestoreQuery {
                             Log.d("FirestoreQuery", "Unable to add cargo; Plane ID is not unique");
                         } else {
                             planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
-                            personnelRef.document(cargo.getId()).set(cargo);
+                            cargoRef.document(cargo.getId()).set(cargo);
+                            planeRef.document(plane.getId()).update("cargoWeight", FieldValue.increment(cargo.getWeight()));
                         }
                     }
                 });
