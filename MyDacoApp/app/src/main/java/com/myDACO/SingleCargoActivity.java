@@ -46,7 +46,7 @@ public class SingleCargoActivity extends AppCompatActivity {
         assignedPlaneDropdown.setAdapter(adapter);
 
         // Button is clicked to update
-        updateBtn = (Button) findViewById(R.id.update_personnel_button);
+        updateBtn = (Button) findViewById(R.id.update_cargo_button);
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
