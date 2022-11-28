@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="1"
     android:descendantFocusability="blocksDescendants">
 
+    <ImageView
+        android:id="@+id/cargo_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/cargo_icon">
+    </ImageView>
+
+
     <TextView
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_toRightOf="@id/cargo_icon"
         android:fontFamily="sans-serif-smallcaps"
         android:maxLength="30"
         android:text="Name"
@@ -27,4 +41,9 @@
         android:layout_toRightOf="@id/label"
         android:layout_gravity="center"
         android:src="@drawable/edit_icon_rotated" />
+
+
 </RelativeLayout>
+
+
+

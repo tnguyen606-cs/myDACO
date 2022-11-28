@@ -84,12 +84,11 @@ public class SingleCargoActivity extends AppCompatActivity {
         if (cargo.equals(updatedCargo)) {
             Toast.makeText(getApplicationContext(), "You did not make any change", Toast.LENGTH_SHORT).show();
         } else {
-            // If an assinged plane is updated, update it in Firebase of planes
+            // If an assigned plane is updated, update it in Firebase of planes
             if (!(pId.matches(cargo.getAssignedPlaneID()))) {
                 fq.reassignCargo(updatedCargo, pId);
-            } else {
-                fq.updateCargo(cargo.getId(), updatedCargo);
             }
+            fq.updateCargo(cargo.getId(), updatedCargo);
             Toast.makeText(getApplicationContext(), "Cargo is updated", Toast.LENGTH_SHORT).show();
         }
 
