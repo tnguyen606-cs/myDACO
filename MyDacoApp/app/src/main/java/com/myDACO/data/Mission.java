@@ -33,24 +33,25 @@ public class Mission implements Serializable {
         this.missionPlanes.add(plane);
     }
 
-    //TODO: Implement bump plan method
-    public List<Planes> bumpPlan(List<Planes> planes, PriorityQueue<Personnel> personnel, PriorityQueue<Cargo> cargo, FirestoreQuery fq) {
+    public int bumpPlan(List<Planes> planes, PriorityQueue<Personnel> personnel, PriorityQueue<Cargo> cargo, FirestoreQuery fq) {
         for (Planes p : planes) {
             while (p.getPersonnelCount() < p.getPersonnelCapacity() && !personnel.isEmpty()) {
-                fq.reassignPersonnel(personnel.poll(), p);
+                fq.reassignPersonnel(personnel.poll(), p.getId());
                 p.setPersonnelCount(p.getPersonnelCount() + 1);
             }
 
 
-            while (p.getCargoCapacity() < p.getCargoCapacity() && !cargo.isEmpty()) {
-                Cargo currCargo = cargo.poll();
-                fq.reassignCargo(currCargo, p);
+            while (p.getCargoWeight() < p.getCargoCapacity() && !cargo.isEmpty()) {
+                Cargo currCargo = cargo.peek();
+                fq.reassignCargo(cargo.poll(), p.getId());
                 p.setCargoWeight(currCargo.getWeight() + p.getCargoWeight());
             }
-
+        }
+        if (!personnel.isEmpty() || !cargo.isEmpty()) {
+            return -1;
         }
 
-        return null;
+        return 0;
     }
 
 

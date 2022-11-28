@@ -1,5 +1,6 @@
 package com.myDACO;
 
+import android.app.Person;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.myDACO.data.*;
 import com.myDACO.searching.SearchPlaneActivity;
@@ -28,11 +30,20 @@ import com.myDACO.utilities.*;
 
 import java.util.*;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MissionActivity extends AppCompatActivity {
 
     static List<Planes> missionPlanes = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static List<Cargo> missionCargo = new ArrayList<>();
+    static List<Personnel> missionPersonnel = new ArrayList<>();
+    public FirestoreQuery fq = new FirestoreQuery();
+
+    private Mission currentMission;
+    private MissionArrayAdapter missionPlaneAdapter;
+
 
     @Override
     public void onStart(){
@@ -59,6 +70,7 @@ public class MissionActivity extends AppCompatActivity {
                         return p1.getPlaneName().compareTo(p2.getPlaneName());
                     }
                 });
+                Log.d("snapshot listener", "current planes " + missionPlanes);
             }
         });
         CollectionReference cargoRef = db.collection("cargo");
@@ -71,15 +83,15 @@ public class MissionActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<String> cargos = new ArrayList<>();
+                missionCargo.clear();
                 for (QueryDocumentSnapshot doc : snapshot) {
-                    if (doc.get("cargoName") != null) {
-                        cargos.add(doc.getString("cargoName"));
-                    }
+                    missionCargo.add(doc.toObject(Cargo.class));
                 }
-                Log.d("snapshot listener", "current cargos " + cargos);
+                Log.d("snapshot listener", "current cargos " + missionCargo);
             }
         });
+
+
         CollectionReference personnelRef = db.collection("personnel");
         personnelRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -90,19 +102,17 @@ public class MissionActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<String> personnel = new ArrayList<>();
+                missionPersonnel.clear();
                 for (QueryDocumentSnapshot doc : snapshot) {
-                    if (doc.get("firstName") != null) {
-                        personnel.add(doc.getString("firstName") + doc.getString("lastName"));
-                    }
+                    missionPersonnel.add(doc.toObject(Personnel.class));
+
                 }
-                Log.d("snapshot listener", "current personnel " + personnel);
+                Log.d("snapshot listener", "current personnel " + missionPersonnel);
             }
         });
-        //TODO add cargo and personnel listeners here like above
+
     }
-    private Mission currentMission;
-    private MissionArrayAdapter missionPlaneAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,16 +159,59 @@ public class MissionActivity extends AppCompatActivity {
                 ArrayList<Planes> downed = new ArrayList<>();
                 ArrayList<Planes> notDowned = new ArrayList<>();
                 for (Planes p : missionPlanes) {
-
                     //get downed plane and notDowned plane
                     if (!p.isActive()) {
                         downed.add(p);
                     } else {
                         notDowned.add(p);
                     }
+                }
+                Log.d("bump Plan", "downed " + downed);
+                Log.d("bump Plan", "notdowned " + notDowned);
+                PriorityQueue<Cargo> cargoQueue = new PriorityQueue<>(1, new Comparator<Cargo>() {
+                    @Override
+                    public int compare(Cargo o1, Cargo o2) {
+                        return o1.getWeight() - o2.getWeight();
+                    }
+                });
+
+                PriorityQueue<Personnel> personnelQueue = new PriorityQueue<>(1, new Comparator<Personnel>() {
+                    @Override
+                    public int compare(Personnel o1, Personnel o2) {
+                        return o1.getPriority() - o2.getPriority();
+                    }
+                });
+
+
+
+
+                for (Planes p : downed) {
+                    for (Cargo c : missionCargo) {
+                        if (c.getAssignedPlaneID().equals(p.getId())) {
+                            cargoQueue.add(c);
+                        }
+                    }
+                    for (Personnel pl : missionPersonnel) {
+                        if (pl.getAssignedPlaneID().equals((p.getId()))) {
+                            personnelQueue.add(pl);
+                        }
+                    }
+                }
+                Log.d("bump Plan", "cargo " + cargoQueue);
+                Log.d("bump Plan", "personnel " + personnelQueue);
+                Log.d("bump Plan", "fq " + fq.getClass());
+                Log.d("bump plan", "curr" + currentMission);
+                Mission bumpHelper = new Mission();
+
+                   int code = bumpHelper.bumpPlan(notDowned, personnelQueue, cargoQueue, fq);
+                    if (code == -1) {
+                        Toast.makeText(MissionActivity.this, "not enough capacity to preform a full bump", Toast.LENGTH_SHORT).show();
+                    }
+
+
 
                     //TODO implement bump plan stuff here using needed data from the listeners implemented in the onStart method
-                }
+
             }
         });
 
