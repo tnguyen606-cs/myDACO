@@ -69,7 +69,7 @@ public class PersonnelArrayAdapter extends ArrayAdapter<Personnel> {
                                     fq.removePersonnel(list.get(position).getId());
                                     Toast.makeText(context.getApplicationContext(), "Deleted " + list.get(position).getFirstName() + " " + list.get(position).getLastName(), Toast.LENGTH_LONG).show();
                                 } else { // If the personnel is serving, then cannot delete it
-                                    Toast.makeText(context.getApplicationContext(), "Cannot Delete " + list.get(position).getFirstName() + " " + list.get(position).getLastName() + " , who is on duty", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context.getApplicationContext(), "Cannot delete " + list.get(position).getFirstName() + " " + list.get(position).getLastName() + " , because they are still on a plane", Toast.LENGTH_LONG).show();
                                 }
                                 break;
                             default:
