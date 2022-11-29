@@ -12,8 +12,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myDACO.ListOfCargosActivity;
 import com.myDACO.R;
 import com.myDACO.SingleCargoActivity;
+import com.myDACO.SinglePersonnelActivity;
 import com.myDACO.data.Cargo;
 
 import java.util.List;
@@ -58,9 +60,7 @@ public class CargoArrayAdapter extends ArrayAdapter<Cargo> {
                         switch (menuItem.getItemId()) {
                             case R.id.edit:
                                 Intent nextScreen = new Intent(context, SingleCargoActivity.class);
-                                nextScreen.putExtra("CARGO_TEXT", list.get(position).getCargoName());
-                                nextScreen.putExtra("CARGO_ID", list.get(position).getAssignedPlaneID());
-                                nextScreen.putExtra("CARGO_WEIGHT", list.get(position).getWeight());
+                                nextScreen.putExtra("CARGO", list.get(position));
                                 context.startActivity(nextScreen);
                                 break;
                             case R.id.delete:
@@ -70,7 +70,7 @@ public class CargoArrayAdapter extends ArrayAdapter<Cargo> {
                                     fq.removeCargo(list.get(position).getId());
                                     Toast.makeText(context.getApplicationContext(), "Deleted " + list.get(position).getCargoName(), Toast.LENGTH_LONG).show();
                                 } else { // If the cargo is on plane, then cannot delete it
-                                    Toast.makeText(context.getApplicationContext(), "Cannot Deleted " + list.get(position).getCargoName() + " , which is on planes", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context.getApplicationContext(), "Cannot delete " + list.get(position).getCargoName() + ", because it is still on a plane.", Toast.LENGTH_LONG).show();
                                 }
                                 break;
                             default:

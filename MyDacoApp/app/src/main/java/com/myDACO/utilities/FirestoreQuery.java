@@ -27,7 +27,7 @@ public class FirestoreQuery {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference planeRef = db.collection("planes");
-    CollectionReference cargoRef = db.collection("cargos");
+    CollectionReference cargoRef = db.collection("cargo");
     CollectionReference personnelRef = db.collection("personnel");
 
     public Planes addPlane(Planes plane) {
