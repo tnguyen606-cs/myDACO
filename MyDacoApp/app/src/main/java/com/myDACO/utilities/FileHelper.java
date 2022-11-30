@@ -1,5 +1,7 @@
 package com.myDACO.utilities;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,8 +17,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -113,71 +114,68 @@ public class FileHelper {
         confirmBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.d("Print:   ", "Plane");
                 if (plane.isChecked()) {
-                    Toast.makeText(ctx.getApplicationContext(), "Excelled Planes to Firebase", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(ctx.getApplicationContext(), "Excelled Planes to Firebase", Toast.LENGTH_LONG).show();
+                    Log.d("Print:   ", "Plane is clicked");
                 } else if (cargo.isChecked()) {
-                    Toast.makeText(ctx.getApplicationContext(), "Excelled Cargos to Firebase", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(ctx.getApplicationContext(), "Excelled Cargos to Firebase", Toast.LENGTH_LONG).show();
+                    Log.d("Print:   ", "CArgo is clicked");
                 } else if (personnel.isChecked()) {
-                    Toast.makeText(ctx.getApplicationContext(), "Excelled Personnel to Firebase", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(ctx.getApplicationContext(), "Excelled Personnel to Firebase", Toast.LENGTH_LONG).show();
+                    Log.d("Print:   ", "Person is clicked");
                 } else {
-                    Toast.makeText(ctx.getApplicationContext(), "Please make sure you checked one of the box!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(ctx.getApplicationContext(), "Please make sure you checked one of the box!", Toast.LENGTH_LONG).show();
+                    Log.d("Print:   ", "Please make sure you checked ");
                     isNotchecked = false;
                 }
                 if (isNotchecked) {
-//                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//                        selectfile();
-//                    } else {
-//                        ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
-//                        Log.w("Print:   ", "Permission Not granted plaoajnajnd");
-//                    }
+                    if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        selectfile(ctx);
+                    } else {
+                        ActivityCompat.requestPermissions(ctx, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
+                        Log.w("Print:   ", "Permission Not granted plaoajnajnd");
+                        onRequestPermissionsFailed(101, ctx);
+                    }
                     dialog.dismiss();
                 }
+                dialog.dismiss();
             }
         }));
         dialog.show();
     }
 
-//    // request for storage permission if not given
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        Log.w("Print:   ",  "plaoajnajnd");
-//        if (requestCode == 101) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Log.w("Print:   ", "Permission granted");
-//            } else {
-//                Log.w("Print:   ", "Permission Not granted");
-////                Toast.makeText(thisContext, "Permission Not granted", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
+    // request for storage permission if not given
+    public void onRequestPermissionsFailed(int requestCode, Activity ctx) {
+        Log.w("Print:   ",  "plaoajnajnd");
+        if (requestCode == 101) {
+            selectfile(ctx);
+        }
+    }
 
-    private void selectfile() {
+    private void selectfile(Activity ctx) {
         // select the file from the file storage
-//        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
-//        chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
-//        chooseFile.setType("*/*");
-//        Intent intentFile = Intent.createChooser(chooseFile, "Choose a file");
-//        context.startActivityForResult(intentFile, 102);
+        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
+        chooseFile.setType("*/*");
+        Intent intentFile = Intent.createChooser(chooseFile, "Choose a file");
+        ctx.startActivityForResult(intentFile, 102);
         Log.w("Print:   ", "Select File");
     }
 
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 102) {
-//            if (resultCode == RESULT_OK) {
-//                String filepath = data.getData().getPath();
-//                // If excel file then only select the file
-//                if (filepath.endsWith(".xlsx") || filepath.endsWith(".xls")) {
-////                    readfile(data.getData());
-//                    Log.d("Print:   ", "Plane");
-//                }
-//                // else show the error
-//                else {
-//                    Log.d("Print:   ", "Plane");
-//                }
-//            }
-//        }
-//    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 102) {
+            if (resultCode == RESULT_OK) {
+                String filepath = data.getData().getPath();
+                // If excel file then only select the file
+                if (filepath.endsWith(".xlsx") || filepath.endsWith(".xls")) {
+//                    readfile(data.getData());
+                    Log.d("Print:   ", "Plane");
+                }
+                // else show the error
+                else {
+                    Log.d("Print:   ", "Plane");
+                }
+            }
+        }
+    }
 }
