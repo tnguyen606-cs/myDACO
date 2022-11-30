@@ -35,7 +35,7 @@
         <activity android:name=".searching.SearchPlaneActivity"></activity>
         <activity android:name=".searching.SearchPersonnelActivity"></activity>
         <activity android:name=".searching.SearchCargoActivity"></activity>
-        <activity android:name=".ExcelActivity"></activity>
+<!--        <activity android:name=".ExcelActivity"></activity>-->
         <activity
             android:name=".PlanesActivity"
             android:exported="true">

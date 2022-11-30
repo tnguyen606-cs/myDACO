@@ -1,21 +1,21 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.myDACO.ExcelActivity;
 import com.myDACO.ListOfCargosActivity;
 import com.myDACO.ListOfPersonnelActivity;
 import com.myDACO.MissionActivity;
 import com.myDACO.PlanesActivity;
 import com.myDACO.MainActivity;
-import com.myDACO.PlanesActivity;
 import com.myDACO.R;
 
 public class FileHelper {
@@ -52,8 +52,7 @@ public class FileHelper {
                                 break;
 
                             case R.id.excel_item:
-                                Intent excel = new Intent(context, ExcelActivity.class);
-                                context.startActivity(excel);
+                                showCustomDialog(context);
                                 break;
 
                             case R.id.sign_out_item:
@@ -72,5 +71,35 @@ public class FileHelper {
                 popupMenu.show();
             }
         });
+    }
+
+    void showCustomDialog(Activity context) {
+        Dialog dialog = new Dialog(context);
+        //We have added a title in the custom layout. So let's disable the default title.
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //The user will be able to cancel the dialog by clicking anywhere outside the dialog.
+        dialog.setCancelable(true);
+        //Mention the name of the layout of your custom dialog.
+        dialog.setContentView(R.layout.activity_excel_dialog);
+
+        //Initializing the views of the dialog.
+        Button cancelBtn = dialog.findViewById(R.id.cancelBtn);
+        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
+
+        // Buttons' listener
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        confirmBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        }));
+
+        dialog.show();
     }
 }
