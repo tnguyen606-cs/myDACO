@@ -21,8 +21,8 @@
     <string name="click_here_string">Click here</string>
     <string name="airfield_manifest_string">Airfield Manifest</string>
     <string name="edit_icon">Edit</string>
-    <string name="plane_delete_confirm">Are you sure you want to remove this Plane from the Manifest?</string>
-    <string name="delete">Delete</string>
+    <string name="excel_confirm">You want to import Excel File to: </string>
+    <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="cargo">Cargo</string>
     <string name="personnel">Personnel</string>
@@ -49,4 +49,10 @@
 
     <string name="AddPlane">add_plane</string>
     <string name="addPlaneForm">Add Plane</string>
+
+    <!-- Excel Strings -->
+    <string name="excelPlane">Planes Firebase</string>
+    <string name="excelCargos">Cargos Firebase</string>
+    <string name="excelPersonnel">Personnel Firebase</string>
+
 </resources>

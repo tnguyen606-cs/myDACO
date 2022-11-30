@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/cargo_item"
         android:title="@string/cargo" >
     </item>
@@ -11,6 +12,9 @@
     </item>
     <item android:id="@+id/mission_manifest_item"
         android:title="Mission Manifest" >
+    </item>
+    <item android:id="@+id/excel_item"
+        android:title="Import Excel File" >
     </item>
     <item android:id="@+id/sign_out_item"
         android:title="@string/sign_out" >

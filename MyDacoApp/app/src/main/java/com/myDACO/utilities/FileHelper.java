@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.myDACO.ExcelActivity;
 import com.myDACO.ListOfCargosActivity;
 import com.myDACO.ListOfPersonnelActivity;
 import com.myDACO.MissionActivity;
@@ -48,6 +49,11 @@ public class FileHelper {
                             case R.id.mission_manifest_item:
                                 Intent intent4 = new Intent(context, MissionActivity.class);
                                 context.startActivity(intent4);
+                                break;
+
+                            case R.id.excel_item:
+                                Intent excel = new Intent(context, ExcelActivity.class);
+                                context.startActivity(excel);
                                 break;
 
                             case R.id.sign_out_item:

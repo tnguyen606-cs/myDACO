@@ -121,6 +121,5 @@ public class Personnel implements Serializable {
                     && (this.weight == otherPer.getWeight());
         }
         return false;
-
     }
 }

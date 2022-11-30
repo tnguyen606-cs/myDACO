@@ -246,7 +246,7 @@ public class FirestoreQuery {
         newPlane.update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
         newPlane.update("cargoWeight", FieldValue.increment(cargo.getWeight()));
 
-        cargoRef.document(cargo.getId()).update("assignedPlaneID", planeID);
+        cargoRef.document(cargo.getId()).set(cargo);
     }
 
     public void reassignPersonnel(Personnel personnel, String planeID) {
@@ -258,7 +258,7 @@ public class FirestoreQuery {
         newPlane.update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
         newPlane.update("personnelCount", FieldValue.increment(1));
 
-        personnelRef.document(personnel.getId()).update("assignedPlaneID", planeID);
+        personnelRef.document(personnel.getId()).set(personnel);
       }
 
     public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {
@@ -295,14 +295,6 @@ public class FirestoreQuery {
             }
         });
         return output;
-    }
-
-    public void updatePersonnel(String id, Personnel person) {
-        personnelRef.document(id).set(person);
-    }
-
-    public void updateCargo(String id, Cargo cargo) {
-        cargoRef.document(id).set(cargo);
     }
 }
 

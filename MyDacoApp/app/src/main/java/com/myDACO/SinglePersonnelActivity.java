@@ -2,6 +2,7 @@ package com.myDACO;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -91,16 +92,11 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         int weight = personnel_weight.getText().toString().matches("") ? person.getWeight() : Integer.parseInt(personnel_weight.getText().toString());
 
         Personnel updatedPersonnel = new Personnel(fname, lname, pId, person.getId(), priority, weight);
-
         if (person.equals(updatedPersonnel)) {
             Toast.makeText(getApplicationContext(), "You did not make any change", Toast.LENGTH_SHORT).show();
-        } else {
-            // If an assigned plane is updated, update it in Firebase of planes
-            if (!(pId.matches(person.getAssignedPlaneID()))) {
-                // If the plane assigned is different from the current plane, call the reassign query before updating personnel.
-                fq.reassignPersonnel(person, pId);
-            }
-            fq.updatePersonnel(updatedPersonnel.getId(), updatedPersonnel);
+        } else { // If a person is updated or not,
+            // If the plane assigned is different from the current plane, call the reassign query before updating personnel.
+            fq.reassignPersonnel(updatedPersonnel, pId);
             Toast.makeText(getApplicationContext(), "Personnel is updated", Toast.LENGTH_SHORT).show();
         }
 
