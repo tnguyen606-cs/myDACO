@@ -20,7 +20,7 @@
         tools:targetApi="31">
         <activity android:name=".ForgotPasswordActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
-<!--        <activity android:name=".PlanesActivity"></activity>-->
+        <activity android:name=".PlanesActivity"></activity>
         <activity android:name=".SinglePlaneActivity"></activity>
         <activity android:name=".MissionActivity"></activity>
         <activity android:name=".AddPlaneActivity"></activity>
@@ -35,9 +35,8 @@
         <activity android:name=".searching.SearchPlaneActivity"></activity>
         <activity android:name=".searching.SearchPersonnelActivity"></activity>
         <activity android:name=".searching.SearchCargoActivity"></activity>
-<!--        <activity android:name=".ExcelActivity"></activity>-->
         <activity
-            android:name=".PlanesActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
