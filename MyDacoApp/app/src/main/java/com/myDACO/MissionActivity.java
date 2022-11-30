@@ -118,7 +118,7 @@ public class MissionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_planes);
-
+        missionPlanes.clear();
         for (Planes plane : PlanesActivity.planesList) {
             if (plane.isOnMission()) {
                 missionPlanes.add(plane);

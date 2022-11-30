@@ -114,7 +114,7 @@ public class SinglePlaneActivity extends AppCompatActivity {
     }
 
     private void getAssignedCargo() {
-        ListenerRegistration cargoListener = db.collection("cargos").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+        ListenerRegistration cargoListener = db.collection("cargo").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {

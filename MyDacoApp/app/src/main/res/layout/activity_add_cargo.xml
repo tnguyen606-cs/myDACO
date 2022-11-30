@@ -51,37 +51,30 @@
             tools:ignore="SpeakableTextPresentCheck"
             android:autofillHints="" />
 
-
         <TextView
-            android:id="@+id/cargo_id"
+            android:id="@+id/cargo_assigned_plane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_name_box"
-            android:layout_marginTop="29dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Cargo ID"
+            android:layout_marginTop="15dp"
+            android:text="Cargo Assigned Plane:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
 
-        <EditText
-            android:id="@+id/cargo_id_input"
-            android:layout_width="355dp"
-            android:layout_height="52dp"
-            android:layout_below="@id/cargo_id"
-            android:digits="0123456789"
-            android:drawablePadding="10dp"
-            android:inputType="number"
-            android:maxLength="4"
-            android:maxLines="1"
-            tools:ignore="SpeakableTextPresentCheck" />
+        <Spinner
+            android:id="@+id/planes_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_assigned_plane" />
 
         <TextView
             android:id="@+id/cargo_weight_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_id_input"
-            android:layout_marginTop="29dp"
+            android:layout_below="@id/planes_spinner"
             android:fontFamily="sans-serif-condensed-medium"
+            android:layout_marginTop="15dp"
             android:text="Cargo Weight:"
             android:textColor="@color/design_default_color_primary"
             android:textSize="25sp" />
@@ -107,7 +100,7 @@
             android:layout_below="@id/cargo_weight_input"
             android:layout_centerInParent="true"
             android:layout_marginTop="29dp"
-            android:text="Enter Cargo" />
+            android:text="Add Cargo" />
 
 
     </RelativeLayout>

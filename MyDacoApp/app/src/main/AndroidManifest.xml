@@ -24,6 +24,7 @@
         <activity android:name=".SinglePlaneActivity"></activity>
         <activity android:name=".MissionActivity"></activity>
         <activity android:name=".AddPlaneActivity"></activity>
+        <activity android:name=".AddCargoActivity"></activity>
         <activity android:name=".ListOfCargosActivity"></activity>
         <activity android:name=".SingleCargoActivity"></activity>
         <activity android:name=".ListOfPersonnelActivity"></activity>

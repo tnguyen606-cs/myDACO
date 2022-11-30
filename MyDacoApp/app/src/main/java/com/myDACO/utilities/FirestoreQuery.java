@@ -207,7 +207,6 @@ public class FirestoreQuery {
                             planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
                             planeRef.document(plane.getId()).update("cargoWeight", FieldValue.increment(cargo.getWeight()));
                             cargoRef.document(cargo.getId()).set(cargo);
-
                         }
                     }
                 });
