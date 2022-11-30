@@ -1,14 +1,24 @@
 package com.myDACO.utilities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.myDACO.ListOfCargosActivity;
@@ -18,7 +28,10 @@ import com.myDACO.PlanesActivity;
 import com.myDACO.MainActivity;
 import com.myDACO.R;
 
-public class FileHelper {
+public class FileHelper extends AppCompatActivity {
+
+    private boolean isNotchecked = true;
+    private Activity thisContext;
 
     public void showMenu(Activity context, ImageView menuIcon) {
         menuIcon.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +99,11 @@ public class FileHelper {
         Button cancelBtn = dialog.findViewById(R.id.cancelBtn);
         Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
 
+        // initiate views
+        CheckBox plane = (CheckBox) dialog.findViewById(R.id.planeCheckBox);
+        CheckBox cargo = (CheckBox) dialog.findViewById(R.id.cargoCheckBox);
+        CheckBox personnel = (CheckBox) dialog.findViewById(R.id.personnelCheckBox);
+
         // Buttons' listener
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,10 +114,73 @@ public class FileHelper {
         confirmBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+//                Log.d("Print:   ", "Plane");
+                if (plane.isChecked()) {
+                    Toast.makeText(context.getApplicationContext(), "Excelled Planes to Firebase", Toast.LENGTH_LONG).show();
+                } else if (cargo.isChecked()) {
+                    Toast.makeText(context.getApplicationContext(), "Excelled Cargos to Firebase", Toast.LENGTH_LONG).show();
+                } else if (personnel.isChecked()) {
+                    Toast.makeText(context.getApplicationContext(), "Excelled Personnel to Firebase", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context.getApplicationContext(), "Please make sure you checked one of the box!", Toast.LENGTH_LONG).show();
+                    isNotchecked = false;
+                }
+                if (isNotchecked) {
+                    importExcelFile(context);
+                    dialog.dismiss();
+                }
             }
         }));
-
         dialog.show();
     }
+
+    private void importExcelFile(Activity context) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            selectfile(context);
+        } else {
+            ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
+        }
+    }
+
+//    // request for storage permission if not given
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == 101) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                selectfile();
+//            } else {
+//                Log.d("Print:   ", "Permission Not granted");
+////                Toast.makeText(thisContext, "Permission Not granted", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//    }
+//
+    private void selectfile(Activity context) {
+        // select the file from the file storage
+        Intent chooseFile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//        chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
+        chooseFile.setType("*/*");
+        Intent intentFile = Intent.createChooser(chooseFile, "Choose a file");
+        context.startActivityForResult(intentFile, 102);
+        Log.w("Print:   ", "Permission Not granted");
+    }
+
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 102) {
+//            if (resultCode == RESULT_OK) {
+//                String filepath = data.getData().getPath();
+//                // If excel file then only select the file
+//                if (filepath.endsWith(".xlsx") || filepath.endsWith(".xls")) {
+////                    readfile(data.getData());
+//                    Log.d("Print:   ", "Plane");
+//                }
+//                // else show the error
+//                else {
+//                    Log.d("Print:   ", "Plane");
+//                }
+//            }
+//        }
+//    }
 }
