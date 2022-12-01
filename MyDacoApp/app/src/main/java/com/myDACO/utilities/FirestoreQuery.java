@@ -165,7 +165,7 @@ public class FirestoreQuery {
                     } else {
                         planeRef.document(plane.getId()).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
                         personnelRef.document(personnel.getId()).set(personnel);
-                        planeRef.document(plane.getId()).update("cargoWeight", FieldValue.increment(personnel.getWeight()));
+                        planeRef.document(plane.getId()).update("personnelCount", FieldValue.increment(1));
                     }
                 }
             });
@@ -205,8 +205,8 @@ public class FirestoreQuery {
                             Log.d("FirestoreQuery", "Unable to add cargo; Plane ID is not unique");
                         } else {
                             planeRef.document(plane.getId()).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
-                            cargoRef.document(cargo.getId()).set(cargo);
                             planeRef.document(plane.getId()).update("cargoWeight", FieldValue.increment(cargo.getWeight()));
+                            cargoRef.document(cargo.getId()).set(cargo);
                         }
                     }
                 });
@@ -236,17 +236,30 @@ public class FirestoreQuery {
         });
     }
 
-    public void reassignCargo(Cargo cargo, String id) {
-        planeRef.document(cargo.getAssignedPlaneID()).update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
-        planeRef.document(id).update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
-        cargoRef.document(cargo.getId()).update("assignedPlaneID", id);
+
+    public void reassignCargo(Cargo cargo, String planeID) {
+        DocumentReference oldPlane = planeRef.document(cargo.getAssignedPlaneID());
+        oldPlane.update("assignedCargo", FieldValue.arrayRemove(cargo.getId()));
+        oldPlane.update("cargoWeight", FieldValue.increment(-cargo.getWeight()));
+
+        DocumentReference newPlane = planeRef.document(planeID);
+        newPlane.update("assignedCargo", FieldValue.arrayUnion(cargo.getId()));
+        newPlane.update("cargoWeight", FieldValue.increment(cargo.getWeight()));
+
+        cargoRef.document(cargo.getId()).update("assignedPlaneID", planeID);
     }
 
-    public void reassignPersonnel(Personnel personnel, String id) {
-        planeRef.document(personnel.getAssignedPlaneID()).update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
-        planeRef.document(id).update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
-        personnelRef.document(personnel.getId()).update("assignedPlaneID", id);
-    }
+    public void reassignPersonnel(Personnel personnel, String planeID) {
+        DocumentReference oldPlane= planeRef.document(personnel.getAssignedPlaneID());
+        oldPlane.update("assignedPersonnel", FieldValue.arrayRemove(personnel.getId()));
+        oldPlane.update("personnelCount", FieldValue.increment(-1));
+
+        DocumentReference newPlane = planeRef.document(planeID);
+        newPlane.update("assignedPersonnel", FieldValue.arrayUnion(personnel.getId()));
+        newPlane.update("personnelCount", FieldValue.increment(1));
+
+        personnelRef.document(personnel.getId()).update("assignedPlaneID", planeID);
+      }
 
     public MutableLiveData<List<Cargo>> getCargo(List<Planes> planes) {
         MutableLiveData<List<Cargo>> output = new MutableLiveData<>();
