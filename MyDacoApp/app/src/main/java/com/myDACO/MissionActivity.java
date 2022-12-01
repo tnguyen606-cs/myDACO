@@ -182,9 +182,6 @@ public class MissionActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-
                 for (Planes p : downed) {
                     for (Cargo c : missionCargo) {
                         if (c.getAssignedPlaneID().equals(p.getId())) {
@@ -205,7 +202,9 @@ public class MissionActivity extends AppCompatActivity {
 
                    int code = bumpHelper.bumpPlan(notDowned, personnelQueue, cargoQueue, fq);
                     if (code == -1) {
-                        Toast.makeText(MissionActivity.this, "not enough capacity to preform a full bump", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MissionActivity.this, "Partial bump performed. Not enough capacity to perform a full bump", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MissionActivity.this, "Bump complete.", Toast.LENGTH_SHORT).show();
                     }
 
 
