@@ -207,10 +207,6 @@ public class MissionActivity extends AppCompatActivity {
                         Toast.makeText(MissionActivity.this, "Bump complete.", Toast.LENGTH_SHORT).show();
                     }
 
-
-
-                    //TODO implement bump plan stuff here using needed data from the listeners implemented in the onStart method
-
             }
         });
 
