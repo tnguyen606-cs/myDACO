@@ -94,7 +94,7 @@ public class SearchCargoActivity extends AppCompatActivity {
             }
         }
         if (!found) {
-            searchText.setError("No matching value has found regarding the search");
+            searchText.setError("No matching item has been found");
         }
     }
 }
