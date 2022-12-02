@@ -93,7 +93,8 @@ public class SingleCargoActivity extends AppCompatActivity {
         }
 
         // Go back to the list view
-        Intent nextScreen = new Intent(SingleCargoActivity.this, ListOfPersonnelActivity.class);
-        SingleCargoActivity.this.startActivity(nextScreen);
+        //Intent nextScreen = new Intent(SingleCargoActivity.this, ListOfPersonnelActivity.class);
+        //SingleCargoActivity.this.startActivity(nextScreen);
+        finish();
     }
 }
