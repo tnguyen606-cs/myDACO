@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlanesActivity">
+
+    <RelativeLayout
+        android:id="@+id/menu_search_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/_bg_App_color">
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/daco_app_string"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:background="@drawable/edit_box_shape">
+
+            <ImageView android:id="@+id/menu_icon"
+                android:src="@drawable/menu_bar_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <ImageView android:id="@+id/search_icon"
+                android:src="@drawable/searching_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menu_search_panel">
+
+        <RelativeLayout
+            android:id="@+id/bump_results_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle_shape">
+
+            <TextView android:id="@+id/bump_results_title_text"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:layout_gravity="center_horizontal|center"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@color/design_default_color_primary"
+                android:layout_centerHorizontal="true"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:text="Bump Plan Results"
+                />
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/downed_aircraft_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/bump_results_title"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView android:id="@+id/downed_planes_text"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/design_default_color_primary"
+            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:text="Downed Aircraft"
+            />
+        <RelativeLayout android:id="@+id/downed_aircraft_view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/downed_planes_text"
+            android:background="@drawable/rectangle_shape">
+            <ListView
+                android:id = "@+id/downed_planes_list"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:divider="@color/text_color"
+                android:dividerHeight="1sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reassigned_personnel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/downed_aircraft_layout"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView android:id="@+id/reassigned_personnel_text"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/design_default_color_primary"
+            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:text="Reassigned Personnel"
+            />
+        <RelativeLayout android:id="@+id/reassigned_personnel_view"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_below="@id/reassigned_personnel_text"
+            android:background="@drawable/rectangle_shape">
+            <ListView
+                android:id = "@+id/reassigned_personnel_list"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:divider="@color/text_color"
+                android:dividerHeight="1sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reassigned_cargo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/reassigned_personnel_layout"
+        android:background="@drawable/rectangle_shape">
+
+        <TextView android:id="@+id/reassigned_cargo_text"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_gravity="center_horizontal|center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/design_default_color_primary"
+            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:text="Reassigned Cargo"
+            />
+        <RelativeLayout android:id="@+id/reassigned_cargo_view"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_below="@id/reassigned_cargo_text"
+            android:background="@drawable/rectangle_shape">
+            <ListView
+                android:id = "@+id/reassigned_cargo_list"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:divider="@color/text_color"
+                android:dividerHeight="1sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

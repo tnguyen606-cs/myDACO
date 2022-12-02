@@ -33,25 +33,35 @@ public class Mission implements Serializable {
         this.missionPlanes.add(plane);
     }
 
-    public int bumpPlan(List<Planes> planes, PriorityQueue<Personnel> personnel, PriorityQueue<Cargo> cargo, FirestoreQuery fq) {
-        for (Planes p : planes) {
+    public BumpResult bumpPlan(List<Planes> activePlanes, List<Planes> downedPlanes, PriorityQueue<Personnel> personnel, PriorityQueue<Cargo> cargo, FirestoreQuery fq) {
+        ArrayList<Personnel> reassignedPersonnel = new ArrayList<Personnel>();
+        ArrayList<Cargo> reassignedCargo = new ArrayList<Cargo>();
+
+        BumpResult result = new BumpResult(0, downedPlanes, reassignedPersonnel, reassignedCargo);
+        result.setDownedPlanes(downedPlanes);
+
+        for (Planes p : activePlanes) {
             while (p.getPersonnelCount() < p.getPersonnelCapacity() && !personnel.isEmpty()) {
-                fq.reassignPersonnel(personnel.poll(), p.getId());
+                Personnel currPersonnel = personnel.poll();
+                fq.reassignPersonnel(currPersonnel, p.getId());
                 p.setPersonnelCount(p.getPersonnelCount() + 1);
+
+                result.addReassignedPersonnel(currPersonnel);
             }
 
-
             while (p.getCargoWeight() < p.getCargoCapacity() && !cargo.isEmpty()) {
-                Cargo currCargo = cargo.peek();
-                fq.reassignCargo(cargo.poll(), p.getId());
+                Cargo currCargo = cargo.poll();
+                fq.reassignCargo(currCargo, p.getId());
                 p.setCargoWeight(currCargo.getWeight() + p.getCargoWeight());
+
+                result.addReassignedCargo(currCargo);
             }
         }
         if (!personnel.isEmpty() || !cargo.isEmpty()) {
-            return -1;
+            result.setCode(-1);
         }
 
-        return 0;
+        return result;
     }
 
 
