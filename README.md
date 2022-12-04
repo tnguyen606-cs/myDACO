@@ -59,78 +59,32 @@ Read more about [here](https://developer.android.com/codelabs/build-your-first-a
 ---
 # Release Notes
 ## Version 1.0
-## Version 0.4.0
-
 ### New Features
-* New UI Options
-  * Ability for users to switch between views and add items to the airfield from each view
-    * Option 1: Master list of Personnel within airfield
-    * Option 2: Master list of Cargo within airfield
-    * Option 3: Master list of Planes within airfield (Default option)
-* Ability for users to add personnel to the manifest
+* Ability for users to view the items on the airfield from three different views:
+  * Option 1: Master list of Planes within airfield (Default option)
+  * Option 2: Master list of Cargo within airfield
+  * Option 3: Master list of Personnel within airfield
+* Ability for users to add items to the airfield: users can add personnel, cargo, and planes to the manifest.
+* Ability for users to see a individual plane's manifest including its cargo and personnel
+* Ability for users to view and update individual cargo and personnel's attributes (name, weight, priority) and plane assignment
+* Ability for users to search for specific planes, personnel, and cargo with the Airfield Smart Search Feature
+* Ability for users to mark planes as active/downed and add/remove them to the mission
+* Ability for users to view a list of planes on a mission
+* Ability for users to execute a Bump Plan based on mission planes (reassign cargo and personnel from downed mission planes to operable mission planes)
 * Ability for users to manually designate certain items to certain planes before every Bump Plan (Pre-existing Inputs Feature)
-* Ability for users to search for specific items with the new Airfield Smart Search Feature
+* Ability for users to view the results of a Bump Plan (view the downed planes, reassigned cargo, and reassigned personnel)
 
 ### Bug Fixes
-* Functionality of Menu Bar
-* Users can now switch between views from menu bar
-* Fixed bugs caused by querying data from Firebase
+* Fixed app not displaying plane data in real time
+* Fixed app crash after navigating back to the previous screen after navigating to the search screen
+* Fixed functionality of the navigation menu bar (Users can now switch between views from menu bar)
+* Fixed single plane manifest not showing cargo and personnel names
+* Fixed bump results screen not allowing user to see a downed plane's manifest by adding "View Manifest" option in the plane's context menu
+* Fixed bugs caused by wrong query references in Firestore
+* Fixed Firebase user permissions 
 
 ### Known Issues
-* Application takes up a lot of RAM and Memory 
-* Firebase Authentication guest sign in feature crashes application (Users must sign in through email or be a current user)
-* Settings menu has no information
-* Bump plan UI button has no functionality
-
-## Version 0.3.0
-
-### New Features
-* Ability for users to add/remove planes to current Airfield Page
-* Ability for users to add/remove planes to current mission --> seen on Mission Page
-* Ability for users to mark planes as active/inactive
-* Displays current planes being utilized on mission from Mission Page
-* Addition of menu bar w/search feature & settings accessibility
-
-### Bug Fixes
-* Fixed the Firebase user permissions 
-* Fixed query issues from Firestore
-* Migrated all previous application database logic to Firestore
-
-### Known Issues
-* Application takes up a lot of RAM and Memory 
-* Firebase Authentication guest sign in feature crashes application (Users must sign in through email or be a current user)
-* Users cannot access settings & navigate through pages from main menu button
-
-## Version 0.2.0
-
-### New Features
-* Ability for users to see the current airfield manifest including all the aircrafs
-* Ability for users to select a particular plane in the current airfield page
-* Ability for users to see the plane's manifest including cargos and personnels
-* Ability for users to remove an unused plane from the airfield manifest page
-
-### Bug Fixes
-* Fixed a bug to migrate database with add/remove a plane with FirebaseFirestore
-* Fixed a bug for Edit's icon context-menu in plane manifest to a triple horizontal dots icon
-* Fixed a bug for Delete action in Edit menu that allows users to delete a plane and update a new list of planes in airfield manifest page
-* Added 2 tableview for cargos and personnels in plane's manifest
-* Added a `Start Mission` button in airfield manifest page
-
-### Known Issues
-* Query the given database to Firebase database in real-time
-* Retrieving data by invoking a blocking method on a database reference with Firebase
-
-----
-## Version 0.1.0
-
-### New Features
-* Ability for users to log into the app using a valid SSO
-* Ability for users to reset password via name and employee Id added
-* Ability for users to sign up new account
-* New dashboard view for users with personel, cargo, and planes information
-
-### Bug Fixes
-N/A
-
-### Known Issues
-N/A
+* Application takes up a lot of RAM and Memory (Android Studio emulator issue)
+* There is no feature to unassign cargo and personnel from a plane or delete planes
+* Users cannot undo a Bump Plan
+* Firebase Authentication guest sign in feature crashes application (Users must sign in through email)
