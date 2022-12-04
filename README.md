@@ -31,6 +31,7 @@
           <li><a href="#opening-mydaco-with-android-studio">Opening myDACO with Android Studio</a></li>
           <li><a href="#running-the-mydaco-application-with-an-android-emulator">Running the application on an Android emulator</a></li>
         </ul>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
     <li>
       <a href="#release-notes">Release Notes</a>
@@ -144,6 +145,28 @@ This section includes steps on running the application on a virtual Android devi
 ![image](https://user-images.githubusercontent.com/111911764/205510275-6a563118-3c71-40d8-b83a-97243de6f9b7.png)
 </details>
 
+## Troubleshooting
+This section provides solutions to issues that may be encountered in the myDACO environment.
+
+### App is freezing in the Android Emulator
+If the application is freezing in the Android Emulator, more RAM may be needed to be allocated to the emulator. 
+To allocate more RAM to the emulator:
+1. Go to the Device Manager by clicking `Tools` in the top menu bar and clicking the `Device Manager` option.
+2. A list should appear with the virtual devices you have created.
+3. Click on the pencil icon to open the modification for that device. 
+4. Click `Show Advanced Settings` and scroll down the the RAM allocation field. 
+5. Add more RAM to the device. 2048 MB is enough to run the application.
+6. Click `Finish` and run the app again.
+
+### The initial app screen takes a very long time to load in the Android Emulator
+When the virtual device's storage is full, the authentication screen takes a long time to load when the app starts. We must wipe the data of the virtual device to ensure the app runs cleanly.  
+To wipe the data:
+1. Go to the Device Manager by clicking `Tools` in the top menu bar and clicking the `Device Manager` option.
+2. A list should appear with the virtual devices you have created.
+3. For the device you are using, click the `...` icon. A context menu will appear.
+4. Click on `Wipe Data`.
+5. Your virtual device data is now cleaned. 
+6. Run the app again. Your device will launch for the first time. This may take several minutes, as the device is being set up. After a few minutes, the initial screen (login screen) of myDACO should appear on your device, indicating that the app is open on the emulator.
 
 
 <!-- RELEASE NOTES -->
