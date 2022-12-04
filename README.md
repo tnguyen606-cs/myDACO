@@ -8,7 +8,7 @@
   <h1 align="center">myDACO</h1>
 
   <p align="center">
-    myDACO is developed using Android Studio and Java
+    myDACO is an Android application developed using Android Studio and Java
   </p>
 </p>
 
