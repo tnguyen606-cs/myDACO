@@ -105,8 +105,9 @@ public class SinglePersonnelActivity extends AppCompatActivity {
         }
 
         // Go back to the list view
-        Intent nextScreen = new Intent(SinglePersonnelActivity.this, ListOfPersonnelActivity.class);
-        SinglePersonnelActivity.this.startActivity(nextScreen);
+        //Intent nextScreen = new Intent(SinglePersonnelActivity.this, ListOfPersonnelActivity.class);
+        //SinglePersonnelActivity.this.startActivity(nextScreen);
+        finish();
 
     }
 }

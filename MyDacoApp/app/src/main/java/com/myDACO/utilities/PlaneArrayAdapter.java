@@ -1,6 +1,7 @@
 package com.myDACO.utilities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import com.myDACO.R;
+import com.myDACO.SingleCargoActivity;
+import com.myDACO.SinglePlaneActivity;
 import com.myDACO.data.Planes;
 
 public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
@@ -73,6 +76,10 @@ public class PlaneArrayAdapter extends ArrayAdapter<Planes> {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
+                            case R.id.view_manifest:
+                                Intent nextScreen = new Intent(context, SinglePlaneActivity.class);
+                                nextScreen.putExtra("PLANE", list.get(position));
+                                context.startActivity(nextScreen);
                             case R.id.set_active:
                                 fq.togglePlaneStatus(list.get(position).getId());
                                 Toast.makeText(context.getApplicationContext(), "Set " + list.get(position).getPlaneName() + "'s status to active", Toast.LENGTH_SHORT).show();

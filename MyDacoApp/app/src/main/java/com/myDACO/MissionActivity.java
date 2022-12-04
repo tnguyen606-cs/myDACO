@@ -200,11 +200,17 @@ public class MissionActivity extends AppCompatActivity {
                 Log.d("bump plan", "curr" + currentMission);
                 Mission bumpHelper = new Mission();
 
-                   int code = bumpHelper.bumpPlan(notDowned, personnelQueue, cargoQueue, fq);
-                    if (code == -1) {
+                BumpResult result = bumpHelper.bumpPlan(notDowned, downed, personnelQueue, cargoQueue, fq);
+                    if (result.getCode() == -1) {
                         Toast.makeText(MissionActivity.this, "Partial bump performed. Not enough capacity to perform a full bump", Toast.LENGTH_SHORT).show();
-                    } else {
+                        Intent nextScreen = new Intent(MissionActivity.this, BumpResultsActivity.class);
+                        nextScreen.putExtra("BUMPRESULTS", result);
+                        MissionActivity.this.startActivity(nextScreen);
+                    } else if (result.getCode() == 0) {
                         Toast.makeText(MissionActivity.this, "Bump complete.", Toast.LENGTH_SHORT).show();
+                        Intent nextScreen = new Intent(MissionActivity.this, BumpResultsActivity.class);
+                        nextScreen.putExtra("BUMPRESULTS", result);
+                        MissionActivity.this.startActivity(nextScreen);
                     }
 
             }

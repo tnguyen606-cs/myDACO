@@ -32,6 +32,7 @@
 <!--        <activity android:name=".PlanesActivity"></activity>-->
         <activity android:name=".SinglePlaneActivity"></activity>
         <activity android:name=".MissionActivity"></activity>
+        <activity android:name=".BumpResultsActivity"></activity>
         <activity android:name=".AddPlaneActivity"></activity>
         <activity android:name=".AddCargoActivity"></activity>
         <activity android:name=".ListOfCargosActivity"></activity>
