@@ -155,7 +155,7 @@ To allocate more RAM to the emulator:
 2. A list should appear with the virtual devices you have created.
 3. Click on the pencil icon to open the modification for that device. 
 4. Click `Show Advanced Settings` and scroll down the the RAM allocation field. 
-5. Add more RAM to the device. 2048 MB is enough to run the application.
+5. Allocate more RAM to the device. 2048 MB is generally enough to run myDACO.
 6. Click `Finish` and run the app again.
 
 ### The initial app screen takes a very long time to load in the Android Emulator
