@@ -212,3 +212,4 @@ To wipe the data:
 * Excel Input Feature
 * Integration of Army Database
 * Addition of New Factors to Bump Plan Algorithm
+  * Location, Space
