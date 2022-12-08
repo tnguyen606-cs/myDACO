@@ -178,10 +178,6 @@ To wipe the data:
 ---
 # Release Notes
 ## Version 1.0
-### What's Next
-* Excel Input Feature
-* Integration of Army Database
-* Addition of New Factors to Bump Plan Algorithm
 ### New Features
 * Ability for users to view the items on the airfield from three different views:
   * Option 1: Master list of Planes within airfield (Default option)
@@ -211,3 +207,8 @@ To wipe the data:
 * There is no feature to unassign cargo and personnel from a plane or delete planes
 * Users cannot undo a Bump Plan (the User must manually reassign each cargo and personnel or perform another bump)
 * Firebase Authentication guest sign in feature crashes application (Users must sign in through email)
+
+### What's Next?
+* Excel Input Feature
+* Integration of Army Database
+* Addition of New Factors to Bump Plan Algorithm
