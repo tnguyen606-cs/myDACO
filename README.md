@@ -135,6 +135,7 @@ This section includes steps on running the application on a virtual Android devi
   
 ![image](https://user-images.githubusercontent.com/111911764/205510000-1b3eb46d-26ed-431b-9aab-fcb8d8c15647.png)
 </details>
+
 8. If not already done so, make sure to have Firebase connected to the application.
 
 9. To see instructions on how to do so: https://firebase.google.com/docs/android/setup#:~:text=Open%20the%20Firebase%20Assistant%3A%20Tools,your%20Android%20project%20with%20Firebase.
