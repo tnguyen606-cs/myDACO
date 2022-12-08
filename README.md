@@ -190,6 +190,7 @@ To wipe the data:
 * Ability for users to mark planes as active/downed and add/remove them to the mission
 * Ability for users to view a list of planes on a mission
 * Ability for users to execute a Bump Plan based on mission planes (reassign cargo and personnel from downed mission planes to operable mission planes)
+  * Algorithm takes priority, weight, and capacity into account
 * Ability for users to manually designate certain items to certain planes before every Bump Plan (Pre-existing Inputs Feature)
 * Ability for users to view the results of a Bump Plan (view the downed planes, reassigned cargo, and reassigned personnel)
 
